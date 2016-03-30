@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_item_vvtalk"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/theme_blue"
+        android:layout_height="200dp">
+        
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/item_background_professor_default"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <LinearLayout
+            android:padding="@dimen/layout_padding"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <cn.incongress.xhy_guke.uis.CircleImageView
+                android:id="@+id/civ_user_icon"
+                android:layout_width="48dp"
+              app:civ_border_width="0dp"
+                android:src="@mipmap/item_vvtalk_professor_head_default"
+                android:layout_height="48dp" />
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_media"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/layout_margin"
+                android:textStyle="bold"
+                style="@style/wrap_wrap" />
+
+            <TextView
+                android:id="@+id/tv_user_hospital"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/white"
+                style="@style/wrap_wrap"  />
+
+            <View style="@style/h_line" android:background="@color/white"/>
+
+            <TextView style="@style/wrap_wrap"
+                android:maxLines="2"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_media"
+                android:id="@+id/tv_title"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/fill_wrap" android:padding="@dimen/layout_padding">
+        <TextView style="@style/wrap_wrap"  android:textSize="@dimen/text_size_small" android:textColor="@color/gray" android:layout_alignParentLeft="true" android:id="@+id/tv_publish_time"/>
+        <TextView style="@style/wrap_wrap"  android:textSize="@dimen/text_size_small" android:textColor="@color/gray" android:layout_alignParentRight="true" android:id="@+id/tv_look_num"/>
+    </RelativeLayout>
+</LinearLayout>

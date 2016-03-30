@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Xhy_guke</string>
+
+    <!-- 主要的四个模块fragment名称  我的主页和我单独设置-->
+    <string name="fragment_v_v_talk">V言V语</string>
+    <string name="fragment_dynamic">动态</string>
+    <string name="fragment_suggest">推荐</string>
+    <string name="fragment_me">我</string>
+    <string name="home_title">我的主页</string>
+
+    <!-- 常用语 -->
+    <string name="loading">努力加载中...</string>
+    <string name="no_data_tips">还木有数据哟...</string>
+    <string name="error_happen_back_to_home">发生未知异常，返回首页</string>
+
+    <!-- V言V语 详情页 -->
+    <string name="vvtalk_detail_comment_hint">写评论...</string>
+    <string name="vvtalk_detail_title">详情</string>
+    <string name="vvtalk_detail_laud_count">共%1$s个赞</string>
+    <string name="vvtalk_empty_tips">快来发表评论，抢占沙发！</string>
+
+    <!-- 动态 -->
+    <string name="dynamic_empty_tips">暂无动态，快发发一波！</string>
+</resources>

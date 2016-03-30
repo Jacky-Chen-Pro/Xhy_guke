@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <include
+        layout="@layout/include_toolbar"/>
+
+    <cn.incongress.xhy_guke.uis.vertical_slide.DragLayout
+        android:id="@+id/draglayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <FrameLayout
+            android:id="@+id/fl_detail_area"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:id="@+id/fl_comment_area"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </cn.incongress.xhy_guke.uis.vertical_slide.DragLayout>
+
+    <View style="@style/h_line"  />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/rl_operation_bar"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:padding="@dimen/layout_padding"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="3.5"
+            android:layout_height="wrap_content">
+            <EditText
+                android:hint="@string/vvtalk_detail_comment_hint"
+                android:textSize="@dimen/text_size_large"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:src="@mipmap/vvtalk_detail_praise"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:src="@mipmap/vvtalk_detail_collection"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@mipmap/vvtalk_detail_share"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

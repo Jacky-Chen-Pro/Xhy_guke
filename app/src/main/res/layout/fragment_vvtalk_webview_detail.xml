@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout style="@style/fill_fill"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <cn.incongress.xhy_guke.uis.ProgressWebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_loading"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+</RelativeLayout>
+
