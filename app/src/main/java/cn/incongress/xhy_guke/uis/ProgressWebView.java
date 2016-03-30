@@ -17,9 +17,9 @@ import cn.incongress.xhy_guke.utils.LogUtils;
 public class ProgressWebView extends WebView {
     private ProgressBar progressbar;
 
-    boolean allowDragTop = true; // 如果是true，则允许拖动至底部的下一页
+    boolean allowDragTop = true;
     float downY = 0;
-    boolean needConsumeTouch = true; // 是否需要承包touch事件，needConsumeTouch一旦被定性，则不会更改
+    boolean needConsumeTouch = true;
 
     public ProgressWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -73,18 +73,14 @@ public class ProgressWebView extends WebView {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             downY = ev.getRawY();
-            needConsumeTouch = true; // 默认情况下，listView内部的滚动优先，默认情况下由该listView去消费touch事件
+            needConsumeTouch = true;
             allowDragTop = isInBottom();
         } else if (ev.getAction() == MotionEvent.ACTION_MOVE) {
             if (!needConsumeTouch) {
-                // 在最顶端且向上拉了，则这个touch事件交给父类去处理
                 getParent().requestDisallowInterceptTouchEvent(false);
                 return false;
             } else if (allowDragTop) {
-                // needConsumeTouch尚未被定性，此处给其定性
-                // 允许拖动到底部的下一页，而且又向上拖动了，就将touch事件交给父view
                 if (ev.getRawY() - downY < 0) {
-                    // flag设置，由父类去消费
                     needConsumeTouch = false;
                     getParent().requestDisallowInterceptTouchEvent(false);
                     return false;
@@ -92,7 +88,6 @@ public class ProgressWebView extends WebView {
             }
         }
 
-        // 通知父view是否要处理touch事件
         getParent().requestDisallowInterceptTouchEvent(needConsumeTouch);
         return super.dispatchTouchEvent(ev);
     }
@@ -102,10 +97,8 @@ public class ProgressWebView extends WebView {
      */
     private boolean isInBottom() {
         if((int)(getContentHeight()*getScale()) -(getHeight()+getScrollY()) < 5 ){
-            LogUtils.println("当前高度：" + getHeight()+getScrollY());
             return true;
         }else {
-            LogUtils.println("当前高度：" + getHeight()+getScrollY());
             return false;
         }
     }
