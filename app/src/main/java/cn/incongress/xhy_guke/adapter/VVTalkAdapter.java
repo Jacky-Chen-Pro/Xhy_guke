@@ -80,7 +80,7 @@ public class VVTalkAdapter extends ListBaseAdapter<VVTalkBean> {
         holder.tvUserName.setText(data.getShowName());
         holder.tvUserHospital.setText(data.getCompany());
         holder.tvTitle.setText(data.getTitle());
-        holder.tvLookNums.setText(data.getReadCount()+"");
+        holder.tvLookNums.setText(mContext.getString(R.string.vvtalk_read_count,data.getReadCount()));
         holder.tvPublishTime.setText(data.getShowTime());
     }
 }
