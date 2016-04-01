@@ -32,42 +32,21 @@ import cn.incongress.xhy_guke.utils.ToastUtils;
  * V言V语
  */
 public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefreshListener, RefreshLayout.OnLoadMoreListener, MultiColumnListView.OnItemClickListener {
-    /**
-     * 最后一个数据Id
-     **/
     private int mLastDataId = -1;
-    /**
-     * 指定的帖子Id
-     **/
     private String mTopIds = "";
-    /**
-     * 下拉刷新控件
-     */
+
     private RefreshLayout refreshLayout;
-    /**
-     * 瀑布流控件
-     **/
     private MultiColumnListView mMultiColumnListView;
-    /**
-     * 瀑布流适配器
-     **/
     private VVTalkAdapter mAdapter;
-    /**
-     * 首页数据集
-     **/
+
     private ArrayList<VVTalkBean> mTalkBeans = new ArrayList<VVTalkBean>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(cn.incongress.xhy_guke.R.layout.fragment_vvtalk, null);
-        initView(view);
-        return view;
-    }
+//      initView(view);
 
-    @Override
-    public void initView(View view) {
-        super.initView(view);
         refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
         mMultiColumnListView = (MultiColumnListView) view.findViewById(R.id.listview);
 
@@ -78,15 +57,35 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
 
         refreshLayout.setOnLoadMoreListener(this);
         refreshLayout.setOnRefreshListener(this);
-        initData();
-    }
 
-    @Override
-    public void initData() {
-        super.initData();
         getData(mLastDataId, mTopIds);
         mMultiColumnListView.setOnItemClickListener(this);
+
+        return view;
     }
+
+//    @Override
+//    public void initView(View view) {
+//        super.initView(view);
+//        refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
+//        mMultiColumnListView = (MultiColumnListView) view.findViewById(R.id.listview);
+//
+//        mAdapter = new VVTalkAdapter(getActivity(), mTalkBeans);
+//        View emptyView = LayoutInflater.from(getActivity()).inflate(R.layout.emptyview,null);
+//        mMultiColumnListView.setEmptyView(emptyView);
+//        mMultiColumnListView.setAdapter(mAdapter);
+//
+//        refreshLayout.setOnLoadMoreListener(this);
+//        refreshLayout.setOnRefreshListener(this);
+//        initData();
+//    }
+//
+//    @Override
+//    public void initData() {
+//        super.initData();
+//        getData(mLastDataId, mTopIds);
+//        mMultiColumnListView.setOnItemClickListener(this);
+//    }
 
     private void getData(final int lastDataId, String topIds) {
         XhyGo.getMainDataListVyvy(getActivity(),refreshLayout, lastDataId, topIds, new StringCallBackWithProgress(getActivity()) {

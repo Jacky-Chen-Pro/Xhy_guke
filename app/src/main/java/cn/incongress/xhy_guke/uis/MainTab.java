@@ -8,11 +8,11 @@ import cn.incongress.xhy_guke.fragment.VVTalkFragment;
 
 public enum MainTab {
 
-    NEWS(0, R.string.fragment_v_v_talk, R.drawable.tab_icon_vvtalk, VVTalkFragment.class),
+    VVTALK(0, R.string.fragment_v_v_talk, R.drawable.tab_icon_vvtalk, VVTalkFragment.class),
 
-    TWEET(1, R.string.fragment_dynamic, R.drawable.tab_icon_dynamic, DynamicFragment.class),
+    DYNAMIC(1, R.string.fragment_dynamic, R.drawable.tab_icon_dynamic, DynamicFragment.class),
 
-    EXPLORE(2, R.string.fragment_suggest, R.drawable.tab_icon_suggest, SuggestFragment.class),
+    SUGGESTION(2, R.string.fragment_suggest, R.drawable.tab_icon_suggest, SuggestFragment.class),
 
     ME(3, R.string.fragment_me, R.drawable.tab_icon_me, MeFragment.class);
 
