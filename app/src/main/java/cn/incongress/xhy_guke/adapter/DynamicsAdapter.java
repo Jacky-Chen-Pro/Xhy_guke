@@ -34,6 +34,8 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private List<DynamicListBean> mDynamicListBeans;
     private LayoutInflater mLayoutInflater;
 
+    private GoToBrowserModeListener mBrowerModeListener;
+
     public DynamicsAdapter(Context context, List<DynamicListBean> beans) {
         this.mDynamicListBeans = beans;
         this.mContext = context;
@@ -83,13 +85,15 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 if (data.getIsImg() != 0) {
                     Picasso.with(mContext).load(data.getBgImg()).into(((DynamicViewHolder) holder).pvOneImage);
                     ((DynamicViewHolder) holder).pvOneImage.setVisibility(View.VISIBLE);
+                    ((DynamicViewHolder) holder).pvOneImage.disenable();
 
-//                    // 启用图片缩放功能
-//                    ((DynamicViewHolder) holder).pvOneImage.enable();
-//                    // 获取图片信息
-//                    Info info = ((DynamicViewHolder) holder).pvOneImage.getInfo();
-//                    // 从一张图片信息变化到现在的图片，用于图片点击后放大浏览，具体使用可以参照demo的使用
-//                    ((DynamicViewHolder) holder).pvOneImage.animaFrom(info);
+                    ((DynamicViewHolder) holder).pvOneImage.setTag(data.getBgImg());
+                            ((DynamicViewHolder) holder).pvOneImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mBrowerModeListener.doGoBrower(v, (String) v.getTag());
+                        }
+                    });
                 }
 
             } else {
@@ -150,5 +154,20 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
             tvEmpty = (TextView) itemView.findViewById(R.id.tv_empty_tips);
         }
+    }
+
+    /**
+     * 进入大图游览模式
+     */
+    public interface GoToBrowserModeListener {
+        void doGoBrower(View view, String urlPath);
+    }
+
+    /**
+     * 设置进入放大模式的监听
+     * @param browerModeListener
+     */
+    public void setGoToBrowerModeListener(GoToBrowserModeListener browerModeListener) {
+        this.mBrowerModeListener = browerModeListener;
     }
 }

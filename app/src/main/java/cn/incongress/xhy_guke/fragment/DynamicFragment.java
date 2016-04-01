@@ -2,14 +2,20 @@ package cn.incongress.xhy_guke.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.widget.FrameLayout;
 
+import com.bm.library.Info;
+import com.bm.library.PhotoView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.jackyonline.refreshdemo.RefreshLayout;
@@ -45,10 +51,22 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
 
     private List<DynamicListBean> mDynamicBeans = new ArrayList<>();
 
+    View mParent;
+    View mBg;
+    PhotoView mPhotoView;
+    Info mInfo;
+
+    AlphaAnimation in = new AlphaAnimation(0, 1);
+    AlphaAnimation out = new AlphaAnimation(1, 0);
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(cn.incongress.xhy_guke.R.layout.fragment_dynamic,null);
+
+        mParent = view.findViewById(R.id.parent);
+        mBg = view.findViewById(R.id.bg);
+        mPhotoView = (PhotoView) view.findViewById(R.id.img);
 
         mRefresh = (RefreshLayout) view.findViewById(R.id.refreshLayout);
         mRcvDynamics = (RecyclerView) view.findViewById(R.id.rcv_dynamics);
@@ -56,6 +74,34 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
         mRcvDynamics.setLayoutManager(mLinearLayoutManager);
 
         mAdapter = new DynamicsAdapter(getActivity(),mDynamicBeans);
+        mAdapter.setGoToBrowerModeListener(new DynamicsAdapter.GoToBrowserModeListener() {
+            @Override
+            public void doGoBrower(View view,String urlPath) {
+                PhotoView p = (PhotoView) view;
+                mInfo = p.getInfo();
+
+                Picasso.with(getActivity()).load(urlPath).into(mPhotoView);
+
+                mBg.startAnimation(in);
+                mParent.setVisibility(View.VISIBLE);
+                mPhotoView.animaFrom(mInfo);
+            }
+        });
+
+        mPhotoView.enable();
+        mPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBg.startAnimation(out);
+                mPhotoView.animaTo(mInfo, new Runnable() {
+                    @Override
+                    public void run() {
+                        mParent.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+
         mRcvDynamics.setAdapter(mAdapter);
 
         mRefresh.setOnRefreshListener(this);
