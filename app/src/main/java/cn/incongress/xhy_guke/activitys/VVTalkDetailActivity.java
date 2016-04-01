@@ -1,26 +1,19 @@
 package cn.incongress.xhy_guke.activitys;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import cn.incongress.xhy_guke.R;
-import cn.incongress.xhy_guke.adapter.VVTalkLaudAdapter;
 import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseActivity;
 import cn.incongress.xhy_guke.base.XhyApplication;
 import cn.incongress.xhy_guke.bean.VVTalkDetailBean;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailAreaFragment;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailCommentFragment;
-import cn.incongress.xhy_guke.fragment.WebViewDetailFragment;
 import cn.incongress.xhy_guke.utils.LogUtils;
 import cn.incongress.xhy_guke.utils.ToastUtils;
 import okhttp3.Call;
@@ -30,7 +23,6 @@ import okhttp3.Call;
  * V言V语详情页
  */
 public class VVTalkDetailActivity extends BaseActivity {
-
     private static final String EXTRA_TYPE = "extra_type";
     private static final String EXTRA_DATA_ID = "data_id";
     private static final String EXTRA_WHERE_STATE = "where_state";
@@ -82,7 +74,6 @@ public class VVTalkDetailActivity extends BaseActivity {
                 LogUtils.println(response);
                 Gson gson = new Gson();
                 mDetailBean = gson.fromJson(response, VVTalkDetailBean.class);
-                LogUtils.println(mDetailBean.toString());
 
                 fillContainer();
             }

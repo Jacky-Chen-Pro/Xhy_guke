@@ -674,4 +674,17 @@ public class RefreshLayout extends ViewGroup {
     public void setOnLoadMoreListener(@NonNull OnLoadMoreListener mOnLoadMoreListener) {
         this.mOnLoadMoreListener = mOnLoadMoreListener;
     }
+
+    /**
+     * 结束当前的刷新或者加载更多
+     */
+    public void finishCurrentLoad(){
+        if(mIsInRefreshMode) {
+            this.refreshComplete();
+        }
+
+        if(mIsInLoadMode) {
+            this.loadMoreComplete();
+        }
+    }
 }

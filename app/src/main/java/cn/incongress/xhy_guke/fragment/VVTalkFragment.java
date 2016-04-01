@@ -1,6 +1,5 @@
 package cn.incongress.xhy_guke.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -21,14 +20,12 @@ import java.util.List;
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.activitys.VVTalkDetailActivity;
 import cn.incongress.xhy_guke.adapter.VVTalkAdapter;
-import cn.incongress.xhy_guke.api.XhyApiClient;
+import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseFragment;
-import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.bean.VVTalkBean;
 import cn.incongress.xhy_guke.utils.LogUtils;
 import cn.incongress.xhy_guke.utils.StringCallBackWithProgress;
 import cn.incongress.xhy_guke.utils.ToastUtils;
-import okhttp3.Call;
 
 /**
  * Created by Jacky Chen on 2016/3/22 0022.
@@ -38,7 +35,7 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
     /**
      * 最后一个数据Id
      **/
-    private String mLastDataId = "-1";
+    private int mLastDataId = -1;
     /**
      * 指定的帖子Id
      **/
@@ -50,7 +47,7 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
     /**
      * 瀑布流控件
      **/
-    private MultiColumnListView mRecyclerView;
+    private MultiColumnListView mMultiColumnListView;
     /**
      * 瀑布流适配器
      **/
@@ -72,7 +69,12 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
     public void initView(View view) {
         super.initView(view);
         refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
-        mRecyclerView = (MultiColumnListView) view.findViewById(R.id.listview);
+        mMultiColumnListView = (MultiColumnListView) view.findViewById(R.id.listview);
+
+        mAdapter = new VVTalkAdapter(getActivity(), mTalkBeans);
+        View emptyView = LayoutInflater.from(getActivity()).inflate(R.layout.emptyview,null);
+        mMultiColumnListView.setEmptyView(emptyView);
+        mMultiColumnListView.setAdapter(mAdapter);
 
         refreshLayout.setOnLoadMoreListener(this);
         refreshLayout.setOnRefreshListener(this);
@@ -82,32 +84,16 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
     @Override
     public void initData() {
         super.initData();
-        getData(mLastDataId, mTopIds, true);
-
-        mAdapter = new VVTalkAdapter(getActivity(), mTalkBeans);
-        mRecyclerView.setAdapter(mAdapter);
-
-        mRecyclerView.setOnItemClickListener(this);
+        getData(mLastDataId, mTopIds);
+        mMultiColumnListView.setOnItemClickListener(this);
     }
 
-    private void getData(String lastDataId, String topIds, final boolean isRefresh) {
-        XhyApiClient.getMainDataListVyvy(lastDataId, Constants.PAGE_SIZE, topIds, new StringCallBackWithProgress(getActivity()) {
-            List<VVTalkBean> beans = new ArrayList<>();
-
-            @Override
-            public void onError(Call call, Exception e) {
-                LogUtils.println("请求失败" + e.toString());
-            }
-
+    private void getData(final int lastDataId, String topIds) {
+        XhyGo.getMainDataListVyvy(getActivity(),refreshLayout, lastDataId, topIds, new StringCallBackWithProgress(getActivity()) {
             @Override
             public void onAfter() {
                 super.onAfter();
-
-                if (isRefresh) {
-                    refreshLayout.refreshComplete();
-                } else {
-                    refreshLayout.loadMoreComplete();
-                }
+                refreshLayout.finishCurrentLoad();
             }
 
             @Override
@@ -118,10 +104,12 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
                     Gson gson = new Gson();
                     int state = obj.getInt("state");
                     if (state == 1) {
-                        beans = gson.fromJson(obj.getString("dataList"), new TypeToken<List<VVTalkBean>>() {
-                        }.getType());
+                        if(lastDataId == -1) {
+                            mTalkBeans.clear();
+                        }
                         mTopIds = obj.getString("topIds");
-                        mTalkBeans.addAll(beans);
+                        mTalkBeans.addAll((List<VVTalkBean>)gson.fromJson(obj.getString("dataList"), new TypeToken<List<VVTalkBean>>() {}.getType()));
+                        mLastDataId = mTalkBeans.get(mTalkBeans.size()-1).getDataId();
                         mAdapter.notifyDataSetChanged();
                     } else {
                         ToastUtils.showShorToast(obj.getString("msg"), getActivity());
@@ -135,15 +123,14 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
 
     @Override
     public void onLoadMore() {
-        getData(mTalkBeans.get(mTalkBeans.size() - 1).getDataId() + "", mTopIds, false);
+        getData(mLastDataId, mTopIds);
     }
 
     @Override
     public void onRefresh() {
-        mLastDataId = "-1";
+        mLastDataId = -1;
         mTopIds = "";
-        mTalkBeans.clear();
-        getData(mLastDataId, mTopIds, true);
+        getData(mLastDataId, mTopIds);
     }
 
     @Override

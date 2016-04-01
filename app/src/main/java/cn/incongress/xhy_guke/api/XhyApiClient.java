@@ -7,6 +7,8 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.incongress.xhy_guke.base.Constants;
+
 /**
  * Created by Jacky Chen on 2016/3/24 0024.
  */
@@ -18,14 +20,13 @@ public class XhyApiClient {
     /**
      * 获取V言V语列表
      * @param lastDataId
-     * @param row
      * @param topIds
      */
-    public static void getMainDataListVyvy(String lastDataId,String row, String topIds,StringCallback stringCallback){
+    public static void getMainDataListVyvy(int lastDataId, String topIds,StringCallback stringCallback){
         Map<String, String> params = new HashMap<>();
         params.put("project", PROJECT_NAME);
-        params.put("lastDataId",lastDataId);
-        params.put("row",row);
+        params.put("lastDataId",lastDataId+"");
+        params.put("row", Constants.PAGE_SIZE);
         params.put("topIds", topIds);
         OkHttpUtils.post().url(HOST +"?getMainDataListVyvy").params(params).build().execute(stringCallback);
     }

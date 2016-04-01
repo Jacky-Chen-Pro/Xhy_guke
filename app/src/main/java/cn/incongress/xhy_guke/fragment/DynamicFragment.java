@@ -25,7 +25,9 @@ import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.bean.DynamicListBean;
+import cn.incongress.xhy_guke.bean.VVTalkBean;
 import cn.incongress.xhy_guke.utils.LogUtils;
+import cn.incongress.xhy_guke.utils.ToastUtils;
 import okhttp3.Call;
 
 
@@ -53,13 +55,41 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
         mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
         mRcvDynamics.setLayoutManager(mLinearLayoutManager);
 
+        mAdapter = new DynamicsAdapter(getActivity(),mDynamicBeans);
+        mRcvDynamics.setAdapter(mAdapter);
+
         mRefresh.setOnRefreshListener(this);
         mRefresh.setOnLoadMoreListener(this);
 
-        int result = XhyGo.getDataListDt(getActivity(), mLasdDataID + "", Constants.PAGE_SIZE, new StringCallback() {
+        getData(mLasdDataID);
+
+        return view;
+    }
+
+    @Override
+    public void onLoadMore() {
+        getData(mLasdDataID);
+    }
+
+    @Override
+    public void onRefresh() {
+        getData(mLasdDataID = -1);
+    }
+
+    /**
+     * 获取数据
+     * @return
+     */
+    private int getData(final int lasdDataID) {
+        return XhyGo.getDataListDt(getActivity(), mRefresh,lasdDataID + "", Constants.PAGE_SIZE, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
+            }
 
+            @Override
+            public void onAfter() {
+                super.onAfter();
+                mRefresh.finishCurrentLoad();
             }
 
             @Override
@@ -68,31 +98,23 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
 
                 try {
                     JSONObject obj = new JSONObject(response);
+                    int state = obj.getInt("state");
                     Gson gson = new Gson();
-                    mDynamicBeans.addAll((List<DynamicListBean>) gson.fromJson(obj.getString("dataList"), new TypeToken<List<DynamicListBean>>() {}.getType()));
 
-                    fillContainer();
+                    if (state == 1) {
+                        if(lasdDataID == -1) {
+                            mDynamicBeans.clear();
+                        }
+                        mDynamicBeans.addAll((List<DynamicListBean>) gson.fromJson(obj.getString("dataList"), new TypeToken<List<DynamicListBean>>() {}.getType()));
+                        mLasdDataID = mDynamicBeans.get(mDynamicBeans.size()-1).getDataId();
+                        mAdapter.notifyDataSetChanged();
+                    } else {
+                        ToastUtils.showShorToast(obj.getString("msg"), getActivity());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-
-        return view;
-    }
-
-    private void fillContainer() {
-        mAdapter = new DynamicsAdapter(getActivity(),mDynamicBeans);
-        mRcvDynamics.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onLoadMore() {
-
-    }
-
-    @Override
-    public void onRefresh() {
-
     }
 }

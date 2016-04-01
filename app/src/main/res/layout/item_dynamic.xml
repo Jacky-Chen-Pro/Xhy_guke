@@ -1,11 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/layout_padding">
 
+    <!-- 头像信息区域 -->
+    <RelativeLayout style="@style/fill_wrap">
+
+        <cn.incongress.xhy_guke.uis.CircleImageView
+            android:id="@+id/civ_user_icon"
+            android:layout_width="46dp"
+            android:src="@mipmap/item_vvtalk_professor_head_default"
+            android:layout_height="46dp"
+            app:civ_border_width="0dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="@dimen/layout_margin"
+            android:layout_toRightOf="@id/civ_user_icon"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/wrap_wrap"
+                android:id="@+id/tv_user_name"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_media" />
+
+            <TextView
+                android:id="@+id/tv_user_hospital"
+                style="@style/wrap_wrap"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_small" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- 内容区域 -->
     <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        style="@style/fill_wrap"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:id="@+id/tv_dynamic_content"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:textSize="@dimen/text_size_media" />
+
+    <!-- 图片区域 -->
+    <!-- 一张图片 -->
+    <com.bm.library.PhotoView
+        android:id="@+id/pv_one_image"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:visibility="gone"
+        android:scaleType="fitStart"
+       />
+
+    <!-- 两张图片或者四张图片 -->
+    <cn.incongress.xhy_guke.uis.NoScrollGridView
+        android:id="@+id/ngv_two_or_four_image"
+        android:columnCount="2"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"/>
+    <!-- 其他图片的情况 -->
+
+    <cn.incongress.xhy_guke.uis.NoScrollGridView
+        android:id="@+id/ngv_other_image"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- 发布时间 -->
+    <RelativeLayout style="@style/fill_wrap">
+        <TextView style="@style/wrap_wrap" android:id="@+id/tv_show_time" android:layout_alignParentLeft="true"/>
+        <TextView style="@style/wrap_wrap" android:id="@+id/tv_read_count" android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 
 </LinearLayout>
