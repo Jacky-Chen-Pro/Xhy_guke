@@ -112,7 +112,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name cn.trinea.android.common:isAutoLoadOnBottom
         */
-        public static final int drop_down_list_attr_isAutoLoadOnBottom = 2;
+        public static int drop_down_list_attr_isAutoLoadOnBottom = 2;
         /**
           <p>This symbol is the offset where the {@link cn.trinea.android.common.R.attr#isDropDownStyle}
           attribute's value can be found in the {@link #drop_down_list_attr} array.
@@ -126,7 +126,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name cn.trinea.android.common:isDropDownStyle
         */
-        public static final int drop_down_list_attr_isDropDownStyle = 0;
+        public static int drop_down_list_attr_isDropDownStyle = 0;
         /**
           <p>This symbol is the offset where the {@link cn.trinea.android.common.R.attr#isOnBottomStyle}
           attribute's value can be found in the {@link #drop_down_list_attr} array.
@@ -140,6 +140,6 @@ theme attribute (in the form
 containing a value of this type.
           @attr name cn.trinea.android.common:isOnBottomStyle
         */
-        public static final int drop_down_list_attr_isOnBottomStyle = 1;
+        public static int drop_down_list_attr_isOnBottomStyle = 1;
     };
 }

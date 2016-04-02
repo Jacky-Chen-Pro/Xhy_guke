@@ -1,2 +1,1 @@
-include ':app', ':library_refreshlayout', ':library_multiListView'
-include ':library_common'
+include ':library_common', ':app', ':library_multiListView', ':library_refreshlayout'
