@@ -14,6 +14,8 @@
     <string name="error_happen_back_to_home">发生未知异常，返回首页</string>
     <string name="internet_error">网络发生点错误，工程师正在努力哦...</string>
     <string name="decode_error">数据解析错误...</string>
+    <string name="cancel">取消</string>
+    <string name="send">发送</string>
 
     <!-- V言V语 列表页 -->
     <string name="vvtalk_read_count">%1$s人查看</string>
@@ -25,4 +27,8 @@
 
     <!-- 动态 -->
     <string name="dynamic_empty_tips">暂无动态，快发发一波！</string>
+
+    <!-- 评论 -->
+    <string name="send_comment">发评论</string>
+    <string name="comment_hint">写评论...</string>
 </resources>

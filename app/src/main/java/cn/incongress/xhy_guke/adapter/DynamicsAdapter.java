@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bm.library.Info;
-import com.bm.library.PhotoView;
 import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
@@ -90,20 +89,10 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                 //背景图片
                 if (data.getIsImg() != 0 && !StringUtils.isEmpty(data.getBgImg())) {
-                    Picasso.with(mContext).load(data.getBgImg()).into(((DynamicViewHolder) holder).pvOneImage);
-
-                    ((DynamicViewHolder) holder).pvOneImage.setVisibility(View.VISIBLE);
-                    ((DynamicViewHolder) holder).pvOneImage.disenable();
-
-                    ((DynamicViewHolder) holder).pvOneImage.setTag(data.getBgImg());
-                            ((DynamicViewHolder) holder).pvOneImage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mBrowerModeListener.doGoBrower(v, (String) v.getTag());
-                        }
-                    });
+                    Picasso.with(mContext).load(data.getBgImg()).into(((DynamicViewHolder) holder).ivOneImage);
+                    ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.VISIBLE);
                 }else {
-                    ((DynamicViewHolder) holder).pvOneImage.setVisibility(View.GONE);
+                    ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.GONE);
                 }
 
             } else {
@@ -121,7 +110,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((DynamicViewHolder) holder).tvShowTime.setText(data.getShowTime());
                 ((DynamicViewHolder) holder).tvReadCount.setText(data.getReadCount()+"");
 
-                ((DynamicViewHolder)holder).pvOneImage.setVisibility(View.GONE);
+                ((DynamicViewHolder)holder).ivOneImage.setVisibility(View.GONE);
                 ((DynamicViewHolder) holder).tvDynamicContent.setText(data.getTitle());
             }
 
@@ -154,7 +143,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     class DynamicViewHolder extends RecyclerView.ViewHolder {
         CircleImageView civUserIcon;
         TextView tvUserName, tvUserHospital, tvDynamicContent, tvShowTime, tvReadCount;
-        PhotoView pvOneImage;
+        ImageView ivOneImage;
         NoScrollGridView ngvTwoOrFour;
         NoScrollGridView ngvOther;
 
@@ -164,7 +153,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             this.tvUserName = (TextView) itemView.findViewById(R.id.tv_user_name);
             this.tvUserHospital = (TextView) itemView.findViewById(R.id.tv_user_hospital);
             this.tvDynamicContent = (TextView) itemView.findViewById(R.id.tv_dynamic_content);
-            this.pvOneImage = (PhotoView) itemView.findViewById(R.id.pv_one_image);
+            this.ivOneImage = (ImageView) itemView.findViewById(R.id.pv_one_image);
             this.ngvTwoOrFour = (NoScrollGridView) itemView.findViewById(R.id.ngv_two_or_four_image);
             this.ngvOther = (NoScrollGridView) itemView.findViewById(R.id.ngv_other_image);
             this.tvShowTime = (TextView) itemView.findViewById(R.id.tv_show_time);

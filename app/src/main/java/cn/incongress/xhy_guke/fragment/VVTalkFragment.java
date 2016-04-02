@@ -23,6 +23,7 @@ import cn.incongress.xhy_guke.adapter.VVTalkAdapter;
 import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.bean.VVTalkBean;
+import cn.incongress.xhy_guke.uis.popup.CommentPopupWindow;
 import cn.incongress.xhy_guke.utils.LogUtils;
 import cn.incongress.xhy_guke.utils.StringCallBackWithProgress;
 import cn.incongress.xhy_guke.utils.ToastUtils;
@@ -137,5 +138,6 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
         VVTalkBean data = mTalkBeans.get(position);
         ToastUtils.showShorToast(data.getTitle(), getActivity());
         VVTalkDetailActivity.startVVTalkDetailActivity(getActivity(),data.getType(),data.getDataId(),VVTalkDetailActivity.WHERE_STATE_VVTALK);
+//        new CommentPopupWindow(getActivity()).showPopupWindow();
     }
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/popup_bg"
+    android:id="@+id/click_to_dismiss"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/graywhite"
+        android:id="@+id/ll_popup_container"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            style="@style/fill_wrap"
+            android:gravity="center_vertical"
+            android:padding="@dimen/layout_padding">
+
+            <TextView
+                android:id="@+id/tv_cancle"
+                style="@style/wrap_wrap"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/cancel"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:id="@+id/tv_send"
+                style="@style/wrap_wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/send"
+                android:textSize="@dimen/text_size_small" />
+
+            <LinearLayout
+                style="@style/wrap_wrap"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/wrap_wrap"
+                    android:text="@string/send_comment"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_media" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/wrap_wrap"
+                    android:layout_alignParentRight="true"
+                    android:text="发送者"
+                    android:textSize="@dimen/text_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/et_comment"
+            style="@style/fill_wrap"
+            android:layout_marginBottom="@dimen/layout_margin"
+            android:layout_marginLeft="@dimen/layout_margin"
+            android:layout_marginRight="@dimen/layout_margin"
+            android:background="@color/white"
+            android:gravity="start"
+            android:hint="@string/comment_hint"
+            android:minLines="5"
+            android:maxLines="5"
+            android:padding="@dimen/layout_padding" />
+
+    </LinearLayout>
+</RelativeLayout>

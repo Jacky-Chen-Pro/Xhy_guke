@@ -43,16 +43,17 @@
         style="@style/fill_wrap"
         android:ellipsize="end"
         android:maxLines="2"
+        android:layout_marginBottom="@dimen/layout_margin"
         android:id="@+id/tv_dynamic_content"
         android:layout_marginTop="@dimen/layout_margin"
         android:textSize="@dimen/text_size_media" />
 
     <!-- 图片区域 -->
     <!-- 一张图片 -->
-    <com.bm.library.PhotoView
+    <ImageView
         android:id="@+id/pv_one_image"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="200dp"
         android:visibility="gone"
         android:scaleType="fitStart"
        />
@@ -73,7 +74,7 @@
         android:layout_height="wrap_content"/>
 
     <!-- 发布时间 -->
-    <RelativeLayout style="@style/fill_wrap">
+    <RelativeLayout style="@style/fill_wrap" android:layout_marginTop="@dimen/layout_margin">
         <TextView style="@style/wrap_wrap" android:id="@+id/tv_show_time" android:layout_alignParentLeft="true"/>
         <TextView style="@style/wrap_wrap" android:id="@+id/tv_read_count" android:layout_alignParentRight="true"/>
     </RelativeLayout>

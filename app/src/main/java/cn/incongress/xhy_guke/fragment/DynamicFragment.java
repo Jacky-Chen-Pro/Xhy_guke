@@ -16,6 +16,7 @@ import com.bm.library.PhotoView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.jackyonline.refreshdemo.RefreshLayout;
@@ -76,7 +77,7 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
         mAdapter = new DynamicsAdapter(getActivity(),mDynamicBeans);
         mAdapter.setGoToBrowerModeListener(new DynamicsAdapter.GoToBrowserModeListener() {
             @Override
-            public void doGoBrower(View view,String urlPath) {
+            public void doGoBrower(View view, String urlPath) {
                 PhotoView p = (PhotoView) view;
                 mInfo = p.getInfo();
 
@@ -103,6 +104,7 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
         });
 
         mRcvDynamics.setAdapter(mAdapter);
+        mRcvDynamics.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
 
         mRefresh.setOnRefreshListener(this);
         mRefresh.setOnLoadMoreListener(this);

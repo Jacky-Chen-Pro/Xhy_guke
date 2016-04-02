@@ -22,4 +22,7 @@
     <color name="theme_blue">#3569AF</color>
     <color name="background">#EAF0F2</color>
 
+    <!-- 评论他弹出框背景色 -->
+    <color name="popup_bg">#8f000000</color>
+
 </resources>

@@ -3,6 +3,8 @@ package cn.incongress.xhy_guke.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -14,6 +16,9 @@ import cn.incongress.xhy_guke.base.XhyApplication;
 import cn.incongress.xhy_guke.bean.VVTalkDetailBean;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailAreaFragment;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailCommentFragment;
+import cn.incongress.xhy_guke.uis.popup.BasePopupWindow;
+import cn.incongress.xhy_guke.uis.popup.CommentPopupWindow;
+import cn.incongress.xhy_guke.uis.popup.InputMethodUtils;
 import cn.incongress.xhy_guke.utils.LogUtils;
 import cn.incongress.xhy_guke.utils.ToastUtils;
 import okhttp3.Call;
@@ -39,6 +44,10 @@ public class VVTalkDetailActivity extends BaseActivity {
 
     private VVTalkDetailBean mDetailBean;
 
+    private TextView mTvMakeComment;
+    private CommentPopupWindow mCommentPop;
+
+
     public static final void startVVTalkDetailActivity(Context context, int type, int dataId, int whereState) {
         Intent intent = new Intent();
         intent.setClass(context, VVTalkDetailActivity.class);
@@ -54,6 +63,7 @@ public class VVTalkDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_vvtalk_detail);
         initToolbar(getString(R.string.vvtalk_detail_title), true, false, -1, null, false, -1, null);
 
+        mTvMakeComment = getViewById(R.id.tv_make_comment);
 
         type = getIntent().getIntExtra(EXTRA_TYPE, -1);
         dataId = getIntent().getIntExtra(EXTRA_DATA_ID, -1);
@@ -76,6 +86,20 @@ public class VVTalkDetailActivity extends BaseActivity {
                 mDetailBean = gson.fromJson(response, VVTalkDetailBean.class);
 
                 fillContainer();
+            }
+        });
+
+        mTvMakeComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCommentPop =  new CommentPopupWindow(VVTalkDetailActivity.this);
+                mCommentPop.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        InputMethodUtils.showInputMethod(VVTalkDetailActivity.this);
+                    }
+                });
+                mCommentPop.showPopupWindow();
             }
         });
     }
