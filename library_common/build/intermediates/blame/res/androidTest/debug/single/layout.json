@@ -1,10 +1,10 @@
 [
     {
-        "merged": "E:\\A-Company_Project_studio\\Xhy_guke\\library_common\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\drop_down_list_footer.xml",
-        "source": "E:\\A-Company_Project_studio\\Xhy_guke\\library_common\\build\\intermediates\\bundles\\debug\\res\\layout\\drop_down_list_footer.xml"
+        "merged": "E:\\A-studio_project\\Xhy_guke\\library_common\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\drop_down_list_header.xml",
+        "source": "E:\\A-studio_project\\Xhy_guke\\library_common\\build\\intermediates\\bundles\\debug\\res\\layout\\drop_down_list_header.xml"
     },
     {
-        "merged": "E:\\A-Company_Project_studio\\Xhy_guke\\library_common\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\drop_down_list_header.xml",
-        "source": "E:\\A-Company_Project_studio\\Xhy_guke\\library_common\\build\\intermediates\\bundles\\debug\\res\\layout\\drop_down_list_header.xml"
+        "merged": "E:\\A-studio_project\\Xhy_guke\\library_common\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\drop_down_list_footer.xml",
+        "source": "E:\\A-studio_project\\Xhy_guke\\library_common\\build\\intermediates\\bundles\\debug\\res\\layout\\drop_down_list_footer.xml"
     }
 ]

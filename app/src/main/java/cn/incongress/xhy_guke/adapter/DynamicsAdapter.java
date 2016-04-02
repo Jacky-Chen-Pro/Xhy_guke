@@ -65,15 +65,21 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             //1新闻 2病例 3发帖 4课件 5视频
             //专家发帖
             if (type == 3) {
+                //头像
                 if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getUserPic())) {
                     Picasso.with(mContext).load(data.getUserPic()).into(((DynamicViewHolder) holder).civUserIcon);
+                }else {
+                    ((DynamicViewHolder) holder).civUserIcon.setImageResource(R.mipmap.item_vvtalk_professor_head_default);
                 }
+
+                //姓名 医院 时间 游览数
                 ((DynamicViewHolder) holder).tvUserName.setText(data.getShowName());
                 ((DynamicViewHolder) holder).tvUserHospital.setText(data.getCompany());
 
                 ((DynamicViewHolder) holder).tvShowTime.setText(data.getShowTime());
                 ((DynamicViewHolder) holder).tvReadCount.setText(data.getReadCount()+"");
 
+                //标题
                 try {
                     String title = URLDecoder.decode(data.getTitle(), Constants.ENCODDING_UTF8);
                     ((DynamicViewHolder) holder).tvDynamicContent.setText(title);
@@ -82,8 +88,10 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     e.printStackTrace();
                 }
 
-                if (data.getIsImg() != 0) {
+                //背景图片
+                if (data.getIsImg() != 0 && !StringUtils.isEmpty(data.getBgImg())) {
                     Picasso.with(mContext).load(data.getBgImg()).into(((DynamicViewHolder) holder).pvOneImage);
+
                     ((DynamicViewHolder) holder).pvOneImage.setVisibility(View.VISIBLE);
                     ((DynamicViewHolder) holder).pvOneImage.disenable();
 
@@ -94,9 +102,26 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             mBrowerModeListener.doGoBrower(v, (String) v.getTag());
                         }
                     });
+                }else {
+                    ((DynamicViewHolder) holder).pvOneImage.setVisibility(View.GONE);
                 }
 
             } else {
+                //头像
+                if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getUserPic())) {
+                    Picasso.with(mContext).load(data.getUserPic()).into(((DynamicViewHolder) holder).civUserIcon);
+                }else {
+                    ((DynamicViewHolder) holder).civUserIcon.setImageResource(R.mipmap.item_vvtalk_professor_head_default);
+                }
+
+                //姓名 医院 时间 游览数
+                ((DynamicViewHolder) holder).tvUserName.setText(data.getShowName());
+                ((DynamicViewHolder) holder).tvUserHospital.setText(data.getCompany());
+
+                ((DynamicViewHolder) holder).tvShowTime.setText(data.getShowTime());
+                ((DynamicViewHolder) holder).tvReadCount.setText(data.getReadCount()+"");
+
+                ((DynamicViewHolder)holder).pvOneImage.setVisibility(View.GONE);
                 ((DynamicViewHolder) holder).tvDynamicContent.setText(data.getTitle());
             }
 

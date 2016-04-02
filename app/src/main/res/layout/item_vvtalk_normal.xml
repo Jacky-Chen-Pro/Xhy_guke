@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_item_vvtalk"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_container"
+        android:layout_width="match_parent"
+        android:background="@mipmap/item_background_professor_default"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <!-- 头像信息区域 -->
+        <RelativeLayout style="@style/fill_wrap"
+            android:padding="@dimen/layout_padding">
+
+            <cn.incongress.xhy_guke.uis.CircleImageView
+                android:id="@+id/civ_user_icon"
+                android:layout_width="46dp"
+                android:src="@mipmap/item_vvtalk_professor_head_default"
+                android:layout_height="46dp"
+                app:civ_border_width="0dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginLeft="@dimen/layout_margin"
+                android:layout_toRightOf="@id/civ_user_icon"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/wrap_wrap"
+                    android:id="@+id/tv_user_name"
+                    android:textColor="@color/white"
+                    android:drawableRight="@mipmap/vvtalk_chairman_tag"
+                    android:drawablePadding="@dimen/layout_padding"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size_media" />
+
+                <TextView
+                    android:id="@+id/tv_user_hospital"
+                    style="@style/wrap_wrap"
+                    android:textColor="@color/white"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView style="@style/fill_wrap"
+        android:maxLines="2"
+        android:id="@+id/tv_title"
+        android:ellipsize="end"
+        android:padding="@dimen/layout_padding"
+        android:textSize="@dimen/text_size_media" android:textColor="@color/black"/>
+    <View style="@style/h_line" android:layout_marginRight="@dimen/layout_margin"
+        android:layout_marginLeft="@dimen/layout_margin"/>
+    <RelativeLayout style="@style/fill_wrap" android:padding="@dimen/layout_padding">
+        <TextView style="@style/wrap_wrap"  android:textSize="@dimen/text_size_small" android:textColor="@color/gray" android:layout_alignParentLeft="true" android:id="@+id/tv_publish_time"/>
+        <TextView style="@style/wrap_wrap"  android:textSize="@dimen/text_size_small" android:textColor="@color/gray" android:layout_alignParentRight="true" android:id="@+id/tv_look_num"/>
+    </RelativeLayout>
+</LinearLayout>
