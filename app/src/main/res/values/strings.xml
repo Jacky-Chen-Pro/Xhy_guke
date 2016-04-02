@@ -12,6 +12,8 @@
     <string name="loading">努力加载中...</string>
     <string name="no_data_tips">还木有数据哟...</string>
     <string name="error_happen_back_to_home">发生未知异常，返回首页</string>
+    <string name="internet_error">网络发生点错误，工程师正在努力哦...</string>
+    <string name="decode_error">数据解析错误...</string>
 
     <!-- V言V语 列表页 -->
     <string name="vvtalk_read_count">%1$s人查看</string>

@@ -4,8 +4,12 @@ import android.content.Context;
 
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.jackyonline.refreshdemo.RefreshLayout;
+
+import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.utils.NetWorkUtils;
 import cn.incongress.xhy_guke.utils.StringUtils;
+import cn.incongress.xhy_guke.utils.ToastUtils;
 
 /**
  * Created by Jacky Chen on 2016/3/29 0029.
@@ -23,23 +27,24 @@ public class XhyGo {
      * 获取V言V语首页数据
      * @param context
      * @param lastDataId
-     * @param row
      * @param topIds
      * @param stringCallback
      * @return
      */
-    public static final int getMainDataListVyvy(Context context,String lastDataId,String row, String topIds,StringCallback stringCallback) {
+    public static final int getMainDataListVyvy(Context context,RefreshLayout refreshLayout,int lastDataId, String topIds,StringCallback stringCallback) {
         //先检查是否有网络
         if(NetWorkUtils.isNetworkConnected(context)) {
             //再检查字段是否格式正确
-            if(StringUtils.isNotEmpty(lastDataId,row)) {
+            if(StringUtils.isNotEmpty(lastDataId)) {
                 //最后发送请求
-                XhyApiClient.getMainDataListVyvy(lastDataId,row,topIds,stringCallback);
+                XhyApiClient.getMainDataListVyvy(lastDataId,topIds,stringCallback);
                 return SUCCESS;
             }else {
                 return FIELD_FORMAT_ERROR;
             }
         }else {
+            refreshLayout.finishCurrentLoad();
+            ToastUtils.showShorToast(context.getString(R.string.internet_error), context);
             return INTERNET_ERROR;
         }
     }
@@ -77,7 +82,7 @@ public class XhyGo {
         }
     }
 
-    public static final int getDataListDt (Context context, String lastDataId,String row, StringCallback stringCallback){
+    public static final int getDataListDt (Context context, RefreshLayout refreshLayout, String lastDataId,String row, StringCallback stringCallback){
         //先检查是否有网络
         if(NetWorkUtils.isNetworkConnected(context)) {
             //再检查字段是否格式正确
@@ -89,6 +94,8 @@ public class XhyGo {
                 return FIELD_FORMAT_ERROR;
             }
         }else {
+            refreshLayout.finishCurrentLoad();
+            ToastUtils.showShorToast(context.getString(R.string.internet_error), context);
             return INTERNET_ERROR;
         }
     }

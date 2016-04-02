@@ -1,6 +1,7 @@
 package cn.incongress.xhy_guke.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -22,7 +23,6 @@ import cn.incongress.xhy_guke.utils.StringUtils;
  * Created by Jacky on 2016/3/28.
  */
 public class VVTalkAdapter extends ListBaseAdapter<VVTalkBean> {
-
     private Context mContext;
 
     public VVTalkAdapter(Context context, ArrayList<VVTalkBean> beans) {
