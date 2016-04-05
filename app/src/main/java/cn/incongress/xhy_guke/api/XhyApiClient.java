@@ -111,20 +111,19 @@ public class XhyApiClient {
      * @param sendUserId
      * @param receiveUserId
      * @param receiveName
-     * @param clientType
      * @param dataId
      * @param content
      * @param stringCallback
      */
-    public static void sendComment(String sendUserId, String receiveUserId, String receiveName, String clientType, String dataId, String content, StringCallback stringCallback) {
+    public static void sendComment(String sendUserId, String receiveUserId, String receiveName, String dataId, String content, StringCallback stringCallback) {
         Map<String, String> params = new HashMap<>();
         params.put("sendUserId", sendUserId);
         params.put("receiveUserId", receiveUserId);
         params.put("receiveName", receiveName);
-        params.put("clientType", clientType);
+        params.put("clientType", Constants.CLIENT_TYPE);
         params.put("dataId", dataId);
         params.put("content", content);
 
-        OkHttpUtils.post().url(HOST +"?getDataLaud").params(params).build().execute(stringCallback);
+        OkHttpUtils.post().url(HOST +"?sendComment").params(params).build().execute(stringCallback);
     }
 }

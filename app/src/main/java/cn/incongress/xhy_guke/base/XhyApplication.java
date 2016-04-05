@@ -7,5 +7,5 @@ import android.app.Application;
  */
 public class XhyApplication extends Application {
     /** 用户ID **/
-    public static final String userId = "-1";
+    public static final String userId = "16004";
 }

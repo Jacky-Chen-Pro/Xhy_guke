@@ -100,7 +100,7 @@ public class XhyGo {
         }
     }
 
-    public static final int goDataLaud(Context context, RefreshLayout refreshLayout, String dataId, String userId, StringCallback stringCallback) {
+    public static final int goDataLaud(Context context, String dataId, String userId, StringCallback stringCallback) {
         //先检查是否有网络
         if(NetWorkUtils.isNetworkConnected(context)) {
             //再检查字段是否格式正确
@@ -112,7 +112,6 @@ public class XhyGo {
                 return FIELD_FORMAT_ERROR;
             }
         }else {
-            refreshLayout.finishCurrentLoad();
             ToastUtils.showShorToast(context.getString(R.string.internet_error), context);
             return INTERNET_ERROR;
         }
@@ -136,19 +135,19 @@ public class XhyGo {
         }
     }
 
-    public static final int goSendComment(Context context, RefreshLayout refreshLayout, String sendUserId, String receiveUserId, String receiveName, String clientType, String dataId, String content, StringCallback stringCallback) {
+    public static final int goSendComment(Context context, String sendUserId, String receiveUserId, String receiveName, String dataId, String content, StringCallback stringCallback) {
         //先检查是否有网络
         if(NetWorkUtils.isNetworkConnected(context)) {
             //再检查字段是否格式正确
-            if(StringUtils.isNotEmpty(sendUserId, receiveUserId,receiveName,clientType,content)) {
+            if(StringUtils.isNotEmpty(content)) {
                 //最后发送请求
-                XhyApiClient.sendComment(sendUserId,receiveUserId,receiveName,clientType,dataId,content,stringCallback);
+                XhyApiClient.sendComment(sendUserId,receiveUserId,receiveName,dataId,content,stringCallback);
                 return SUCCESS;
             }else {
+                ToastUtils.showShorToast(context.getString(R.string.comment_empty), context);
                 return FIELD_FORMAT_ERROR;
             }
         }else {
-            refreshLayout.finishCurrentLoad();
             ToastUtils.showShorToast(context.getString(R.string.internet_error), context);
             return INTERNET_ERROR;
         }

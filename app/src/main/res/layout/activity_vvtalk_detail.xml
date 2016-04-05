@@ -24,6 +24,7 @@
     </cn.incongress.xhy_guke.uis.vertical_slide.DragLayout>
 
     <View style="@style/h_line"  />
+    <!-- 下方操作栏  -->
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/rl_operation_bar"
@@ -48,19 +49,23 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/iv_praise"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:src="@mipmap/vvtalk_detail_praise"
             android:layout_height="wrap_content" />
         <ImageView
             android:layout_width="0dp"
+            android:id="@+id/iv_collect"
             android:layout_weight="1"
             android:src="@mipmap/vvtalk_detail_collection"
             android:layout_height="wrap_content" />
         <ImageView
             android:layout_width="0dp"
             android:src="@mipmap/vvtalk_detail_share"
+            android:id="@+id/iv_share"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
+
     </LinearLayout>
 </LinearLayout>

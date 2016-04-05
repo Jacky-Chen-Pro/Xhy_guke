@@ -1,5 +1,6 @@
 package cn.incongress.xhy_guke.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -95,6 +97,14 @@ public class VVTalkDetailCommentFragment extends BaseFragment {
         mRcvComments = (RecyclerView) view.findViewById(R.id.rcv_comments);
         mLinearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false);
         mRcvComments.setLayoutManager(mLinearLayoutManager);
+
+        mRcvComments.addItemDecoration(
+                new HorizontalDividerItemDecoration.Builder(getActivity())
+                        .color(getActivity().getResources().getColor(R.color.graywhite))
+                        .size(getResources().getDimensionPixelSize(R.dimen.divider_height))
+                        .margin(getResources().getDimensionPixelSize(R.dimen.layout_margin),
+                                getResources().getDimensionPixelSize(R.dimen.layout_margin))
+                        .build());
 
         int result = XhyGo.getCommentList(getActivity(), mDataId, XhyApplication.userId, mLastCommentId + "", Constants.PAGE_SIZE, new StringCallback() {
             @Override

@@ -4,10 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.api.XhyGo;
@@ -23,6 +29,7 @@ import cn.incongress.xhy_guke.uis.popup.InputMethodUtils;
 import cn.incongress.xhy_guke.utils.LogUtils;
 import cn.incongress.xhy_guke.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * Created by Jacky Chen on 2016/3/29 0029.
@@ -52,6 +59,7 @@ public class VVTalkDetailActivity extends BaseActivity {
 
     private TextView mTvMakeComment;
     private CommentPopupWindow mCommentPop;
+    private ImageView mIvPraise,mIvCollect,mIvShare;
 
 
     public static final void startVVTalkDetailActivity(Context context, int type, int dataId, int whereState) {
@@ -70,6 +78,9 @@ public class VVTalkDetailActivity extends BaseActivity {
         initToolbar(getString(R.string.vvtalk_detail_title), true, false, -1, null, false, -1, null);
 
         mTvMakeComment = getViewById(R.id.tv_make_comment);
+        mIvPraise = getViewById(R.id.iv_praise);
+        mIvCollect = getViewById(R.id.iv_collect);
+        mIvShare = getViewById(R.id.iv_share);
 
         mCurrentType = getIntent().getIntExtra(EXTRA_TYPE, -1);
         mDataId = getIntent().getIntExtra(EXTRA_DATA_ID, -1);
@@ -95,17 +106,101 @@ public class VVTalkDetailActivity extends BaseActivity {
             }
         });
 
+
+    }
+
+    private void initEvents() {
         mTvMakeComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCommentPop =  new CommentPopupWindow(VVTalkDetailActivity.this);
+                mCommentPop = new CommentPopupWindow(VVTalkDetailActivity.this, XhyApplication.userId, "-1", "", mDataId + "", new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            int state = obj.getInt("state");
+
+                            if(state == 1) {
+                                ToastUtils.showShorToast(getString(R.string.comment_success),VVTalkDetailActivity.this);
+                            }else {
+                                ToastUtils.showShorToast(obj.getString("msg"), VVTalkDetailActivity.this);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
                 mCommentPop.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
                         InputMethodUtils.showInputMethod(VVTalkDetailActivity.this);
                     }
                 });
+
                 mCommentPop.showPopupWindow();
+            }
+        });
+
+        mIvPraise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mDetailBean.getIsLaud() == 0) {
+                    XhyGo.goDataLaud(VVTalkDetailActivity.this, mDataId+"", XhyApplication.userId, new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e) {
+
+                        }
+
+                        @Override
+                        public void onBefore(Request request) {
+                            super.onBefore(request);
+
+                            //放大动画
+                            final ScaleAnimation animation =new ScaleAnimation(1.0f, 1.3f, 1.0f, 1.3f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                            animation.setDuration(500);//设置动画持续时间
+                            mIvPraise.startAnimation(animation);
+                        }
+
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject json = new JSONObject(response);
+                                int state = json.getInt("state");
+                                String msg = json.getString("msg");
+                                int laudCount = json.getInt("laudCount");
+                                if(state == 0) {
+                                    ToastUtils.showShorToast(msg, VVTalkDetailActivity.this);
+                                }else {
+                                    mIvPraise.setImageResource(R.mipmap.vvtalk_detail_praise_done);
+                                    mDetailBean.setIsLaud(1);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+
+
+            }
+        });
+
+        mIvCollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        mIvShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
@@ -127,6 +222,14 @@ public class VVTalkDetailActivity extends BaseActivity {
             ToastUtils.showShorToast("Attach", VVTalkDetailActivity.this);
         }else if(mCurrentType == DETAIL_TYPE_VIDEO) {
             ToastUtils.showShorToast("Video", VVTalkDetailActivity.this);
+        }
+
+        initEvents();
+
+        if(mDetailBean != null) {
+            if(mDetailBean.getIsLaud() == 1) {
+                mIvPraise.setImageResource(R.mipmap.vvtalk_detail_praise_done);
+            }
         }
     }
 }

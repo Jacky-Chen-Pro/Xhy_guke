@@ -29,6 +29,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcv_comments"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/layout_margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

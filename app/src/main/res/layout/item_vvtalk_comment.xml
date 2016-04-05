@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
+    android:gravity="center_vertical"
     android:padding="@dimen/layout_padding"
     android:layout_height="wrap_content">
 
@@ -8,6 +9,7 @@
         android:id="@+id/civ_comment_icon"
         android:layout_width="0dp"
         android:layout_weight="2"
+        android:src="@mipmap/item_vvtalk_professor_head_default"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -22,6 +24,7 @@
         android:layout_width="0dp"
         android:layout_weight="6"
         android:textColor="@color/black"
+        android:layout_marginLeft="@dimen/layout_margin"
         android:gravity="start"
         android:layout_height="wrap_content" />
 </LinearLayout>

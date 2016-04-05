@@ -9,16 +9,20 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.bean.CommentListBean;
 import cn.incongress.xhy_guke.uis.CircleImageView;
+import cn.incongress.xhy_guke.utils.StringUtils;
 
 /**
  * Created by Jacky on 2016/3/30.
  */
-public class VVTalkCommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class VVTalkCommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>     {
     private static final int VIEW_TYPE_EMPTY = 0X0001;
     private static final int VIEW_TYPE_NORMAL = 0X0002;
 
@@ -51,9 +55,20 @@ public class VVTalkCommentAdapter extends RecyclerView.Adapter<RecyclerView.View
         if(getItemViewType(position) == VIEW_TYPE_NORMAL) {
             CommentListBean data = mCommentListBean.get(position);
 
-            Picasso.with(mContext).load(data.getUserPic()).into(((CommentViewHolder)holder).civCommentIcon);
-            ((CommentViewHolder) holder).tvCommentName.setText(data.getUserName());
-            ((CommentViewHolder) holder).tvCommentContent.setText(data.getContent());
+            if(StringUtils.isNotEmpty(data.getUserPic())) {
+                Picasso.with(mContext).load(data.getUserPic()).into(((CommentViewHolder)holder).civCommentIcon);
+            }
+            ((CommentViewHolder) holder).tvCommentName.setText(data.getUserName()+":");
+
+            try {
+                String content = URLDecoder.decode(data.getContent(), Constants.ENCODDING_UTF8);
+                content = URLDecoder.decode(content, Constants.ENCODDING_UTF8);
+                ((CommentViewHolder) holder).tvCommentContent.setText(content);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                ((CommentViewHolder) holder).tvCommentContent.setText(R.string.decode_error);
+            }
+
         }else {
             ((EmptyViewHolder)holder).tvEmpty.setText(R.string.vvtalk_empty_tips);
         }

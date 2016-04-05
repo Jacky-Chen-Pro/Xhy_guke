@@ -17,6 +17,7 @@
     <string name="cancel">取消</string>
     <string name="send">发送</string>
 
+
     <!-- V言V语 列表页 -->
     <string name="vvtalk_read_count">%1$s人查看</string>
     <!-- V言V语 详情页 -->
@@ -31,4 +32,8 @@
     <!-- 评论 -->
     <string name="send_comment">发评论</string>
     <string name="comment_hint">写评论...</string>
+    <string name="send_comment_fail">发送评论失败</string>
+    <string name="comment_empty">评论为空哦</string>
+    <string name="comment_success">评论成功</string>
+
 </resources>
