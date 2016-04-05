@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -98,6 +99,9 @@ public class VVTalkDetailCommentFragment extends BaseFragment {
         mLinearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false);
         mRcvComments.setLayoutManager(mLinearLayoutManager);
 
+        mCommentAdapter = new VVTalkCommentAdapter(getActivity(),mCommentList);
+        mRcvComments.setAdapter(mCommentAdapter);
+
         mRcvComments.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(getActivity())
                         .color(getActivity().getResources().getColor(R.color.graywhite))
@@ -131,12 +135,6 @@ public class VVTalkDetailCommentFragment extends BaseFragment {
     }
 
     private void fillContainer() {
-        if(mCommentList.size() == 0) {
-            ToastUtils.showShorToast("No Comments",getActivity());
-        }else {
-            ToastUtils.showShorToast("Has Comments",getActivity());
-        }
-        mCommentAdapter = new VVTalkCommentAdapter(getActivity(),mCommentList);
-        mRcvComments.setAdapter(mCommentAdapter);
+       mCommentAdapter.notifyDataSetChanged();
     }
 }
