@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.incongress.xhy_guke.uis.MyScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/fill_fill">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <!-- 头像信息区域 -->
+        <RelativeLayout
+            style="@style/fill_wrap"
+            android:padding="@dimen/layout_padding">
+
+            <cn.incongress.xhy_guke.uis.CircleImageView
+                android:id="@+id/civ_user_icon"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:src="@mipmap/item_vvtalk_professor_head_default"
+                app:civ_border_width="0dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginLeft="@dimen/layout_margin"
+                android:layout_toRightOf="@id/civ_user_icon"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/wrap_wrap"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_media" />
+
+                <TextView
+                    android:id="@+id/tv_hospital"
+                    style="@style/wrap_wrap"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_vvtalk_content"
+            style="@style/fill_wrap"
+            android:padding="@dimen/layout_padding"
+            android:textSize="@dimen/text_size_media" />
+
+        <!-- 图片区域 -->
+        <!-- 一张图片 -->
+        <ImageView
+            android:id="@+id/iv_one_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="@dimen/layout_margin"
+            android:scaleType="fitStart"
+            android:visibility="gone" />
+
+        <!-- 两张图片或者四张图片 -->
+        <cn.incongress.xhy_guke.uis.NoScrollGridView
+            android:id="@+id/ngv_two_or_four_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_margin"
+            android:horizontalSpacing="5dip"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dip"
+            android:visibility="gone" />
+
+        <!-- 其他图片的情况 -->
+        <cn.incongress.xhy_guke.uis.NoScrollGridView
+            android:id="@+id/ngv_other_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_margin"
+            android:columnWidth="70dp"
+            android:horizontalSpacing="5dip"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dip"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</cn.incongress.xhy_guke.uis.MyScrollView>

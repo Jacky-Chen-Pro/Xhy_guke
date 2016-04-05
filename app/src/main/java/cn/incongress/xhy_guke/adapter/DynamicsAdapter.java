@@ -12,8 +12,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
@@ -21,9 +19,6 @@ import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.bean.DynamicListBean;
 import cn.incongress.xhy_guke.uis.CircleImageView;
 import cn.incongress.xhy_guke.uis.NoScrollGridView;
-import cn.trinea.android.common.util.ArrayUtils;
-import cn.trinea.android.common.util.CollectionUtils;
-import cn.trinea.android.common.util.StringUtils;
 
 /**
  * Created by Jacky on 2016/3/30.
@@ -94,7 +89,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 if(cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getImgs())) {
                     String[] imgs= data.getImgs().split(",");
                     if(imgs.length == 1) {
-                        Picasso.with(mContext).load(data.getBgImg()).into(((DynamicViewHolder) holder).ivOneImage);
+                        Picasso.with(mContext).load(imgs[0]).into(((DynamicViewHolder) holder).ivOneImage);
                         ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.VISIBLE);
                         ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
                         ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
@@ -136,10 +131,8 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
                 ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
             }
-
         } else {
             ((EmptyViewHolder) holder).tvEmpty.setText(R.string.dynamic_empty_tips);
-
         }
     }
 
@@ -177,7 +170,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             this.tvUserName = (TextView) itemView.findViewById(R.id.tv_user_name);
             this.tvUserHospital = (TextView) itemView.findViewById(R.id.tv_user_hospital);
             this.tvDynamicContent = (TextView) itemView.findViewById(R.id.tv_dynamic_content);
-            this.ivOneImage = (ImageView) itemView.findViewById(R.id.pv_one_image);
+            this.ivOneImage = (ImageView) itemView.findViewById(R.id.iv_one_image);
             this.ngvTwoOrFour = (NoScrollGridView) itemView.findViewById(R.id.ngv_two_or_four_image);
             this.ngvOther = (NoScrollGridView) itemView.findViewById(R.id.ngv_other_image);
             this.tvShowTime = (TextView) itemView.findViewById(R.id.tv_show_time);

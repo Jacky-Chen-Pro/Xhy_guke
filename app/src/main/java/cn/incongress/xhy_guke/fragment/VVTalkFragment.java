@@ -46,8 +46,13 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(cn.incongress.xhy_guke.R.layout.fragment_vvtalk, null);
-//      initView(view);
+        initView(view);
+        return view;
+    }
 
+    @Override
+    public void initView(View view) {
+        super.initView(view);
         refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
         mMultiColumnListView = (MultiColumnListView) view.findViewById(R.id.listview);
 
@@ -58,35 +63,15 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
 
         refreshLayout.setOnLoadMoreListener(this);
         refreshLayout.setOnRefreshListener(this);
-
-        getData(mLastDataId, mTopIds);
-        mMultiColumnListView.setOnItemClickListener(this);
-
-        return view;
+        initData();
     }
 
-//    @Override
-//    public void initView(View view) {
-//        super.initView(view);
-//        refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
-//        mMultiColumnListView = (MultiColumnListView) view.findViewById(R.id.listview);
-//
-//        mAdapter = new VVTalkAdapter(getActivity(), mTalkBeans);
-//        View emptyView = LayoutInflater.from(getActivity()).inflate(R.layout.emptyview,null);
-//        mMultiColumnListView.setEmptyView(emptyView);
-//        mMultiColumnListView.setAdapter(mAdapter);
-//
-//        refreshLayout.setOnLoadMoreListener(this);
-//        refreshLayout.setOnRefreshListener(this);
-//        initData();
-//    }
-//
-//    @Override
-//    public void initData() {
-//        super.initData();
-//        getData(mLastDataId, mTopIds);
-//        mMultiColumnListView.setOnItemClickListener(this);
-//    }
+    @Override
+    public void initData() {
+        super.initData();
+        getData(mLastDataId, mTopIds);
+        mMultiColumnListView.setOnItemClickListener(this);
+    }
 
     private void getData(final int lastDataId, String topIds) {
         XhyGo.getMainDataListVyvy(getActivity(),refreshLayout, lastDataId, topIds, new StringCallBackWithProgress(getActivity()) {
@@ -136,8 +121,6 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
     @Override
     public void onItemClick(PLA_AdapterView<?> parent, View view, int position, long id) {
         VVTalkBean data = mTalkBeans.get(position);
-        ToastUtils.showShorToast(data.getTitle(), getActivity());
         VVTalkDetailActivity.startVVTalkDetailActivity(getActivity(),data.getType(),data.getDataId(),VVTalkDetailActivity.WHERE_STATE_VVTALK);
-//        new CommentPopupWindow(getActivity()).showPopupWindow();
     }
 }

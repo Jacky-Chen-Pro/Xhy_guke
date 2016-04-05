@@ -14,8 +14,9 @@ import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseActivity;
 import cn.incongress.xhy_guke.base.XhyApplication;
 import cn.incongress.xhy_guke.bean.VVTalkDetailBean;
-import cn.incongress.xhy_guke.fragment.VVTalkDetailAreaFragment;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailCommentFragment;
+import cn.incongress.xhy_guke.fragment.VVTalkDetailMakePostFragment;
+import cn.incongress.xhy_guke.fragment.WebViewDetailFragment;
 import cn.incongress.xhy_guke.uis.popup.BasePopupWindow;
 import cn.incongress.xhy_guke.uis.popup.CommentPopupWindow;
 import cn.incongress.xhy_guke.uis.popup.InputMethodUtils;
@@ -32,15 +33,20 @@ public class VVTalkDetailActivity extends BaseActivity {
     private static final String EXTRA_DATA_ID = "data_id";
     private static final String EXTRA_WHERE_STATE = "where_state";
 
-    /** EXTRA_TYPE **/
-    public static final int DETAIL_TYPE = 1;//webview
+    /** V言V语 详情类型 **/
+    public static final int DETAIL_TYPE_NEWS = 1;//新闻
+    public static final int DETAIL_TYPE_CASE = 2; //病例
+    public static final int DETAIL_TYPE_POST = 3;//发帖
+    public static final int DETAIL_TYPE_ATTACH = 4;//课件
+    public static final int DETAIL_TYPE_VIDEO = 5;//视频
 
+    /**  从V言V语跳转或者动态跳转 **/
     public static final int WHERE_STATE_VVTALK = 1;
     public static final int WHERE_STATE_DYNAMIC = 2;
 
-    private int type;
-    private int dataId;
-    private int whereState;
+    private int mCurrentType;//当前详情类型
+    private int mDataId;      //详情ID
+    private int mCurrentWhereState; //跳转来源
 
     private VVTalkDetailBean mDetailBean;
 
@@ -65,16 +71,16 @@ public class VVTalkDetailActivity extends BaseActivity {
 
         mTvMakeComment = getViewById(R.id.tv_make_comment);
 
-        type = getIntent().getIntExtra(EXTRA_TYPE, -1);
-        dataId = getIntent().getIntExtra(EXTRA_DATA_ID, -1);
-        whereState = getIntent().getIntExtra(EXTRA_WHERE_STATE, -1);
+        mCurrentType = getIntent().getIntExtra(EXTRA_TYPE, -1);
+        mDataId = getIntent().getIntExtra(EXTRA_DATA_ID, -1);
+        mCurrentWhereState = getIntent().getIntExtra(EXTRA_WHERE_STATE, -1);
 
-        if(type==-1 || dataId == -1 || whereState == -1) {
+        if(mCurrentType ==-1 || mDataId == -1 || mCurrentWhereState == -1) {
             ToastUtils.showShorToast(getString(R.string.error_happen_back_to_home),this);
             this.finish();
         }
 
-        int result = XhyGo.getDataById(this, dataId+"", XhyApplication.userId, whereState+"", new StringCallback() {
+        int result = XhyGo.getDataById(this, mDataId +"", XhyApplication.userId, mCurrentWhereState +"", new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
             }
@@ -108,8 +114,19 @@ public class VVTalkDetailActivity extends BaseActivity {
      * 页面布局
      */
     private void fillContainer() {
-        getSupportFragmentManager().beginTransaction().
-                add(R.id.fl_detail_area, VVTalkDetailAreaFragment.getInstance(mDetailBean.getHtmlUrl()))
-                .add(R.id.fl_comment_area,   VVTalkDetailCommentFragment.getInstance(mDetailBean.getLaudList(), mDetailBean.getDataId() + "")).commit();
+        if(mCurrentType == DETAIL_TYPE_NEWS || mCurrentType == DETAIL_TYPE_CASE) {
+            getSupportFragmentManager().beginTransaction().
+                    add(R.id.fl_detail_area, WebViewDetailFragment.getInstance(mDetailBean.getHtmlUrl()))
+                    .add(R.id.fl_comment_area, VVTalkDetailCommentFragment.getInstance(mDetailBean.getLaudList(), mDetailBean.getDataId() + "")).commit();
+        }else if(mCurrentType == DETAIL_TYPE_POST) {
+            ToastUtils.showShorToast("Post", VVTalkDetailActivity.this);
+            getSupportFragmentManager().beginTransaction().
+                    add(R.id.fl_detail_area, VVTalkDetailMakePostFragment.getInstance(mDetailBean.getAuthorPic(), mDetailBean.getCreateUser(), mDetailBean.getHospital(), mDetailBean.getContent(), mDetailBean.getImgs()))
+                    .add(R.id.fl_comment_area, VVTalkDetailCommentFragment.getInstance(mDetailBean.getLaudList(), mDetailBean.getDataId() + "")).commit();
+        }else if(mCurrentType == DETAIL_TYPE_ATTACH) {
+            ToastUtils.showShorToast("Attach", VVTalkDetailActivity.this);
+        }else if(mCurrentType == DETAIL_TYPE_VIDEO) {
+            ToastUtils.showShorToast("Video", VVTalkDetailActivity.this);
+        }
     }
 }

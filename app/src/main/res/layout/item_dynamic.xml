@@ -51,7 +51,7 @@
     <!-- 图片区域 -->
     <!-- 一张图片 -->
     <ImageView
-        android:id="@+id/pv_one_image"
+        android:id="@+id/iv_one_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:visibility="gone"
