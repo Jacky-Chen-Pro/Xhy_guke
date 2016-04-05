@@ -61,15 +61,23 @@
     <!-- 两张图片或者四张图片 -->
     <cn.incongress.xhy_guke.uis.NoScrollGridView
         android:id="@+id/ngv_two_or_four_image"
-        android:columnCount="2"
         android:visibility="gone"
+        android:horizontalSpacing="5dip"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dip"
         android:layout_width="match_parent"
-        android:layout_height="256dp"/>
-    <!-- 其他图片的情况 -->
+        android:layout_height="wrap_content"/>
 
+    <!-- 其他图片的情况 -->
     <cn.incongress.xhy_guke.uis.NoScrollGridView
         android:id="@+id/ngv_other_image"
         android:visibility="gone"
+        android:columnWidth="70dp"
+        android:horizontalSpacing="5dip"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

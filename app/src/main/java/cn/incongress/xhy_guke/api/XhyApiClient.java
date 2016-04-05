@@ -78,4 +78,53 @@ public class XhyApiClient {
     }
 
 
+    /**
+     * 内容点赞
+     * @param dataId
+     * @param userId
+     * @param stringCallback
+     */
+    public static void doDataLaud(String dataId, String userId,StringCallback stringCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("dataId", dataId);
+        params.put("userId", userId);
+        OkHttpUtils.post().url(HOST +"?dataLaud").params(params).build().execute(stringCallback);
+    }
+
+
+    /**
+     * 获取点赞、评论数
+     * @param dataId
+     * @param userId
+     * @param stringCallback
+     */
+    public static void getDataLaud(String dataId, String userId, StringCallback stringCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("dataId", dataId);
+        params.put("userId", userId);
+        OkHttpUtils.post().url(HOST +"?getDataLaud").params(params).build().execute(stringCallback);
+    }
+
+
+    /**
+     * 发表评论
+     * @param sendUserId
+     * @param receiveUserId
+     * @param receiveName
+     * @param clientType
+     * @param dataId
+     * @param content
+     * @param stringCallback
+     */
+    public static void sendComment(String sendUserId, String receiveUserId, String receiveName, String clientType, String dataId, String content, StringCallback stringCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("sendUserId", sendUserId);
+        params.put("receiveUserId", receiveUserId);
+        params.put("receiveName", receiveName);
+        params.put("clientType", clientType);
+        params.put("dataId", dataId);
+        params.put("content", content);
+
+        OkHttpUtils.post().url(HOST +"?getDataLaud").params(params).build().execute(stringCallback);
+    }
 }

@@ -18,6 +18,7 @@ public class DynamicListBean {
     private int bgHeight;
     private String userPic;
     private String showTime;
+    private String imgs;
 
 
     public int getDataId() {
@@ -130,5 +131,34 @@ public class DynamicListBean {
 
     public void setShowTime(String showTime) {
         this.showTime = showTime;
+    }
+
+    public String getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(String imgs) {
+        this.imgs = imgs;
+    }
+
+    @Override
+    public String toString() {
+        return "DynamicListBean{" +
+                "dataId=" + dataId +
+                ", title='" + title + '\'' +
+                ", showName='" + showName + '\'' +
+                ", company='" + company + '\'' +
+                ", userType=" + userType +
+                ", isNiming=" + isNiming +
+                ", readCount=" + readCount +
+                ", type=" + type +
+                ", isImg=" + isImg +
+                ", bgImg='" + bgImg + '\'' +
+                ", bgWidth=" + bgWidth +
+                ", bgHeight=" + bgHeight +
+                ", userPic='" + userPic + '\'' +
+                ", showTime='" + showTime + '\'' +
+                ", imgs='" + imgs + '\'' +
+                '}';
     }
 }

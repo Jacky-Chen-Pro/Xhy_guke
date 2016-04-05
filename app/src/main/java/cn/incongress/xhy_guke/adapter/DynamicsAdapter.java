@@ -12,6 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
@@ -19,6 +21,8 @@ import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.bean.DynamicListBean;
 import cn.incongress.xhy_guke.uis.CircleImageView;
 import cn.incongress.xhy_guke.uis.NoScrollGridView;
+import cn.trinea.android.common.util.ArrayUtils;
+import cn.trinea.android.common.util.CollectionUtils;
 import cn.trinea.android.common.util.StringUtils;
 
 /**
@@ -87,14 +91,29 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     e.printStackTrace();
                 }
 
-                //背景图片
-                if (data.getIsImg() != 0 && !StringUtils.isEmpty(data.getBgImg())) {
-                    Picasso.with(mContext).load(data.getBgImg()).into(((DynamicViewHolder) holder).ivOneImage);
-                    ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.VISIBLE);
+                if(cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getImgs())) {
+                    String[] imgs= data.getImgs().split(",");
+                    if(imgs.length == 1) {
+                        Picasso.with(mContext).load(data.getBgImg()).into(((DynamicViewHolder) holder).ivOneImage);
+                        ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.VISIBLE);
+                        ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
+                        ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
+                    }else if(imgs.length == 2 || imgs.length == 4) {
+                        ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.GONE);
+                        ((DynamicViewHolder) holder).ngvTwoOrFour.setAdapter(new NoScrollGridViewAdapter(mContext, imgs));
+                        ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.VISIBLE);
+                        ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
+                    }else {
+                        ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.GONE);
+                        ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
+                        ((DynamicViewHolder) holder).ngvOther.setAdapter(new NoScrollGridViewAdapter(mContext, imgs));
+                        ((DynamicViewHolder) holder).ngvOther.setVisibility(View.VISIBLE);
+                    }
                 }else {
                     ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.GONE);
+                    ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
+                    ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
                 }
-
             } else {
                 //头像
                 if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getUserPic())) {
@@ -110,12 +129,17 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((DynamicViewHolder) holder).tvShowTime.setText(data.getShowTime());
                 ((DynamicViewHolder) holder).tvReadCount.setText(data.getReadCount()+"");
 
-                ((DynamicViewHolder)holder).ivOneImage.setVisibility(View.GONE);
                 ((DynamicViewHolder) holder).tvDynamicContent.setText(data.getTitle());
+
+                //其他类型 图片先隐藏处理
+                ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.GONE);
+                ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
+                ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
             }
 
         } else {
             ((EmptyViewHolder) holder).tvEmpty.setText(R.string.dynamic_empty_tips);
+
         }
     }
 

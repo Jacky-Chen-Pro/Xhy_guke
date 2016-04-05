@@ -52,7 +52,7 @@ public class CommentPopupWindow extends BasePopupWindow implements View.OnClickL
 
     @Override
     protected View getClickToDismissView() {
-        return  popupView.findViewById(R.id.click_to_dismiss);
+        return  popupView.findViewById(R.id.rl_bg);
     }
 
     @Override
