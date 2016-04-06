@@ -40,4 +40,13 @@
     <string name="attach_download">文献下载</string>
     <string name="attach_intro">文献简介</string>
     <string name="attach_click_download">点击下载</string>
+
+    <!-- 登录页面 -->
+    <string name="login_mobile_hint">请输入手机号</string>
+    <string name="login_pwd_hint">请输入密码</string>
+    <string name="login_login">登录</string>
+    <string name="login_regist_account">— 注册新账号 —</string>
+    <string name="login_forget_pwd">忘记密码？</string>
+    <string name="login_user_first">先用用看</string>
+    <string name="login_version">版本号：%1$s</string>
 </resources>
