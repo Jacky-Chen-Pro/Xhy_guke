@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="@dimen/layout_padding"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:padding="@dimen/layout_padding"
+        android:hint="@string/login_mobile_hint"
+        android:background="@drawable/bg_login"
+        android:layout_margin="@dimen/layout_margin"
+        android:textSize="@dimen/text_size_media"
+        android:gravity="center"
+        android:layout_height="46dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:hint="@string/login_enter_code"
+        android:background="@drawable/bg_login"
+        android:textSize="@dimen/text_size_media"
+        android:gravity="center"
+        android:layout_height="46dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:padding="@dimen/layout_padding"
+        android:layout_margin="@dimen/layout_margin"
+        android:hint="@string/login_set_pwd"
+        android:background="@drawable/bg_login"
+        android:textSize="@dimen/text_size_media"
+        android:gravity="center"
+        android:layout_height="46dp" />
+
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/layout_margin"
+        android:background="@drawable/bg_login_bt"
+        android:layout_below="@id/et_pwd"
+        android:text="@string/login_submit_login"
+        android:textSize="@dimen/text_size_large"
+        android:layout_height="46dp" />
+</LinearLayout>

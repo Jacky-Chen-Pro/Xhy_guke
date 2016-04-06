@@ -18,7 +18,7 @@
         android:layout_margin="@dimen/layout_margin"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="180" />
+        android:layout_height="180dp" />
 
     <EditText
         android:id="@+id/et_mobile"
@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:background="@drawable/bg_login"
+        android:inputType="textPassword"
         android:layout_below="@id/et_mobile"
         android:padding="@dimen/layout_padding"
         android:textSize="@dimen/text_size_media"
@@ -56,6 +57,7 @@
 
 
     <TextView
+        android:id="@+id/tv_register"
         android:layout_width="wrap_content"
         android:textSize="@dimen/text_size_media"
         android:layout_below="@id/bt_login"
