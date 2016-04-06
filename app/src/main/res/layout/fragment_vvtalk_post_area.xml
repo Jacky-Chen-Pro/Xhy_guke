@@ -32,14 +32,14 @@
                     android:id="@+id/tv_name"
                     style="@style/wrap_wrap"
                     android:singleLine="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_media" />
 
                 <TextView
                     android:id="@+id/tv_hospital"
                     style="@style/wrap_wrap"
                     android:singleLine="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_small" />
             </LinearLayout>
         </RelativeLayout>

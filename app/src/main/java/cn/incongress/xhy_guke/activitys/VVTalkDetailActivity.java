@@ -23,6 +23,7 @@ import cn.incongress.xhy_guke.bean.VVTalkDetailBean;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailAttachFragment;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailCommentFragment;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailMakePostFragment;
+import cn.incongress.xhy_guke.fragment.VVTalkDetailVideoFragment;
 import cn.incongress.xhy_guke.fragment.WebViewDetailFragment;
 import cn.incongress.xhy_guke.uis.popup.BasePopupWindow;
 import cn.incongress.xhy_guke.uis.popup.CommentPopupWindow;
@@ -220,12 +221,15 @@ public class VVTalkDetailActivity extends BaseActivity {
         }else if(mCurrentType == DETAIL_TYPE_ATTACH) {
             ToastUtils.showShorToast("Attach", VVTalkDetailActivity.this);
             getSupportFragmentManager().beginTransaction().
-                    add(R.id.fl_detail_area,  VVTalkDetailAttachFragment.getInstance(mDetailBean.getAuthorPic(), mDetailBean.getCreateUser(),
-                            mDetailBean.getHospital(), mDetailBean.getTitle(),mDetailBean.getTime(), mDetailBean.getReadCount()+"", mDetailBean.getTitle(),
-                            mDetailBean.getPdfDataSize(),mDetailBean.getPdfDataUrl(),mDetailBean.getDataDescribe(), Integer.valueOf(mDetailBean.getDataType())))
+                    add(R.id.fl_detail_area, VVTalkDetailAttachFragment.getInstance(mDetailBean.getAuthorPic(), mDetailBean.getCreateUser(),
+                            mDetailBean.getHospital(), mDetailBean.getTitle(), mDetailBean.getTime(), mDetailBean.getReadCount() + "", mDetailBean.getTitle(),
+                            mDetailBean.getPdfDataSize(), mDetailBean.getPdfDataUrl(), mDetailBean.getDataDescribe(), Integer.valueOf(mDetailBean.getDataType())))
                     .add(R.id.fl_comment_area, VVTalkDetailCommentFragment.getInstance(mDetailBean.getLaudList(), mDetailBean.getDataId() + "")).commit();
         }else if(mCurrentType == DETAIL_TYPE_VIDEO) {
             ToastUtils.showShorToast("Video", VVTalkDetailActivity.this);
+            getSupportFragmentManager().beginTransaction().
+                    add(R.id.fl_detail_area, VVTalkDetailVideoFragment.getInstance(mDetailBean.getHtmlUrl(),mDetailBean.getTitle(),mDetailBean.getAuthorPic(), mDetailBean.getAuthor(), mDetailBean.getTitle(),mDetailBean.getTime(), mDetailBean.getReadCount()+""))
+                    .add(R.id.fl_comment_area, VVTalkDetailCommentFragment.getInstance(mDetailBean.getLaudList(), mDetailBean.getDataId() + "")).commit();
         }
 
         initEvents();

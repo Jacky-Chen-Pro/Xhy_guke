@@ -28,4 +28,6 @@
     <!-- 课件 -->
     <color name="attach_bg">#FF6826</color>
 
+    <!-- 视频 -->
+    <color name="video_bg">#5FB339</color>
 </resources>
