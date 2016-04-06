@@ -19,6 +19,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="180" />
+
     <EditText
         android:id="@+id/et_mobile"
         android:layout_width="match_parent"
