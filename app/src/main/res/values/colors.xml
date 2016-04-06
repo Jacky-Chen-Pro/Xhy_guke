@@ -25,4 +25,7 @@
     <!-- 评论他弹出框背景色 -->
     <color name="popup_bg">#8f000000</color>
 
+    <!-- 课件 -->
+    <color name="attach_bg">#FF6826</color>
+
 </resources>

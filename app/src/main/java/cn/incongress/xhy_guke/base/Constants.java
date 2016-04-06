@@ -10,4 +10,9 @@ public class Constants {
     public static final String ENCODDING_UTF8 = "utf-8";
     /** 客户端类型 1:ios ; 2:android **/
     public static final String CLIENT_TYPE = "2";
+
+    /** 课件详情中的附件类型，见名知意 **/
+    public static final int DATA_TYPE_PPT = 1;
+    public static final int DATA_TYPE_WORD = 2;
+    public static final int DATA_TYPE_PDF = 3;
 }

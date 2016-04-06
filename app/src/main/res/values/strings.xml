@@ -36,4 +36,8 @@
     <string name="comment_empty">评论为空哦</string>
     <string name="comment_success">评论成功</string>
 
+    <!-- 文献详情页 -->
+    <string name="attach_download">文献下载</string>
+    <string name="attach_intro">文献简介</string>
+    <string name="attach_click_download">点击下载</string>
 </resources>
