@@ -30,4 +30,8 @@
 
     <!-- 视频 -->
     <color name="video_bg">#5FB339</color>
+
+    <!-- 我 -->
+    <color name="background_white_transplant">#99FFFFFF</color>
+
 </resources>

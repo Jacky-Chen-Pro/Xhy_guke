@@ -54,5 +54,11 @@
     <string name="login_get_code">获取</string>
     <string name="login_submit_login">提交并登录</string>
 
-
+    <!-- 我 -->
+    <string name="me_my_publish">我的发布</string>
+    <string name="me_my_publish_vvtalk">我发布的V言V语</string>
+    <string name="me_my_publish_dynamic">我发布的学术动态</string>
+    <string name="me_my_operation">我的操作</string>
+    <string name="me_download">下载</string>
+    <string name="me_collection">收藏</string>
 </resources>

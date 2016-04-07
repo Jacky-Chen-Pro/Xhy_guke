@@ -17,6 +17,19 @@ public class MeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(cn.incongress.xhy_guke.R.layout.fragment_me,null);
+        initView(view);
         return view;
+    }
+
+    @Override
+    public void initView(View view) {
+        super.initView(view);
+
+
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
     }
 }
