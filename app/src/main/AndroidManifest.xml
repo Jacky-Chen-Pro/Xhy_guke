@@ -5,6 +5,21 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- 友盟额外添加的权限 start -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <!-- 友盟额外添加的权限 end -->
+
     <application
         android:name=".base.XhyApplication"
         android:allowBackup="true"
@@ -12,13 +27,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppBaseTheme_Light">
+
+        <!-- 友盟 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="55d67ff067e58e06010053d2"></meta-data>
+
         <activity android:name=".activitys.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activitys.RegisterActivity"/>
+        <activity android:name=".activitys.RegisterActivity" />
         <activity
             android:name="cn.incongress.xhy_guke.activitys.HomeActivity"
             android:launchMode="singleTask" />
@@ -31,7 +52,20 @@
                 android:value=".activitys.HomeActivity" />
         </activity>
 
-
+        <activity
+            android:name=".activitys.MsgStationActivity"
+            android:parentActivityName=".activitys.HomeActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activitys.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>

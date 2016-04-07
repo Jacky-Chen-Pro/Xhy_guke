@@ -1,5 +1,6 @@
 package cn.incongress.xhy_guke.activitys;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,7 +32,14 @@ public class HomeActivity  extends BaseActivity  implements TabHost.OnTabChangeL
         }
 
         initTabs();
-        initToolbar(getString(cn.incongress.xhy_guke.R.string.fragment_v_v_talk),false,false,-1,null,false,-1,null);
+        initToolbar(getString(cn.incongress.xhy_guke.R.string.fragment_v_v_talk), false, true, R.mipmap.home_message, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //消息站
+                startActivity(new Intent(HomeActivity.this,MsgStationActivity.class));
+            }
+        }, false, -1, null);
+
         setLeftAndRightImg(0);
         mTabHost.setCurrentTab(0);
         mTabHost.setOnTabChangedListener(this);

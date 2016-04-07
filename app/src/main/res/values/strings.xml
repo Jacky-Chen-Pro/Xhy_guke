@@ -61,4 +61,11 @@
     <string name="me_my_operation">我的操作</string>
     <string name="me_download">下载</string>
     <string name="me_collection">收藏</string>
+
+    <!-- 消息站 -->
+    <string name="msg_title">消息站</string>
+    <string name="msg_user_msg">用户消息</string>
+    <string name="msg_system_msg">系统消息</string>
+    <string name="msg_broadcast_msg">广播消息</string>
+
 </resources>

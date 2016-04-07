@@ -3,4 +3,4 @@
     android:shape="rectangle">
     <corners android:radius="5dp" />
     <solid android:color="#b73225" />
-</shape><!-- From: file:/F:/A-studio_project/android-app/social_sdk_library_project/src/main/res/drawable/btn_red_pressed.xml --><!-- From: file:/F:/A-studio_project/android-app/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/btn_red_pressed.xml -->
+</shape>
