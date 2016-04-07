@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.BaseActivity;
 import cn.incongress.xhy_guke.uis.MainTab;
 import cn.incongress.xhy_guke.uis.MyFragmentTabHost;
@@ -20,7 +21,7 @@ public class HomeActivity  extends BaseActivity  implements TabHost.OnTabChangeL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(cn.incongress.xhy_guke.R.layout.activity_home);
+        setContentView(R.layout.activity_home);
 
         mTabHost = (MyFragmentTabHost) findViewById(android.R.id.tabhost);
 
@@ -82,7 +83,7 @@ public class HomeActivity  extends BaseActivity  implements TabHost.OnTabChangeL
                 if(i!=3) {
                     mTvTitle.setText(mTabHost.getCurrentTabTag());
                 }else {
-                    mTvTitle.setText(cn.incongress.xhy_guke.R.string.home_title);
+                    mTvTitle.setText(R.string.home_title);
                 }
 
                 setLeftAndRightImg(mTabHost.getCurrentTab());

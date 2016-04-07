@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.huewu.pla.lib.MultiColumnListView;
+import com.huewu.pla.lib.internal.PLA_AbsListView;
 import com.huewu.pla.lib.internal.PLA_AdapterView;
 
 import org.jackyonline.refreshdemo.RefreshLayout;
@@ -42,12 +43,31 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
 
     private ArrayList<VVTalkBean> mTalkBeans = new ArrayList<VVTalkBean>();
 
+    private View rootView;// 缓存Fragment view
+    private int scrolledX = 0,scrolledY = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(cn.incongress.xhy_guke.R.layout.fragment_vvtalk, null);
-        initView(view);
-        return view;
+        if (rootView == null)
+        {
+            rootView = inflater.inflate(R.layout.fragment_vvtalk, null);
+            initView(rootView);
+        }
+        // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
+        ViewGroup parent = (ViewGroup) rootView.getParent();
+        if (parent != null)
+        {
+            parent.removeView(rootView);
+        }
+
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     @Override
@@ -71,6 +91,24 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
         super.initData();
         getData(mLastDataId, mTopIds);
         mMultiColumnListView.setOnItemClickListener(this);
+
+        mMultiColumnListView.setOnScrollListener(new PLA_AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(PLA_AbsListView view, int scrollState) {
+                // 不滚动时保存当前滚动到的位置
+                if (scrollState == PLA_AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    if (getActivity() != null) {
+                        scrolledY = mMultiColumnListView.getFirstVisiblePosition();
+                        LogUtils.e("VVTalkFragment", "position:" + scrolledX +"," + scrolledY);
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(PLA_AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
     }
 
     private void getData(final int lastDataId, String topIds) {

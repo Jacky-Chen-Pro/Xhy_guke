@@ -42,7 +42,7 @@ import okhttp3.Call;
  * Created by Jacky Chen on 2016/3/22 0022.
  * V言V语
  */
-public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRefreshListener, RefreshLayout.OnLoadMoreListener{
+public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRefreshListener, RefreshLayout.OnLoadMoreListener {
     private int mLasdDataID = -1;
 
     private RefreshLayout mRefresh;
@@ -60,10 +60,28 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
     AlphaAnimation in = new AlphaAnimation(0, 1);
     AlphaAnimation out = new AlphaAnimation(1, 0);
 
+    private View rootView;// 缓存Fragment view
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(cn.incongress.xhy_guke.R.layout.fragment_dynamic,null);
+
+        if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_dynamic, null);
+            initView(rootView);
+        }
+        // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
+        ViewGroup parent = (ViewGroup) rootView.getParent();
+        if (parent != null) {
+            parent.removeView(rootView);
+        }
+
+        return rootView;
+    }
+
+    @Override
+    public void initView(View view) {
+        super.initView(view);
 
         mParent = view.findViewById(R.id.parent);
         mBg = view.findViewById(R.id.bg);
@@ -71,10 +89,20 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
 
         mRefresh = (RefreshLayout) view.findViewById(R.id.refreshLayout);
         mRcvDynamics = (RecyclerView) view.findViewById(R.id.rcv_dynamics);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
+        mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRcvDynamics.setLayoutManager(mLinearLayoutManager);
 
-        mAdapter = new DynamicsAdapter(getActivity(),mDynamicBeans);
+        mAdapter = new DynamicsAdapter(getActivity(), mDynamicBeans);
+        mRcvDynamics.setAdapter(mAdapter);
+        mRcvDynamics.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
+
+        initData();
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+
         mAdapter.setGoToBrowerModeListener(new DynamicsAdapter.GoToBrowserModeListener() {
             @Override
             public void doGoBrower(View view, String urlPath) {
@@ -103,15 +131,12 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
             }
         });
 
-        mRcvDynamics.setAdapter(mAdapter);
-        mRcvDynamics.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
 
         mRefresh.setOnRefreshListener(this);
         mRefresh.setOnLoadMoreListener(this);
 
         getData(mLasdDataID);
 
-        return view;
     }
 
     @Override
@@ -126,10 +151,11 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
 
     /**
      * 获取数据
+     *
      * @return
      */
     private int getData(final int lasdDataID) {
-        return XhyGo.getDataListDt(getActivity(), mRefresh,lasdDataID + "", Constants.PAGE_SIZE, new StringCallback() {
+        return XhyGo.getDataListDt(getActivity(), mRefresh, lasdDataID + "", Constants.PAGE_SIZE, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
             }
@@ -150,11 +176,12 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
                     Gson gson = new Gson();
 
                     if (state == 1) {
-                        if(lasdDataID == -1) {
+                        if (lasdDataID == -1) {
                             mDynamicBeans.clear();
                         }
-                        mDynamicBeans.addAll((List<DynamicListBean>) gson.fromJson(obj.getString("dataList"), new TypeToken<List<DynamicListBean>>() {}.getType()));
-                        mLasdDataID = mDynamicBeans.get(mDynamicBeans.size()-1).getDataId();
+                        mDynamicBeans.addAll((List<DynamicListBean>) gson.fromJson(obj.getString("dataList"), new TypeToken<List<DynamicListBean>>() {
+                        }.getType()));
+                        mLasdDataID = mDynamicBeans.get(mDynamicBeans.size() - 1).getDataId();
                         mAdapter.notifyDataSetChanged();
                     } else {
                         ToastUtils.showShorToast(obj.getString("msg"), getActivity());

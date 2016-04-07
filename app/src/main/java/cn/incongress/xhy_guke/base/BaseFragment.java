@@ -26,4 +26,5 @@ public class BaseFragment extends Fragment implements BaseFragmentInterface{
     @Override
     public void initData() {
     }
+
 }

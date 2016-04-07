@@ -144,7 +144,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.3"
                 android:text="周访问"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -168,7 +168,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.3"
                 android:text="周点赞"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -191,7 +191,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.3"
                 android:text="周评论"
                 android:gravity="center"
                 android:textColor="@color/white"
