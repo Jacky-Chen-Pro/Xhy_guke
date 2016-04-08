@@ -138,6 +138,7 @@ public class VVTalkAdapter extends ListBaseAdapter<VVTalkBean> {
         if(data.getType() == 3) {
             try {
                 String title = URLDecoder.decode(data.getTitle(), Constants.ENCODDING_UTF8);
+                title = URLDecoder.decode(title, Constants.ENCODDING_UTF8);
                 holder.tvTitle.setText(title);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

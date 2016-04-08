@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.jackyonline.refreshdemo.RefreshLayout;
@@ -14,6 +15,7 @@ import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.base.XhyApplication;
+import cn.incongress.xhy_guke.bean.SuggestBean;
 import cn.incongress.xhy_guke.utils.LogUtils;
 import cn.trinea.android.common.util.AppUtils;
 import okhttp3.Call;
@@ -22,9 +24,10 @@ import okhttp3.Call;
  * Created by Jacky Chen on 2016/3/22 0022.
  * 推荐
  */
-public class SuggestFragment extends BaseFragment {
+public class SuggestFragment extends BaseFragment implements RefreshLayout.OnRefreshListener{
     private View rootView;// 缓存Fragment view
     private RefreshLayout mRefreshLayout;
+    private SuggestBean mSuggestBean;
 
     @Nullable
     @Override
@@ -56,7 +59,7 @@ public class SuggestFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-//        mRefreshLayout.setOnRefreshListener(this);
+        mRefreshLayout.setOnRefreshListener(this);
         getData();
     }
 
@@ -70,13 +73,21 @@ public class SuggestFragment extends BaseFragment {
             @Override
             public void onAfter() {
                 super.onAfter();
-
+                mRefreshLayout.finishCurrentLoad();
             }
 
             @Override
             public void onResponse(String response) {
-                LogUtils.println("list:" + response);
+
+                Gson gson  = new Gson();
+                mSuggestBean = gson.fromJson(response, SuggestBean.class);
+
             }
         });
+    }
+
+    @Override
+    public void onRefresh() {
+        getData();
     }
 }
