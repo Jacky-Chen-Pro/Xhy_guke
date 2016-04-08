@@ -15,4 +15,12 @@ public class Constants {
     public static final int DATA_TYPE_PPT = 1;
     public static final int DATA_TYPE_WORD = 2;
     public static final int DATA_TYPE_PDF = 3;
+
+    /** 用户类型 **/
+    public static final int USER_TYPE_NORMAL = 0;//普通用户
+    public static final int USER_TYPE_SERIAL_VIP = 1; //大V
+    public static final int USER_TYPE_MEDIA_VIP = 2;//中V
+    public static final int USER_TYPE_NORMAL_CERTIFY = 3; //已认证用户
+    public static final int USER_TYPE_ORGANIZATION = 4; //组织
+
 }

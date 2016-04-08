@@ -8,11 +8,6 @@ import android.app.Application;
 public class XhyApplication extends Application {
     /** 用户ID **/
     public static final String userId = "16004";
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-
-    }
+    /** 用户类型 **/
+    public static final int userType = Constants.USER_TYPE_ORGANIZATION;
 }

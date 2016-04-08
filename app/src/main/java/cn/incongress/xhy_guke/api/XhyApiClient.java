@@ -296,6 +296,8 @@ public class XhyApiClient {
     /**
      * 我的
      *
+     * 0,普通用户（未认证）；1，大V;2,中V;3，已认证用户；4，组织
+     *
      * @param userId
      * @param userType
      * @param stringCallback

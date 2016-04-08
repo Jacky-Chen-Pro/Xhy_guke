@@ -3,6 +3,5 @@
     <declare-styleable name="RefreshLayout">
         <attr name="can_refresh" format="boolean"/>
         <attr name="can_load" format="boolean"/>
-
     </declare-styleable>
 </resources>

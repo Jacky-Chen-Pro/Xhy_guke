@@ -61,6 +61,11 @@
     <string name="me_my_operation">我的操作</string>
     <string name="me_download">下载</string>
     <string name="me_collection">收藏</string>
+    <string name="me_follow_count">关注%1$s</string>
+    <string name="me_fans_count">粉丝%1$s</string>
+    <string name="me_all_visit_count">总访问量(%1$s)</string>
+    <string name="me_all_praise_count">总点赞数(%1$s)</string>
+    <string name="me_all_comment_count">总评论数(%1$s)</string>
 
     <!-- 消息站 -->
     <string name="msg_title">消息站</string>

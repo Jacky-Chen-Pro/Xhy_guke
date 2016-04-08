@@ -84,11 +84,11 @@ public class RefreshLayout extends ViewGroup {
     private Scroller mScroller = new Scroller(getContext());
 
     public RefreshLayout(Context context) {
-        super(context, null);
+        this(context,null);
     }
 
     public RefreshLayout(Context context, AttributeSet attrs) {
-        super(context, attrs, 0);
+        this(context,attrs, 0);
     }
 
     public RefreshLayout(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -121,16 +121,15 @@ public class RefreshLayout extends ViewGroup {
             lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int)DimenUtils.dipToPx(getContext(),50f));
             mHeaderView = new RefreshView(getContext());
             addView(mHeaderView, lp);
+            mHeaderView.setIsHeaderOrFooter(true);
         }
 
         if(mIsCanLoad) {
             lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int)DimenUtils.dipToPx(getContext(),50f));
             mFooterView = new RefreshView(getContext());
             addView(mFooterView, lp);
+            mFooterView.setIsHeaderOrFooter(false);
         }
-
-        mHeaderView.setIsHeaderOrFooter(true);
-        mFooterView.setIsHeaderOrFooter(false);
     }
 
     //设置view的位置

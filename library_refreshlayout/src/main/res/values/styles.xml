@@ -9,7 +9,6 @@
     </style>
 
     <style name="refresh_progress_style">
-        　　
         <item name="android:indeterminateDrawable">@anim/rotate_circle</item>
         <item name="android:minWidth">20dip</item>
         <item name="android:maxWidth">20dip</item>
