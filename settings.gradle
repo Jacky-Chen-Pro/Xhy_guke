@@ -1,1 +1,1 @@
-include ':library_common', ':app', ':library_multiListView', ':library_refreshlayout', ':library_umeng_share'
+include ':library_umeng_share', ':app', ':library_common', ':library_multiListView', ':library_refreshlayout'
