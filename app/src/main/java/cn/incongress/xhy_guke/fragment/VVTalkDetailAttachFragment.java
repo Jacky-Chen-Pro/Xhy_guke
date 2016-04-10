@@ -1,13 +1,21 @@
 package cn.incongress.xhy_guke.fragment;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.DownloadListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+import java.io.File;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.BaseFragment;
@@ -15,6 +23,7 @@ import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.uis.CircleImageView;
 import cn.incongress.xhy_guke.utils.StringUtils;
 import cn.incongress.xhy_guke.utils.ToastUtils;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by Jacky on 2016/4/6.
@@ -28,6 +37,8 @@ public class VVTalkDetailAttachFragment extends BaseFragment {
 
     //文件类型
     private int mDataType = Constants.DATA_TYPE_PDF;
+
+
 
     public static final String EXTRA_USER_ICON_URL = "userIconUrl";
     public static final String EXTRA_USER_NAME = "userName";
