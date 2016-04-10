@@ -1,194 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/background"
+android:orientation="vertical"
+xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout style="@style/fill_wrap">
+
+<LinearLayout
+    android:id="@+id/ll_top_info"
+    style="@style/fill_wrap"
+    android:background="@color/attach_bg"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <RelativeLayout style="@style/fill_wrap">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
 
-        <LinearLayout
-            android:id="@+id/ll_top_info"
-            style="@style/fill_wrap"
-            android:background="@color/attach_bg"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+        <View
+            android:id="@+id/white_bg"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/white" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/white_bg"
+            android:background="@color/attach_bg" />
 
-                <View
-                    android:id="@+id/white_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="@color/white" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/white_bg"
-                    android:background="@color/attach_bg" />
-
-                <cn.incongress.xhy_guke.uis.CircleImageView
-                    android:id="@+id/civ_user_icon"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/item_vvtalk_professor_head_default" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="@dimen/layout_padding">
-
-                <TextView
-                    android:id="@+id/tv_user_name"
-                    style="@style/wrap_wrap"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_media" />
-
-                <TextView
-                    android:id="@+id/tv_user_hospital"
-                    style="@style/wrap_wrap"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_small" />
-
-                <View style="@style/h_line" />
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    style="@style/fill_wrap"
-                    android:layout_marginBottom="@dimen/layout_margin"
-                    android:layout_marginTop="@dimen/layout_margin"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_large"
-                    android:textStyle="bold" />
-
-                <!-- 发布时间 -->
-                <RelativeLayout style="@style/fill_wrap">
-
-                    <TextView
-                        android:id="@+id/tv_show_time"
-                        style="@style/wrap_wrap"
-                        android:layout_alignParentLeft="true"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/tv_read_count"
-                        style="@style/wrap_wrap"
-                        android:layout_alignParentRight="true"
-                        android:textSize="@dimen/text_size_small" />
-                </RelativeLayout>
-            </LinearLayout>
-        </LinearLayout>
+        <cn.incongress.xhy_guke.uis.CircleImageView
+            android:id="@+id/civ_user_icon"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/item_vvtalk_professor_head_default" />
     </RelativeLayout>
 
     <LinearLayout
-        style="@style/fill_wrap"
-        android:layout_marginTop="6dp"
-        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="@dimen/layout_padding">
 
         <TextView
+            android:id="@+id/tv_user_name"
             style="@style/wrap_wrap"
-            android:text="@string/attach_download"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_media" />
+
+        <TextView
+            android:id="@+id/tv_user_hospital"
+            style="@style/wrap_wrap"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_small" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginTop="3dp"
-            android:layout_height="wrap_content">
-            <View style="@style/h_line"/>
-            <View style="@style/h_line" android:layout_width="46dp" android:background="@color/attach_bg"/>
-        </RelativeLayout>
+        <View style="@style/h_line" />
 
-        <LinearLayout
-            style="@style/fill_fill"
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/fill_wrap"
+            android:layout_marginBottom="@dimen/layout_margin"
             android:layout_marginTop="@dimen/layout_margin"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/fill_wrap"
-                    android:text="呼吸机相关性肺炎的新进展"
-                    android:id="@+id/tv_pdf_name"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_media" />
-
-                <TextView
-                    android:id="@+id/tv_pdf_size"
-                    style="@style/wrap_wrap"
-                    android:text="225kb"
-                    android:textSize="@dimen/text_size_media" />
-            </LinearLayout>
-
-            <View style="@style/v_line" />
+        <!-- 发布时间 -->
+        <RelativeLayout style="@style/fill_wrap">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:id="@+id/tv_click_download"
-                android:drawablePadding="3dp"
-                android:drawableTop="@mipmap/attach_download_icon"
-                android:gravity="center"
-                android:text="@string/attach_click_download"
+                android:id="@+id/tv_show_time"
+                style="@style/wrap_wrap"
+                android:layout_alignParentLeft="true"
                 android:textSize="@dimen/text_size_small" />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_read_count"
+                style="@style/wrap_wrap"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/text_size_small" />
+        </RelativeLayout>
     </LinearLayout>
+</LinearLayout>
+</RelativeLayout>
+
+<LinearLayout
+style="@style/fill_wrap"
+android:layout_marginTop="6dp"
+android:background="@color/white"
+android:orientation="vertical"
+android:padding="@dimen/layout_padding">
+
+<TextView
+    style="@style/wrap_wrap"
+    android:text="@string/attach_download"
+    android:textSize="@dimen/text_size_small" />
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_marginTop="3dp"
+    android:layout_height="wrap_content">
+    <View style="@style/h_line"/>
+    <View style="@style/h_line" android:layout_width="46dp" android:background="@color/attach_bg"/>
+</RelativeLayout>
+
+<LinearLayout
+    style="@style/fill_fill"
+    android:layout_marginTop="@dimen/layout_margin"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
     <LinearLayout
-        style="@style/fill_wrap"
-        android:layout_marginTop="6dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="@dimen/layout_padding">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:orientation="vertical">
 
         <TextView
+            style="@style/fill_wrap"
+            android:text="呼吸机相关性肺炎的新进展"
+            android:id="@+id/tv_pdf_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_media" />
+
+        <TextView
+            android:id="@+id/tv_pdf_size"
             style="@style/wrap_wrap"
-            android:text="@string/attach_intro"
-            android:textSize="@dimen/text_size_small" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginTop="3dp"
-            android:layout_height="wrap_content">
-            <View style="@style/h_line"/>
-            <View style="@style/h_line" android:layout_width="46dp" android:background="@color/attach_bg"/>
-        </RelativeLayout>
-
-        <LinearLayout
-            style="@style/fill_fill"
-            android:layout_marginTop="@dimen/layout_margin"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/fill_wrap"
-                    android:id="@+id/tv_attach_intro"
-                    android:text="呼吸机相关性肺炎的新进展"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_media" />
-            </LinearLayout>
-
-        </LinearLayout>
+            android:text="225kb"
+            android:textSize="@dimen/text_size_media" />
     </LinearLayout>
+
+    <View style="@style/v_line" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:id="@+id/tv_click_download"
+        android:drawablePadding="3dp"
+        android:drawableTop="@mipmap/attach_download_icon"
+        android:gravity="center"
+        android:text="@string/attach_click_download"
+        android:textSize="@dimen/text_size_small" />
+</LinearLayout>
+</LinearLayout>
+
+<LinearLayout
+style="@style/fill_wrap"
+android:layout_marginTop="6dp"
+android:background="@color/white"
+android:orientation="vertical"
+android:padding="@dimen/layout_padding">
+
+<TextView
+    style="@style/wrap_wrap"
+    android:text="@string/attach_intro"
+    android:textSize="@dimen/text_size_small" />
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_marginTop="3dp"
+    android:layout_height="wrap_content">
+    <View style="@style/h_line"/>
+    <View style="@style/h_line" android:layout_width="46dp" android:background="@color/attach_bg"/>
+</RelativeLayout>
+
+<LinearLayout
+    style="@style/fill_fill"
+    android:layout_marginTop="@dimen/layout_margin"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/fill_wrap"
+            android:id="@+id/tv_attach_intro"
+            android:text="呼吸机相关性肺炎的新进展"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_media" />
+    </LinearLayout>
+
+</LinearLayout>
+</LinearLayout>
 
 </LinearLayout>

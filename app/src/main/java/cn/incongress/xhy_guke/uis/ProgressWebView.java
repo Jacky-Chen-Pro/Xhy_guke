@@ -4,22 +4,14 @@ import android.content.Context;
 import android.net.http.SslError;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import cn.incongress.xhy_guke.utils.LogUtils;
-
-public class ProgressWebView extends WebView {
+public class ProgressWebView extends WebView{
     private ProgressBar progressbar;
-
-    boolean allowDragTop = true;
-    float downY = 0;
-    boolean needConsumeTouch = true;
 
     public ProgressWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -69,37 +61,4 @@ public class ProgressWebView extends WebView {
         super.onScrollChanged(l, t, oldl, oldt);
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            downY = ev.getRawY();
-            needConsumeTouch = true;
-            allowDragTop = isInBottom();
-        } else if (ev.getAction() == MotionEvent.ACTION_MOVE) {
-            if (!needConsumeTouch) {
-                getParent().requestDisallowInterceptTouchEvent(false);
-                return false;
-            } else if (allowDragTop) {
-                if (ev.getRawY() - downY < 0) {
-                    needConsumeTouch = false;
-                    getParent().requestDisallowInterceptTouchEvent(false);
-                    return false;
-                }
-            }
-        }
-
-        getParent().requestDisallowInterceptTouchEvent(needConsumeTouch);
-        return super.dispatchTouchEvent(ev);
-    }
-
-    /**
-     * @return
-     */
-    private boolean isInBottom() {
-        if((int)(getContentHeight()*getScale()) -(getHeight()+getScrollY()) < 5 ){
-            return true;
-        }else {
-            return false;
-        }
-    }
 }

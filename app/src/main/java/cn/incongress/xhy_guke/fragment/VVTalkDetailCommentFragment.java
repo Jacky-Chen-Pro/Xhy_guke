@@ -1,12 +1,10 @@
 package cn.incongress.xhy_guke.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,7 +14,6 @@ import com.google.gson.reflect.TypeToken;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -24,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.activitys.VVTalkDetailActivity;
 import cn.incongress.xhy_guke.adapter.VVTalkCommentAdapter;
 import cn.incongress.xhy_guke.adapter.VVTalkLaudAdapter;
 import cn.incongress.xhy_guke.api.XhyGo;
@@ -33,7 +31,6 @@ import cn.incongress.xhy_guke.base.XhyApplication;
 import cn.incongress.xhy_guke.bean.CommentListBean;
 import cn.incongress.xhy_guke.bean.LaudListBean;
 import cn.incongress.xhy_guke.utils.LogUtils;
-import cn.incongress.xhy_guke.utils.ToastUtils;
 import okhttp3.Call;
 
 /**
@@ -110,7 +107,19 @@ public class VVTalkDetailCommentFragment extends BaseFragment {
                                 getResources().getDimensionPixelSize(R.dimen.layout_margin))
                         .build());
 
-        int result = XhyGo.getCommentList(getActivity(), mDataId, XhyApplication.userId, mLastCommentId + "", Constants.PAGE_SIZE, new StringCallback() {
+        getData(mLastCommentId+"");
+
+        return view;
+    }
+
+    private void fillContainer() {
+       mCommentAdapter.notifyDataSetChanged();
+
+      ((VVTalkDetailActivity)getActivity()).completeRefresh();
+    }
+
+    private void getData(String lastCommentId) {
+        XhyGo.getCommentList(getActivity(), mDataId, XhyApplication.userId, lastCommentId, Constants.PAGE_SIZE, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
             }
@@ -121,20 +130,31 @@ public class VVTalkDetailCommentFragment extends BaseFragment {
                 try {
                     JSONObject obj = new JSONObject(response);
                     Gson gson = new Gson();
-                    mCommentList.addAll((List<CommentListBean>)gson.fromJson(obj.getString("commentList"), new TypeToken<List<CommentListBean>>() {}.getType()));
-
+                    mCommentList.addAll((List<CommentListBean>) gson.fromJson(obj.getString("commentList"), new TypeToken<List<CommentListBean>>() {
+                    }.getType()));
+                    if (mCommentList.size() > 0) {
+                        mLastCommentId = mCommentList.get(mCommentList.size() - 1).getCommentId();
+                    }
                     fillContainer();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
         });
-
-        return view;
     }
 
-    private void fillContainer() {
-       mCommentAdapter.notifyDataSetChanged();
+    //加载更多评论
+    public void loadMoreComment() {
+        getData(mLastCommentId + "");
     }
+
+    public void addCommentToList(CommentListBean commentListBean) {
+        mCommentList.add(0, commentListBean);
+        mCommentAdapter.notifyDataSetChanged();
+        //刷新末尾的评论id
+        if (mCommentList.size() > 0) {
+            mLastCommentId = mCommentList.get(mCommentList.size() - 1).getCommentId();
+        }
+    }
+
 }

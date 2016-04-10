@@ -1,7 +1,6 @@
 package cn.incongress.xhy_guke.fragment;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.BaseFragment;
@@ -22,13 +20,13 @@ import cn.incongress.xhy_guke.uis.ProgressWebView;
  * Created by Jacky Chen on 2016/3/29 0029.
  * V言V语详情页中加载的WevView使用该Fragment来嵌套
  */
-public class WebViewDetailFragment extends BaseFragment {
+public class VVTalkDetailWebViewFragment extends BaseFragment {
     private static final String BUNDLE_URL = "url";
     private ProgressWebView mWebView;
     private String mUrl;
 
-    public static final WebViewDetailFragment getInstance(String url) {
-        WebViewDetailFragment fragment = new WebViewDetailFragment();
+    public static final VVTalkDetailWebViewFragment getInstance(String url) {
+        VVTalkDetailWebViewFragment fragment = new VVTalkDetailWebViewFragment();
         Bundle bundle = new Bundle();
         bundle.putString(BUNDLE_URL, url);
         fragment.setArguments(bundle);
@@ -54,6 +52,7 @@ public class WebViewDetailFragment extends BaseFragment {
         super.initView(view);
         mWebView = (ProgressWebView) view.findViewById(R.id.webview);
 //        mIvLoading = (ImageView) view.findViewById(R.id.iv_loading);
+
         initialWebViewSetting();
     }
 

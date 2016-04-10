@@ -159,7 +159,6 @@
             style="@style/fill_wrap">
             <ImageView style="@style/wrap_wrap" android:src="@mipmap/suggest_hot_header"/>
 
-            <
         </RelativeLayout>
     </LinearLayout>
 

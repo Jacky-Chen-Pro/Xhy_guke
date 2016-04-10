@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.incongress.xhy_guke.uis.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent">
+
+    <LinearLayout style="@style/fill_fill" android:orientation="vertical">
+        <FrameLayout style="@style/fill_fill" android:id="@+id/webview_container"/>
+
+        <TextView android:background="@color/background" android:padding="@dimen/layout_padding" style="@style/fill_wrap" android:text="@string/down_look_more" android:textColor="@color/gray" android:layout_marginTop="@dimen/layout_margin" android:gravity="center"/>
+    </LinearLayout>
+</cn.incongress.xhy_guke.uis.MyScrollView>

@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/background"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <include
         layout="@layout/include_toolbar"/>
 
-    <cn.incongress.xhy_guke.uis.vertical_slide.DragLayout
-        android:id="@+id/draglayout"
+    <org.jackyonline.refreshdemo.RefreshLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        app:can_refresh="false"
+        app:can_load="true"
+        android:id="@+id/refreshLayout"
+        android:layout_weight="1">
+        <cn.incongress.xhy_guke.uis.RecyclerViewScrollview
+           style="@style/fill_fill">
 
-        <FrameLayout
-            android:id="@+id/fl_detail_area"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <LinearLayout style="@style/fill_fill" android:orientation="vertical">
+                <FrameLayout
+                    android:id="@+id/fl_detail_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-        <FrameLayout
-            android:id="@+id/fl_comment_area"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </cn.incongress.xhy_guke.uis.vertical_slide.DragLayout>
+                <FrameLayout
+                    android:id="@+id/fl_comment_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </cn.incongress.xhy_guke.uis.RecyclerViewScrollview>
+    </org.jackyonline.refreshdemo.RefreshLayout>
+
 
     <View style="@style/h_line"  />
     <!-- 下方操作栏  -->

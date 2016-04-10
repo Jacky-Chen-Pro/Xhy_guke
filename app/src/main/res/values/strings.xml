@@ -20,6 +20,7 @@
 
     <!-- V言V语 列表页 -->
     <string name="vvtalk_read_count">%1$s人查看</string>
+
     <!-- V言V语 详情页 -->
     <string name="vvtalk_detail_comment_hint">写评论...</string>
     <string name="vvtalk_detail_title">详情</string>
@@ -40,7 +41,7 @@
     <string name="attach_download">文献下载</string>
     <string name="attach_intro">文献简介</string>
     <string name="attach_click_download">点击下载</string>
-
+    <string name="down_look_more">——向下滑动，查看评论和点赞——</string>
     <!-- 登录页面 -->
     <string name="login_mobile_hint">请输入手机号码</string>
     <string name="login_pwd_hint">请输入密码</string>

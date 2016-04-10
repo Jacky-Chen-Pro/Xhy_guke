@@ -16,6 +16,7 @@
         android:id="@+id/tv_comment_name"
         android:layout_width="0dp"
         android:layout_weight="2"
+        android:layout_marginLeft="6dp"
         android:textColor="@color/theme_blue"
         android:layout_height="wrap_content" />
 
@@ -24,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_weight="6"
         android:textColor="@color/black"
-        android:layout_marginLeft="@dimen/layout_margin"
+        android:layout_marginLeft="6dp"
         android:gravity="start"
         android:layout_height="wrap_content" />
 </LinearLayout>

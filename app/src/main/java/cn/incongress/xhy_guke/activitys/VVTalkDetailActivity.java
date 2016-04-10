@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.jackyonline.refreshdemo.RefreshLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,12 +20,13 @@ import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseActivity;
 import cn.incongress.xhy_guke.base.XhyApplication;
+import cn.incongress.xhy_guke.bean.CommentListBean;
 import cn.incongress.xhy_guke.bean.VVTalkDetailBean;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailAttachFragment;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailCommentFragment;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailMakePostFragment;
 import cn.incongress.xhy_guke.fragment.VVTalkDetailVideoFragment;
-import cn.incongress.xhy_guke.fragment.WebViewDetailFragment;
+import cn.incongress.xhy_guke.fragment.VVTalkDetailWebViewFragment;
 import cn.incongress.xhy_guke.uis.popup.BasePopupWindow;
 import cn.incongress.xhy_guke.uis.popup.CommentPopupWindow;
 import cn.incongress.xhy_guke.uis.popup.InputMethodUtils;
@@ -37,7 +39,7 @@ import okhttp3.Request;
  * Created by Jacky Chen on 2016/3/29 0029.
  * V言V语详情页
  */
-public class VVTalkDetailActivity extends BaseActivity {
+public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.OnLoadMoreListener {
     private static final String EXTRA_TYPE = "extra_type";
     private static final String EXTRA_DATA_ID = "data_id";
     private static final String EXTRA_WHERE_STATE = "where_state";
@@ -63,6 +65,9 @@ public class VVTalkDetailActivity extends BaseActivity {
     private CommentPopupWindow mCommentPop;
     private ImageView mIvPraise,mIvCollect,mIvShare;
 
+    private RefreshLayout mRefreshLayout;
+
+    private VVTalkDetailCommentFragment mCommentFragment;
 
     public static final void startVVTalkDetailActivity(Context context, int type, int dataId, int whereState) {
         Intent intent = new Intent();
@@ -79,6 +84,7 @@ public class VVTalkDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_vvtalk_detail);
         initToolbar(getString(R.string.vvtalk_detail_title), true, false, -1, null, false, -1, null);
 
+        mRefreshLayout = getViewById(R.id.refreshLayout);
         mTvMakeComment = getViewById(R.id.tv_make_comment);
         mIvPraise = getViewById(R.id.iv_praise);
         mIvCollect = getViewById(R.id.iv_collect);
@@ -112,13 +118,13 @@ public class VVTalkDetailActivity extends BaseActivity {
     }
 
     private void initEvents() {
+        mRefreshLayout.setOnLoadMoreListener(this);
         mTvMakeComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCommentPop = new CommentPopupWindow(VVTalkDetailActivity.this, XhyApplication.userId, "-1", "", mDataId + "", new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e) {
-
                     }
 
                     @Override
@@ -127,8 +133,13 @@ public class VVTalkDetailActivity extends BaseActivity {
                             JSONObject obj = new JSONObject(response);
                             int state = obj.getInt("state");
 
+                            //state msg commentId content  userId userName userPic timeShow
                             if(state == 1) {
                                 ToastUtils.showShorToast(getString(R.string.comment_success),VVTalkDetailActivity.this);
+                                CommentListBean tempComment = new Gson().fromJson(response, CommentListBean.class);
+                                if(tempComment != null && mCommentFragment != null) {
+                                    mCommentFragment.addCommentToList(tempComment);
+                                }
                             }else {
                                 ToastUtils.showShorToast(obj.getString("msg"), VVTalkDetailActivity.this);
                             }
@@ -209,27 +220,29 @@ public class VVTalkDetailActivity extends BaseActivity {
      * 页面布局
      */
     private void fillContainer() {
+        mCommentFragment = VVTalkDetailCommentFragment.getInstance(mDetailBean.getLaudList(), mDetailBean.getDataId() + "");
+
         if(mCurrentType == DETAIL_TYPE_NEWS || mCurrentType == DETAIL_TYPE_CASE) {
             getSupportFragmentManager().beginTransaction().
-                    add(R.id.fl_detail_area, WebViewDetailFragment.getInstance(mDetailBean.getHtmlUrl()))
-                    .add(R.id.fl_comment_area, VVTalkDetailCommentFragment.getInstance(mDetailBean.getLaudList(), mDetailBean.getDataId() + "")).commit();
+                    add(R.id.fl_detail_area, VVTalkDetailWebViewFragment.getInstance(mDetailBean.getHtmlUrl()))
+                    .add(R.id.fl_comment_area, mCommentFragment).commit();
         }else if(mCurrentType == DETAIL_TYPE_POST) {
             ToastUtils.showShorToast("Post", VVTalkDetailActivity.this);
             getSupportFragmentManager().beginTransaction().
                     add(R.id.fl_detail_area, VVTalkDetailMakePostFragment.getInstance(mDetailBean.getAuthorPic(), mDetailBean.getCreateUser(), mDetailBean.getHospital(), mDetailBean.getContent(), mDetailBean.getImgs()))
-                    .add(R.id.fl_comment_area, VVTalkDetailCommentFragment.getInstance(mDetailBean.getLaudList(), mDetailBean.getDataId() + "")).commit();
+                    .add(R.id.fl_comment_area, mCommentFragment).commit();
         }else if(mCurrentType == DETAIL_TYPE_ATTACH) {
             ToastUtils.showShorToast("Attach", VVTalkDetailActivity.this);
             getSupportFragmentManager().beginTransaction().
                     add(R.id.fl_detail_area, VVTalkDetailAttachFragment.getInstance(mDetailBean.getAuthorPic(), mDetailBean.getCreateUser(),
                             mDetailBean.getHospital(), mDetailBean.getTitle(), mDetailBean.getTime(), mDetailBean.getReadCount() + "", mDetailBean.getTitle(),
                             mDetailBean.getPdfDataSize(), mDetailBean.getPdfDataUrl(), mDetailBean.getDataDescribe(), Integer.valueOf(mDetailBean.getDataType())))
-                    .add(R.id.fl_comment_area, VVTalkDetailCommentFragment.getInstance(mDetailBean.getLaudList(), mDetailBean.getDataId() + "")).commit();
+                    .add(R.id.fl_comment_area, mCommentFragment).commit();
         }else if(mCurrentType == DETAIL_TYPE_VIDEO) {
             ToastUtils.showShorToast("Video", VVTalkDetailActivity.this);
             getSupportFragmentManager().beginTransaction().
                     add(R.id.fl_detail_area, VVTalkDetailVideoFragment.getInstance(mDetailBean.getHtmlUrl(),mDetailBean.getTitle(),mDetailBean.getAuthorPic(), mDetailBean.getAuthor(), mDetailBean.getTitle(),mDetailBean.getTime(), mDetailBean.getReadCount()+""))
-                    .add(R.id.fl_comment_area, VVTalkDetailCommentFragment.getInstance(mDetailBean.getLaudList(), mDetailBean.getDataId() + "")).commit();
+                    .add(R.id.fl_comment_area, mCommentFragment).commit();
         }
 
         initEvents();
@@ -239,5 +252,16 @@ public class VVTalkDetailActivity extends BaseActivity {
                 mIvPraise.setImageResource(R.mipmap.vvtalk_detail_praise_done);
             }
         }
+    }
+
+    @Override
+    public void onLoadMore() {
+        //加载更多评论
+        mCommentFragment.loadMoreComment();
+    }
+
+    public void completeRefresh() {
+        if(mRefreshLayout != null)
+            mRefreshLayout.finishCurrentLoad();
     }
 }
