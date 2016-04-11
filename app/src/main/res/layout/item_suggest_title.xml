@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View style="@style/h_line"/>
+
+    <TextView style="@style/fill_wrap" android:id="@+id/tv_title" android:textSize="@dimen/text_size_small"  android:padding="6dp"/>
+
+    <View style="@style/h_line"/>
+</LinearLayout>

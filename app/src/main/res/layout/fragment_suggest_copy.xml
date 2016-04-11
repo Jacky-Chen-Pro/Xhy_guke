@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.jackyonline.refreshdemo.RefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    app:can_load="false"
+    app:can_refresh="true">
+    <ScrollView style="@style/fill_fill" android:layout_marginTop="6dp">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/wrap_wrap"
+                android:layout_centerInParent="true"
+                android:padding="6dp"
+                android:text="@string/suggest_specail" />
+
+            <LinearLayout
+                style="@style/fill_wrap"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/layout_padding">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <cn.incongress.xhy_guke.uis.CircleImageView
+                        android:id="@+id/civ_special_user_icon_first"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+                    <TextView
+                        android:id="@+id/tv_username_first"
+                        style="@style/wrap_wrap"
+                        android:text="张元哲"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/tv_hopital_first"
+                        style="@style/wrap_wrap"
+                        android:text="中日友好医院"
+                        android:textSize="@dimen/text_size_small" />
+
+                    <TextView
+                        android:id="@+id/tv_homepage_first"
+                        style="@style/wrap_wrap"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_boarder"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="3dp"
+                        android:text="@string/suggest_his_home_page"
+                        android:textColor="@color/theme_blue" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <cn.incongress.xhy_guke.uis.CircleImageView
+                        android:id="@+id/civ_special_user_icon_second"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+                    <TextView
+                        android:id="@+id/tv_username_second"
+                        style="@style/wrap_wrap"
+                        android:text="张元哲"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/tv_hopital_second"
+                        style="@style/wrap_wrap"
+                        android:text="中日友好医院"
+                        android:textSize="@dimen/text_size_small" />
+
+                    <TextView
+                        android:id="@+id/tv_homepage_second"
+                        style="@style/wrap_wrap"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_boarder"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="3dp"
+                        android:text="@string/suggest_his_home_page"
+                        android:textColor="@color/theme_blue" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <cn.incongress.xhy_guke.uis.CircleImageView
+                        android:id="@+id/civ_special_user_icon_third"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+                    <TextView
+                        android:id="@+id/tv_username_third"
+                        style="@style/wrap_wrap"
+                        android:text="张元哲"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/tv_hopital_third"
+                        style="@style/wrap_wrap"
+                        android:text="中日友好医院"
+                        android:textSize="@dimen/text_size_small" />
+
+                    <TextView
+                        android:id="@+id/tv_homepage_third"
+                        style="@style/wrap_wrap"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_boarder"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="3dp"
+                        android:text="@string/suggest_his_home_page"
+                        android:textColor="@color/theme_blue" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/h_line" android:layout_marginTop="@dimen/layout_margin"/>
+
+            <TextView
+                style="@style/fill_wrap"
+                android:padding="6dp"
+                android:text="@string/suggest_hot_head" />
+            <View style="@style/h_line" />
+
+            <RelativeLayout
+                android:paddingLeft="@dimen/layout_padding"
+                android:paddingRight="@dimen/layout_padding"
+                style="@style/fill_wrap">
+
+                <ImageView style="@style/wrap_wrap" android:src="@mipmap/suggest_hot_header" android:id="@+id/iv_hot_first_lable"/>
+
+                <RelativeLayout style="@style/fill_wrap"
+                    android:layout_toRightOf="@id/iv_hot_first_lable"
+                    android:padding="@dimen/layout_padding"
+                    >
+                    <cn.incongress.xhy_guke.uis.CircleImageView
+                        android:id="@+id/civ_user_icon"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+                    <TextView
+                        android:id="@+id/tv_add_attention"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="10dp"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/theme_blue"
+                        android:paddingTop="3dp"
+                        style="@style/wrap_wrap" android:background="@drawable/bg_boarder" android:text="@string/suggest_add_attention"/>
+
+                    <LinearLayout style="@style/wrap_wrap" android:orientation="vertical" android:layout_marginLeft="@dimen/layout_margin" android:layout_toRightOf="@id/civ_user_icon" >
+                        <TextView style="@style/wrap_wrap" android:text="连享宁" android:drawableRight="@mipmap/vvtalk_chairman_tag" android:textSize="@dimen/text_size_media" android:textStyle="bold" android:textColor="@color/black"  android:drawablePadding="6dp"/>
+                        <TextView style="@style/wrap_wrap" android:text="成都军区总医院" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_toLeftOf="@id/tv_add_attention" android:layout_marginTop="6dp" style="@style/fill_wrap" android:orientation="horizontal" android:layout_below="@id/civ_user_icon">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="关注度"/>
+                        <View style="@style/v_line"/>
+                        <TextView android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="阅读数"/>
+                        <View style="@style/v_line"/>
+                        <TextView  android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="点赞数"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View style="@style/h_line" android:layout_marginLeft="@dimen/layout_margin" android:layout_marginRight="@dimen/layout_margin"/>
+
+            <RelativeLayout
+                android:paddingLeft="@dimen/layout_padding"
+                android:paddingRight="@dimen/layout_padding"
+                style="@style/fill_wrap">
+
+                <ImageView style="@style/wrap_wrap" android:src="@mipmap/suggest_hot_header" android:id="@+id/iv_hot_first_lable"/>
+
+                <RelativeLayout style="@style/fill_wrap"
+                    android:layout_toRightOf="@id/iv_hot_first_lable"
+                    android:padding="@dimen/layout_padding"
+                    >
+                    <cn.incongress.xhy_guke.uis.CircleImageView
+                        android:id="@+id/civ_user_icon"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+                    <TextView
+                        android:id="@+id/tv_add_attention"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="10dp"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/theme_blue"
+                        android:paddingTop="3dp"
+                        style="@style/wrap_wrap" android:background="@drawable/bg_boarder" android:text="@string/suggest_add_attention"/>
+
+                    <LinearLayout style="@style/wrap_wrap" android:orientation="vertical" android:layout_marginLeft="@dimen/layout_margin" android:layout_toRightOf="@id/civ_user_icon" >
+                        <TextView style="@style/wrap_wrap" android:text="连享宁" android:drawableRight="@mipmap/vvtalk_chairman_tag" android:textSize="@dimen/text_size_media" android:textStyle="bold" android:textColor="@color/black"  android:drawablePadding="6dp"/>
+                        <TextView style="@style/wrap_wrap" android:text="成都军区总医院" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_toLeftOf="@id/tv_add_attention" android:layout_marginTop="6dp" style="@style/fill_wrap" android:orientation="horizontal" android:layout_below="@id/civ_user_icon">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="关注度"/>
+                        <View style="@style/v_line"/>
+                        <TextView android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="阅读数"/>
+                        <View style="@style/v_line"/>
+                        <TextView  android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="点赞数"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View style="@style/h_line" android:layout_marginLeft="@dimen/layout_margin" android:layout_marginRight="@dimen/layout_margin"/>
+
+            <RelativeLayout
+                android:paddingLeft="@dimen/layout_padding"
+                android:paddingRight="@dimen/layout_padding"
+                style="@style/fill_wrap">
+
+                <ImageView style="@style/wrap_wrap" android:src="@mipmap/suggest_hot_header" android:id="@+id/iv_hot_first_lable"/>
+
+                <RelativeLayout style="@style/fill_wrap"
+                    android:layout_toRightOf="@id/iv_hot_first_lable"
+                    android:padding="@dimen/layout_padding"
+                    >
+                    <cn.incongress.xhy_guke.uis.CircleImageView
+                        android:id="@+id/civ_user_icon"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+                    <TextView
+                        android:id="@+id/tv_add_attention"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="10dp"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/theme_blue"
+                        android:paddingTop="3dp"
+                        style="@style/wrap_wrap" android:background="@drawable/bg_boarder" android:text="@string/suggest_add_attention"/>
+
+                    <LinearLayout style="@style/wrap_wrap" android:orientation="vertical" android:layout_marginLeft="@dimen/layout_margin" android:layout_toRightOf="@id/civ_user_icon" >
+                        <TextView style="@style/wrap_wrap" android:text="连享宁" android:drawableRight="@mipmap/vvtalk_chairman_tag" android:textSize="@dimen/text_size_media" android:textStyle="bold" android:textColor="@color/black"  android:drawablePadding="6dp"/>
+                        <TextView style="@style/wrap_wrap" android:text="成都军区总医院" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_toLeftOf="@id/tv_add_attention" android:layout_marginTop="6dp" style="@style/fill_wrap" android:orientation="horizontal" android:layout_below="@id/civ_user_icon">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="关注度"/>
+                        <View style="@style/v_line"/>
+                        <TextView android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="阅读数"/>
+                        <View style="@style/v_line"/>
+                        <TextView  android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="点赞数"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View style="@style/h_line"/>
+
+            <TextView
+                style="@style/fill_wrap"
+                android:padding="6dp"
+                android:text="@string/suggest_hot_colleague" />
+            <View style="@style/h_line" />
+
+            <RelativeLayout
+                android:paddingLeft="@dimen/layout_padding"
+                android:paddingRight="@dimen/layout_padding"
+                style="@style/fill_wrap">
+
+                <ImageView style="@style/wrap_wrap" android:src="@mipmap/suggest_hot_colleague" android:id="@+id/iv_hot_first_lable"/>
+
+                <RelativeLayout style="@style/fill_wrap"
+                    android:layout_toRightOf="@id/iv_hot_first_lable"
+                    android:padding="@dimen/layout_padding"
+                    >
+                    <cn.incongress.xhy_guke.uis.CircleImageView
+                        android:id="@+id/civ_user_icon"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+                    <TextView
+                        android:id="@+id/tv_add_attention"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="10dp"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/theme_blue"
+                        android:paddingTop="3dp"
+                        style="@style/wrap_wrap" android:background="@drawable/bg_boarder" android:text="@string/suggest_add_attention"/>
+
+                    <LinearLayout style="@style/wrap_wrap" android:orientation="vertical" android:layout_marginLeft="@dimen/layout_margin" android:layout_toRightOf="@id/civ_user_icon" >
+                        <TextView style="@style/wrap_wrap" android:text="连享宁" android:drawableRight="@mipmap/vvtalk_chairman_tag" android:textSize="@dimen/text_size_media" android:textStyle="bold" android:textColor="@color/black"  android:drawablePadding="6dp"/>
+                        <TextView style="@style/wrap_wrap" android:text="成都军区总医院" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_toLeftOf="@id/tv_add_attention" android:layout_marginTop="6dp" style="@style/fill_wrap" android:orientation="horizontal" android:layout_below="@id/civ_user_icon">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="关注度"/>
+                        <View style="@style/v_line"/>
+                        <TextView android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="阅读数"/>
+                        <View style="@style/v_line"/>
+                        <TextView  android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="点赞数"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View style="@style/h_line" android:layout_marginLeft="@dimen/layout_margin" android:layout_marginRight="@dimen/layout_margin"/>
+
+
+            <RelativeLayout
+                android:paddingLeft="@dimen/layout_padding"
+                android:paddingRight="@dimen/layout_padding"
+                style="@style/fill_wrap">
+
+                <ImageView style="@style/wrap_wrap" android:src="@mipmap/suggest_hot_colleague" android:id="@+id/iv_hot_first_lable"/>
+
+                <RelativeLayout style="@style/fill_wrap"
+                    android:layout_toRightOf="@id/iv_hot_first_lable"
+                    android:padding="@dimen/layout_padding"
+                    >
+                    <cn.incongress.xhy_guke.uis.CircleImageView
+                        android:id="@+id/civ_user_icon"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+                    <TextView
+                        android:id="@+id/tv_add_attention"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="10dp"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/theme_blue"
+                        android:paddingTop="3dp"
+                        style="@style/wrap_wrap" android:background="@drawable/bg_boarder" android:text="@string/suggest_add_attention"/>
+
+                    <LinearLayout style="@style/wrap_wrap" android:orientation="vertical" android:layout_marginLeft="@dimen/layout_margin" android:layout_toRightOf="@id/civ_user_icon" >
+                        <TextView style="@style/wrap_wrap" android:text="连享宁" android:drawableRight="@mipmap/vvtalk_chairman_tag" android:textSize="@dimen/text_size_media" android:textStyle="bold" android:textColor="@color/black"  android:drawablePadding="6dp"/>
+                        <TextView style="@style/wrap_wrap" android:text="成都军区总医院" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_toLeftOf="@id/tv_add_attention" android:layout_marginTop="6dp" style="@style/fill_wrap" android:orientation="horizontal" android:layout_below="@id/civ_user_icon">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="关注度"/>
+                        <View style="@style/v_line"/>
+                        <TextView android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="阅读数"/>
+                        <View style="@style/v_line"/>
+                        <TextView  android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="点赞数"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View style="@style/h_line" android:layout_marginLeft="@dimen/layout_margin" android:layout_marginRight="@dimen/layout_margin"/>
+
+
+            <RelativeLayout
+                android:paddingLeft="@dimen/layout_padding"
+                android:paddingRight="@dimen/layout_padding"
+                style="@style/fill_wrap">
+
+                <ImageView style="@style/wrap_wrap" android:src="@mipmap/suggest_hot_colleague" android:id="@+id/iv_hot_first_lable"/>
+
+                <RelativeLayout style="@style/fill_wrap"
+                    android:layout_toRightOf="@id/iv_hot_first_lable"
+                    android:padding="@dimen/layout_padding"
+                    >
+                    <cn.incongress.xhy_guke.uis.CircleImageView
+                        android:id="@+id/civ_user_icon"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+                    <TextView
+                        android:id="@+id/tv_add_attention"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="10dp"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/theme_blue"
+                        android:paddingTop="3dp"
+                        style="@style/wrap_wrap" android:background="@drawable/bg_boarder" android:text="@string/suggest_add_attention"/>
+
+                    <LinearLayout style="@style/wrap_wrap" android:orientation="vertical" android:layout_marginLeft="@dimen/layout_margin" android:layout_toRightOf="@id/civ_user_icon" >
+                        <TextView style="@style/wrap_wrap" android:text="连享宁" android:drawableRight="@mipmap/vvtalk_chairman_tag" android:textSize="@dimen/text_size_media" android:textStyle="bold" android:textColor="@color/black"  android:drawablePadding="6dp"/>
+                        <TextView style="@style/wrap_wrap" android:text="成都军区总医院" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_toLeftOf="@id/tv_add_attention" android:layout_marginTop="6dp" style="@style/fill_wrap" android:orientation="horizontal" android:layout_below="@id/civ_user_icon">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="关注度"/>
+                        <View style="@style/v_line"/>
+                        <TextView android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="阅读数"/>
+                        <View style="@style/v_line"/>
+                        <TextView  android:layout_marginLeft="@dimen/layout_margin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="点赞数"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View style="@style/h_line"/>
+        </LinearLayout>
+    </ScrollView>
+</org.jackyonline.refreshdemo.RefreshLayout>

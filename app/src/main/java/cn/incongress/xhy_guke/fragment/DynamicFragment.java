@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.activitys.VVTalkDetailActivity;
 import cn.incongress.xhy_guke.adapter.DynamicsAdapter;
 import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseFragment;
@@ -128,6 +129,13 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
                         mParent.setVisibility(View.GONE);
                     }
                 });
+            }
+        });
+
+        mAdapter.setOnItemClickListener(new DynamicsAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, DynamicListBean dynamicListBean) {
+                VVTalkDetailActivity.startVVTalkDetailActivity(getActivity(), dynamicListBean.getType(), dynamicListBean.getDataId(), VVTalkDetailActivity.WHERE_STATE_DYNAMIC);
             }
         });
 

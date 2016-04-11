@@ -205,9 +205,10 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
         mIvCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ToastUtils.showShorToast("collect is collected", VVTalkDetailActivity.this);
             }
         });
+
         mIvShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

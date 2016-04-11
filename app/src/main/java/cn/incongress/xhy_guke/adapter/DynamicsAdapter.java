@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
@@ -24,7 +25,7 @@ import cn.incongress.xhy_guke.uis.NoScrollGridView;
  * Created by Jacky on 2016/3/30.
  * 动态的Adapter
  */
-public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private static final int VIEW_TYPE_EMPTY = 0X0001;
     private static final int VIEW_TYPE_NORMAL = 0X0002;
 
@@ -33,17 +34,20 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private LayoutInflater mLayoutInflater;
 
     private GoToBrowserModeListener mBrowerModeListener;
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public DynamicsAdapter(Context context, List<DynamicListBean> beans) {
         this.mDynamicListBeans = beans;
         this.mContext = context;
         this.mLayoutInflater = LayoutInflater.from(mContext);
+
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_NORMAL) {
             View view = mLayoutInflater.inflate(R.layout.item_dynamic, null);
+            view.setOnClickListener(this);
             DynamicViewHolder holder = new DynamicViewHolder(view);
             return holder;
         } else {
@@ -51,12 +55,15 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             EmptyViewHolder holder = new EmptyViewHolder(view);
             return holder;
         }
-
     }
+
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == VIEW_TYPE_NORMAL) {
+            //将数据保存在itemView的Tag中，以便点击时获取
+            holder.itemView.setTag(mDynamicListBeans.get(position));
+
             DynamicListBean data = mDynamicListBeans.get(position);
             int type = data.getType();
 
@@ -66,16 +73,15 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 //头像
                 if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getUserPic())) {
                     Picasso.with(mContext).load(data.getUserPic()).into(((DynamicViewHolder) holder).civUserIcon);
-                }else {
+                } else {
                     ((DynamicViewHolder) holder).civUserIcon.setImageResource(R.mipmap.item_vvtalk_professor_head_default);
                 }
-
                 //姓名 医院 时间 游览数
                 ((DynamicViewHolder) holder).tvUserName.setText(data.getShowName());
                 ((DynamicViewHolder) holder).tvUserHospital.setText(data.getCompany());
 
                 ((DynamicViewHolder) holder).tvShowTime.setText(data.getShowTime());
-                ((DynamicViewHolder) holder).tvReadCount.setText(data.getReadCount()+"");
+                ((DynamicViewHolder) holder).tvReadCount.setText(mContext.getString(R.string.vvtalk_read_count, data.getReadCount()));
 
                 //标题
                 try {
@@ -86,25 +92,25 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     e.printStackTrace();
                 }
 
-                if(cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getImgs())) {
-                    String[] imgs= data.getImgs().split(",");
-                    if(imgs.length == 1) {
+                if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getImgs())) {
+                    String[] imgs = data.getImgs().split(",");
+                    if (imgs.length == 1) {
                         Picasso.with(mContext).load(imgs[0]).into(((DynamicViewHolder) holder).ivOneImage);
                         ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.VISIBLE);
                         ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
                         ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
-                    }else if(imgs.length == 2 || imgs.length == 4) {
+                    } else if (imgs.length == 2 || imgs.length == 4) {
                         ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.GONE);
                         ((DynamicViewHolder) holder).ngvTwoOrFour.setAdapter(new NoScrollGridViewAdapter(mContext, imgs));
                         ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.VISIBLE);
                         ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.GONE);
                         ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
                         ((DynamicViewHolder) holder).ngvOther.setAdapter(new NoScrollGridViewAdapter(mContext, imgs));
                         ((DynamicViewHolder) holder).ngvOther.setVisibility(View.VISIBLE);
                     }
-                }else {
+                } else {
                     ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.GONE);
                     ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
                     ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
@@ -113,7 +119,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 //头像
                 if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getUserPic())) {
                     Picasso.with(mContext).load(data.getUserPic()).into(((DynamicViewHolder) holder).civUserIcon);
-                }else {
+                } else {
                     ((DynamicViewHolder) holder).civUserIcon.setImageResource(R.mipmap.item_vvtalk_professor_head_default);
                 }
 
@@ -122,7 +128,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((DynamicViewHolder) holder).tvUserHospital.setText(data.getCompany());
 
                 ((DynamicViewHolder) holder).tvShowTime.setText(data.getShowTime());
-                ((DynamicViewHolder) holder).tvReadCount.setText(data.getReadCount()+"");
+                ((DynamicViewHolder) holder).tvReadCount.setText(mContext.getString(R.string.vvtalk_read_count, data.getReadCount()));
 
                 ((DynamicViewHolder) holder).tvDynamicContent.setText(data.getTitle());
 
@@ -151,6 +157,13 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return VIEW_TYPE_EMPTY;
         } else {
             return VIEW_TYPE_NORMAL;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(v, (DynamicListBean) v.getTag());
         }
     }
 
@@ -196,9 +209,26 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     /**
      * 设置进入放大模式的监听
+     *
      * @param browerModeListener
      */
     public void setGoToBrowerModeListener(GoToBrowserModeListener browerModeListener) {
         this.mBrowerModeListener = browerModeListener;
+    }
+
+    /**
+     * 监听接口
+     */
+    public static interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view, DynamicListBean dynamicListBean);
+    }
+
+    /**
+     * 设置监听
+     *
+     * @param listener
+     */
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
     }
 }

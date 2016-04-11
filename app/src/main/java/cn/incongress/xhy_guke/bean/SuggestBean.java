@@ -150,6 +150,15 @@ public class SuggestBean {
         private int readCount;
         private int laudCount;
         private int isFocus;
+        private int rang;
+
+        public int getRang() {
+            return rang;
+        }
+
+        public void setRang(int rang) {
+            this.rang = rang;
+        }
 
         public int getUserId() {
             return userId;
@@ -234,6 +243,15 @@ public class SuggestBean {
         private int readCount;
         private int laudCount;
         private int isFocus;
+        private int rang;
+
+        public int getRang() {
+            return rang;
+        }
+
+        public void setRang(int rang) {
+            this.rang = rang;
+        }
 
         public int getUserId() {
             return userId;

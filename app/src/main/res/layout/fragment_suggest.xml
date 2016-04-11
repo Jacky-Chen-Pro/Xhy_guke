@@ -8,158 +8,33 @@
     app:can_load="false"
     app:can_refresh="true">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+    <cn.incongress.xhy_guke.uis.RecyclerViewScrollview
+        style="@style/fill_fill"
+        android:fillViewport="true"
+        android:layout_marginTop="6dp">
 
-        <TextView
-            style="@style/wrap_wrap"
-            android:layout_centerInParent="true"
-            android:padding="6dp"
-            android:text="@string/suggest_specail" />
-
-        <LinearLayout
-            style="@style/fill_wrap"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@color/white"
-            android:orientation="horizontal"
-            android:padding="@dimen/layout_padding">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+            <TextView
+                style="@style/wrap_wrap"
+                android:layout_centerInParent="true"
+                android:padding="6dp"
+                android:text="@string/suggest_specail" />
 
-                <cn.incongress.xhy_guke.uis.CircleImageView
-                    android:id="@+id/civ_user_icon_first"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:src="@mipmap/item_vvtalk_professor_head_default" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcv_special_suggest"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/tv_username_first"
-                    style="@style/wrap_wrap"
-                    android:text="张元哲"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_large" />
-
-                <TextView
-                    android:id="@+id/tv_hopital_first"
-                    style="@style/wrap_wrap"
-                    android:text="中日友好医院"
-                    android:textSize="@dimen/text_size_small" />
-
-                <TextView
-                    android:id="@+id/tv_homepage_first"
-                    style="@style/wrap_wrap"
-                    android:layout_marginTop="3dp"
-                    android:background="@drawable/bg_boarder"
-                    android:paddingBottom="3dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="3dp"
-                    android:text="@string/suggest_his_home_page"
-                    android:textColor="@color/theme_blue" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <cn.incongress.xhy_guke.uis.CircleImageView
-                    android:id="@+id/civ_user_icon_second"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:src="@mipmap/item_vvtalk_professor_head_default" />
-
-                <TextView
-                    android:id="@+id/tv_username_second"
-                    style="@style/wrap_wrap"
-                    android:text="张元哲"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_large" />
-
-                <TextView
-                    android:id="@+id/tv_hopital_second"
-                    style="@style/wrap_wrap"
-                    android:text="中日友好医院"
-                    android:textSize="@dimen/text_size_small" />
-
-                <TextView
-                    android:id="@+id/tv_homepage_second"
-                    style="@style/wrap_wrap"
-                    android:layout_marginTop="3dp"
-                    android:background="@drawable/bg_boarder"
-                    android:paddingBottom="3dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="3dp"
-                    android:text="@string/suggest_his_home_page"
-                    android:textColor="@color/theme_blue" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <cn.incongress.xhy_guke.uis.CircleImageView
-                    android:id="@+id/civ_user_icon_third"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:src="@mipmap/item_vvtalk_professor_head_default" />
-
-                <TextView
-                    android:id="@+id/tv_username_third"
-                    style="@style/wrap_wrap"
-                    android:text="张元哲"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_large" />
-
-                <TextView
-                    android:id="@+id/tv_hopital_third"
-                    style="@style/wrap_wrap"
-                    android:text="中日友好医院"
-                    android:textSize="@dimen/text_size_small" />
-
-                <TextView
-                    android:id="@+id/tv_homepage_third"
-                    style="@style/wrap_wrap"
-                    android:layout_marginTop="3dp"
-                    android:background="@drawable/bg_boarder"
-                    android:paddingBottom="3dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="3dp"
-                    android:text="@string/suggest_his_home_page"
-                    android:textColor="@color/theme_blue" />
-            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/rcv_hot_suggest"
+                android:layout_height="wrap_content" />
         </LinearLayout>
-
-        <View style="@style/h_line" android:layout_marginTop="@dimen/layout_margin"/>
-
-        <TextView
-            style="@style/fill_wrap"
-            android:padding="6dp"
-            android:text="@string/suggest_hot_head" />
-
-        <View style="@style/h_line" />
-
-        <RelativeLayout
-            android:paddingLeft="@dimen/layout_padding"
-            android:paddingRight="@dimen/layout_padding"
-            style="@style/fill_wrap">
-            <ImageView style="@style/wrap_wrap" android:src="@mipmap/suggest_hot_header"/>
-
-        </RelativeLayout>
-    </LinearLayout>
-
+    </cn.incongress.xhy_guke.uis.RecyclerViewScrollview>
 </org.jackyonline.refreshdemo.RefreshLayout>

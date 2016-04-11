@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <cn.incongress.xhy_guke.uis.CircleImageView
+        android:id="@+id/civ_user_icon"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        style="@style/wrap_wrap"
+        android:text="张元哲"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/tv_hospital"
+        style="@style/wrap_wrap"
+        android:text="中日友好医院"
+        android:textSize="@dimen/text_size_small" />
+
+    <TextView
+        android:id="@+id/tv_homepage"
+        style="@style/wrap_wrap"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_boarder"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:text="@string/suggest_his_home_page"
+        android:textColor="@color/theme_blue" />
+
+</LinearLayout>
