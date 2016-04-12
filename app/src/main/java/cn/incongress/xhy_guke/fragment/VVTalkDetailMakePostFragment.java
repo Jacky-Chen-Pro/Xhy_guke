@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.activitys.ImageViewPagerActivity;
 import cn.incongress.xhy_guke.adapter.NoScrollGridViewAdapter;
 import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.base.Constants;
@@ -108,22 +110,43 @@ public class VVTalkDetailMakePostFragment extends BaseFragment {
 
         //图片
         if (StringUtils.isNotEmpty(mImgs)) {
-            String[] imgs = mImgs.split(",");
+            final String[] imgs = mImgs.split(",");
             if (imgs.length == 1) {
                 Picasso.with(getActivity()).load(imgs[0]).into(mIvOne);
                 mIvOne.setVisibility(View.VISIBLE);
                 mTwoOrFourGridView.setVisibility(View.GONE);
                 mOtherGridView.setVisibility(View.GONE);
+
+                mIvOne.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ImageViewPagerActivity.startImageViewPagerActivity(getActivity(),imgs,0);
+                    }
+                });
             } else if (imgs.length == 2 || imgs.length == 4) {
                 mIvOne.setVisibility(View.GONE);
                 mTwoOrFourGridView.setAdapter(new NoScrollGridViewAdapter(getActivity(), imgs));
                 mTwoOrFourGridView.setVisibility(View.VISIBLE);
                 mOtherGridView.setVisibility(View.GONE);
+
+                mTwoOrFourGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ImageViewPagerActivity.startImageViewPagerActivity(getActivity(),imgs,position);
+                    }
+                });
             } else {
                 mIvOne.setVisibility(View.GONE);
                 mTwoOrFourGridView.setVisibility(View.GONE);
                 mOtherGridView.setAdapter(new NoScrollGridViewAdapter(getActivity(), imgs));
                 mOtherGridView.setVisibility(View.VISIBLE);
+
+                mOtherGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ImageViewPagerActivity.startImageViewPagerActivity(getActivity(),imgs,position);
+                    }
+                });
             }
         }
     }

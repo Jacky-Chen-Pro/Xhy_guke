@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_toolbar" />
+
+    <info.hoang8f.android.segmented.SegmentedGroup
+        android:id="@+id/segment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        segmentedgroup:sc_border_width="1dp"
+        segmentedgroup:sc_corner_radius="4dp">
+
+        <RadioButton
+            android:id="@+id/rb_vv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/post_tab_vv"
+            android:textSize="@dimen/text_size_media"
+            style="@style/RadioButton" />
+
+        <RadioButton
+            android:id="@+id/rb_academics"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/text_size_media"
+            android:layout_height="wrap_content"
+            android:text="@string/post_tab_academics"
+            style="@style/RadioButton" />
+    </info.hoang8f.android.segmented.SegmentedGroup>
+
+    <android.support.v4.view.ViewPager
+        android:layout_below="@id/toolbar"
+        android:id="@+id/viewpager"
+        android:layout_marginTop="6dp"
+        style="@style/fill_fill" />
+
+    <TextView android:id="@+id/tv_publish" android:gravity="center" android:textSize="@dimen/text_size_media" android:padding="@dimen/layout_padding"  android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_alignBottom="@id/toolbar" android:text="@string/post_publish" android:textColor="@color/theme_blue" android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

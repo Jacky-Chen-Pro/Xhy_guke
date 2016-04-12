@@ -1,10 +1,12 @@
 package cn.incongress.xhy_guke.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Jacky Chen on 2016/3/29 0029.
  * LaudList中的单元
  */
-public class LaudListBean {
+public class LaudListBean implements Serializable {
     private String userId;
     private String userPic;
 

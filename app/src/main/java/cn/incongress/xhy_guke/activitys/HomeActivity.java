@@ -36,9 +36,14 @@ public class HomeActivity  extends BaseActivity  implements TabHost.OnTabChangeL
             @Override
             public void onClick(View v) {
                 //消息站
-                startActivity(new Intent(HomeActivity.this,MsgStationActivity.class));
+                startActivity(new Intent(HomeActivity.this, MsgStationActivity.class));
             }
-        }, false, -1, null);
+        }, true, R.mipmap.home_make_post, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, MakePostActivity.class));
+            }
+        });
 
         setLeftAndRightImg(0);
         mTabHost.setCurrentTab(0);

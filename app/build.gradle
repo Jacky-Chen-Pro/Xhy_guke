@@ -37,4 +37,5 @@ dependencies {
     compile project(':library_multiListView')
     compile project(':library_common')
     compile project(':library_umeng_share')
+    compile project(':library_segment_group')
 }

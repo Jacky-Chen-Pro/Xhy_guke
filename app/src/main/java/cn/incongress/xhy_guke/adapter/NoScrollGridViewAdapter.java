@@ -39,7 +39,7 @@ public class NoScrollGridViewAdapter extends ListBaseAdapter<String> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Picasso.with(mContext).load(mDatas.get(position)).resize(200,200).into(( holder.imageView));
+        Picasso.with(mContext).load(mDatas.get(position)).resize(400,400).into(( holder.imageView));
         return convertView;
     }
 

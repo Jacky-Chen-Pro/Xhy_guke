@@ -60,12 +60,33 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activitys.HomeActivity" />
         </activity>
+
+        <activity android:name=".activitys.ImageViewPagerActivity"
+            android:parentActivityName=".activitys.VVTalkDetailActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activitys.VVTalkDetailActivity" />
+        </activity>
+
+        <activity
+            android:name=".activitys.MakePostActivity"
+            android:parentActivityName=".activitys.HomeActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activitys.HomeActivity" />
+        </activity>
+
+
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryDark">@color/black</item>
         <item name="android:textColorLink">#0b9a27</item>
-        <item name="colorAccent">@color/day_colorPrimary</item>
+        <item name="colorAccent">@color/theme_blue</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="editTextColor">@color/gray</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
@@ -19,6 +19,7 @@
         <item name="android:textColorHint">@color/day_edit_hit_color</item>
         <item name="android:listDivider">@drawable/divider_bg</item>
         <item name="android:progressBarStyleHorizontal">@style/progress_horizontal</item>
+        <item name="android:textColorSecondary">@color/gray</item>
     </style>
 
     <!-- 夜间模式 -->

@@ -34,4 +34,7 @@
     <!-- 我 -->
     <color name="background_white_transplant">#99FFFFFF</color>
 
+    <!--发布-->
+    <color name="edit_background">#E9E9EB</color>
+    <color name="edit_hint_color">#C6C6C6</color>
 </resources>
