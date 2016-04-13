@@ -58,8 +58,7 @@
 
     <!-- 我 -->
     <string name="me_my_publish">我的发布</string>
-    <string name="me_my_publish_vvtalk">我发布的V言V语</string>
-    <string name="me_my_publish_dynamic">我发布的学术动态</string>
+    <string name="me_my_publish_post">我发布的帖子</string>
     <string name="me_my_operation">我的操作</string>
     <string name="me_download">下载</string>
     <string name="me_collection">收藏</string>
@@ -101,4 +100,6 @@
     <string name="mypublish_comment_count">评论 %1$s</string>
     <string name="mypublish_praise_count">点赞 %1$s</string>
     <string name="mypublish_no_data">您还未发布任何的V言V语哦</string>
+    <string name="mypublish_time">%1$s发布</string>
+    <string name="mypublish_no_more_data">没有更多的发布数据了</string>
 </resources>

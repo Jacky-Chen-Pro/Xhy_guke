@@ -87,7 +87,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <activity android:name=".activitys.MyPublishVVTalk"
+        <activity android:name=".activitys.MyPublishPostActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".activitys.HomeActivity">
             <meta-data

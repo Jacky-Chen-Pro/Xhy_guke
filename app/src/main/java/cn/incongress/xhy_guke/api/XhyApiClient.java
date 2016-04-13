@@ -51,8 +51,8 @@ public class XhyApiClient {
      * 获取资源详情看，分别从V言V语或者动态中跳转
      * @param dataId
      * @param userId
-     * @param whereState
-     * @param stringCallback 1 vv 2动态 3 我的
+     * @param whereState 1 vv 2动态 3 我的 ##(分享的时候去掉wherestate=3 + isShare=1, 新闻和病例)
+     * @param stringCallback
      */
     public static void getDataById(String dataId, String userId, String whereState, StringCallback stringCallback) {
         Map<String, String> params = new HashMap<>();

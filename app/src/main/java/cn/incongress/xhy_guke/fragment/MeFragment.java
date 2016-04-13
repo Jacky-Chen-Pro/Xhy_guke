@@ -12,10 +12,9 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.jackyonline.refreshdemo.RefreshLayout;
-import org.w3c.dom.Text;
 
 import cn.incongress.xhy_guke.R;
-import cn.incongress.xhy_guke.activitys.MyPublishVVTalk;
+import cn.incongress.xhy_guke.activitys.MyPublishPostActivity;
 import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.base.XhyApplication;
@@ -142,7 +141,7 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
 
         switch (target) {
             case R.id.ll_my_publish_vvtalk:
-                MyPublishVVTalk.startMyPublishVVtalkActivity(getActivity());
+                MyPublishPostActivity.startMyPublishVVtalkActivity(getActivity());
                 break;
         }
     }

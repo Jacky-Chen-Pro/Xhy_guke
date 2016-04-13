@@ -8,24 +8,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.bean.DynamicListBean;
 import cn.incongress.xhy_guke.bean.MyVVTalkBean;
-import cn.incongress.xhy_guke.utils.StringUtils;
 
 /**
  * Created by Jacky on 2016/4/13.
  */
-public class MyPublishVVTalkAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyPublishVVTalkAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private static final int VIEW_TYPE_EMPTY = 0X0001;
     private static final int VIEW_TYPE_NORMAL = 0X0002;
 
     private Context mContext;
     private List<MyVVTalkBean.DataListBean> mMyTalkBeans;
     private LayoutInflater mInflater;
+    private OnItemClickListener mOnItemClickListener = null;
 
     public MyPublishVVTalkAdapter(Context context, List<MyVVTalkBean.DataListBean> beans) {
         this.mContext = context;
@@ -35,11 +34,12 @@ public class MyPublishVVTalkAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == VIEW_TYPE_NORMAL) {
+        if (viewType == VIEW_TYPE_NORMAL) {
             View view = mInflater.inflate(R.layout.item_my_vvtalk_with_bg, null);
+            view.setOnClickListener(this);
             ViewHolder holder = new ViewHolder(view);
             return holder;
-        }else{
+        } else {
             View view = mInflater.inflate(R.layout.item_empty_view, null);
             EmptyViewHolder holder = new EmptyViewHolder(view);
             return holder;
@@ -48,21 +48,16 @@ public class MyPublishVVTalkAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(getItemViewType(position) == VIEW_TYPE_NORMAL) {
+        if (getItemViewType(position) == VIEW_TYPE_NORMAL) {
             MyVVTalkBean.DataListBean dataListBean = mMyTalkBeans.get(position);
+            holder.itemView.setTag(dataListBean);
 
-            if(StringUtils.isNotEmpty(dataListBean.getBgImg())) {
-                Picasso.with(mContext).load(dataListBean.getBgImg()).into( ((ViewHolder)holder).ivBg);
-                ((ViewHolder)holder).ivBg.setVisibility(View.VISIBLE);
-            }else {
-                ((ViewHolder)holder).ivBg.setVisibility(View.GONE);
-            }
-
-            ((ViewHolder)holder).mTvTitleWithTime.setText(dataListBean.getTitle());
-            ((ViewHolder)holder).mTvReadCount.setText(mContext.getString(R.string.mypublish_read_count, dataListBean.getReadCount()));
-            ((ViewHolder)holder).mTvCommentCount.setText(mContext.getString(R.string.mypublish_comment_count, dataListBean.getCommentCount()));
-            ((ViewHolder)holder).mTvPraiseCount.setText(mContext.getString(R.string.mypublish_praise_count, dataListBean.getLaudCount()));
-        }else {
+            ((ViewHolder) holder).mTvTitleWithTime.setText(dataListBean.getTitle());
+            ((ViewHolder) holder).mTvReadCount.setText(mContext.getString(R.string.mypublish_read_count, dataListBean.getReadCount()));
+            ((ViewHolder) holder).mTvCommentCount.setText(mContext.getString(R.string.mypublish_comment_count, dataListBean.getCommentCount()));
+            ((ViewHolder) holder).mTvPraiseCount.setText(mContext.getString(R.string.mypublish_praise_count, dataListBean.getLaudCount()));
+            ((ViewHolder) holder).tvPublishTime.setText(mContext.getString(R.string.mypublish_time, dataListBean.getShowTime()));
+        } else {
             ((EmptyViewHolder) holder).tvEmpty.setText(R.string.mypublish_no_data);
         }
     }
@@ -78,16 +73,23 @@ public class MyPublishVVTalkAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public int getItemCount() {
-        if(mMyTalkBeans != null && mMyTalkBeans.size() > 0) {
+        if (mMyTalkBeans != null && mMyTalkBeans.size() > 0) {
             return mMyTalkBeans.size();
-        }else {
+        } else {
             return 0;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(v, (MyVVTalkBean.DataListBean) v.getTag());
         }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivBg;
-        TextView mTvTitleWithTime,mTvReadCount,mTvCommentCount,mTvPraiseCount;
+        TextView mTvTitleWithTime, mTvReadCount, mTvCommentCount, mTvPraiseCount, tvPublishTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -96,6 +98,7 @@ public class MyPublishVVTalkAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             this.mTvReadCount = (TextView) itemView.findViewById(R.id.tv_read_count);
             this.mTvCommentCount = (TextView) itemView.findViewById(R.id.tv_comment_count);
             this.mTvPraiseCount = (TextView) itemView.findViewById(R.id.tv_praise_count);
+            this.tvPublishTime = (TextView) itemView.findViewById(R.id.tv_publish_time);
         }
     }
 
@@ -106,5 +109,13 @@ public class MyPublishVVTalkAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             super(itemView);
             tvEmpty = (TextView) itemView.findViewById(R.id.tv_empty_tips);
         }
+    }
+
+    public interface OnItemClickListener {
+        public void onItemClick(View view, MyVVTalkBean.DataListBean dataBean);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener clickListener) {
+        this.mOnItemClickListener = clickListener;
     }
 }

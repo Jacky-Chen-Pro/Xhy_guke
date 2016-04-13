@@ -18,6 +18,7 @@ public class VVTalkBean {
     private String userPic; //返回发帖人头像
     private int readCount; //阅读数
     private String showTime; //显示时间
+    private String dataDescribe;// 用于userType=4是，的内容描述
 
     public int getDataId() {
         return dataId;

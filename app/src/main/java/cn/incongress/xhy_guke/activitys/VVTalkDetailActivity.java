@@ -3,6 +3,7 @@ package cn.incongress.xhy_guke.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
@@ -51,9 +52,10 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
     public static final int DETAIL_TYPE_ATTACH = 4;//课件
     public static final int DETAIL_TYPE_VIDEO = 5;//视频
 
-    /**  从V言V语跳转或者动态跳转 **/
+    /**  从V言V语跳转或者动态跳转 新加从我的发布进入**/
     public static final int WHERE_STATE_VVTALK = 1;
     public static final int WHERE_STATE_DYNAMIC = 2;
+    public static final int WHERE_STATE_MY_PUBLISH = 3;
 
     private int mCurrentType;//当前详情类型
     private int mDataId;      //详情ID
@@ -113,8 +115,6 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
                 fillContainer();
             }
         });
-
-
     }
 
     private void initEvents() {
@@ -264,5 +264,18 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
     public void completeRefresh() {
         if(mRefreshLayout != null)
             mRefreshLayout.finishCurrentLoad();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO Auto-generated method stub
+        if(mCurrentWhereState == VVTalkDetailActivity.WHERE_STATE_MY_PUBLISH) {
+            if(item.getItemId() == android.R.id.home)
+            {
+                this.finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
