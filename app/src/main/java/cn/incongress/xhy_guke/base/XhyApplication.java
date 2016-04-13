@@ -10,4 +10,10 @@ public class XhyApplication extends Application {
     public static final String userId = "16004";
     /** 用户类型 **/
     public static final int userType = Constants.USER_TYPE_ORGANIZATION;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+    }
 }
