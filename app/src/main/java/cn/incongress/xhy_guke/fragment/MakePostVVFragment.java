@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.BaseFragment;
@@ -18,6 +19,7 @@ import cn.incongress.xhy_guke.base.BaseFragment;
 public class MakePostVVFragment extends BaseFragment {
     private AppCompatCheckBox mCheckbox;
     private boolean mIsNickName = false;//是否昵称发布
+    private ImageView mIvCloseKeyboard;
 
     public static MakePostVVFragment getInstance() {
         MakePostVVFragment fragment = new MakePostVVFragment();
@@ -36,6 +38,7 @@ public class MakePostVVFragment extends BaseFragment {
     public void initView(View view) {
         super.initView(view);
         mCheckbox = (AppCompatCheckBox) view.findViewById(R.id.checkBox);
+        mIvCloseKeyboard = (ImageView) view.findViewById(R.id.iv_close_keyboard);
 
         mCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -43,6 +46,7 @@ public class MakePostVVFragment extends BaseFragment {
                 mIsNickName = isChecked;
             }
         });
+
         initData();
     }
 

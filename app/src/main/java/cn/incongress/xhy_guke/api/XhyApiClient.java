@@ -52,7 +52,7 @@ public class XhyApiClient {
      * @param dataId
      * @param userId
      * @param whereState
-     * @param stringCallback
+     * @param stringCallback 1 vv 2动态 3 我的
      */
     public static void getDataById(String dataId, String userId, String whereState, StringCallback stringCallback) {
         Map<String, String> params = new HashMap<>();

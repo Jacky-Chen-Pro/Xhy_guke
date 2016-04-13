@@ -42,6 +42,7 @@
     <string name="attach_intro">文献简介</string>
     <string name="attach_click_download">点击下载</string>
     <string name="down_look_more">——向下滑动，查看评论和点赞——</string>
+
     <!-- 登录页面 -->
     <string name="login_mobile_hint">请输入手机号码</string>
     <string name="login_pwd_hint">请输入密码</string>
@@ -94,4 +95,10 @@
     <string name="post_academics_title">学术发布&#038;资源共享</string>
     <string name="post_academics_content">如需发布学术资源请登录管理后台进行编辑发布哦，如忘记密码请登录注册号，点击忘记密码可邮箱获取密码，即可发布到您的最新学术资源</string>
     <string name="post_edit_hint">输入内容</string>
+
+    <!-- 我发布的V言V语 -->
+    <string name="mypublish_read_count">阅读 %1$s</string>
+    <string name="mypublish_comment_count">评论 %1$s</string>
+    <string name="mypublish_praise_count">点赞 %1$s</string>
+    <string name="mypublish_no_data">您还未发布任何的V言V语哦</string>
 </resources>

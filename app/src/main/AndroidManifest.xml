@@ -33,7 +33,9 @@
             android:name="UMENG_APPKEY"
             android:value="55d67ff067e58e06010053d2"></meta-data>
 
-        <activity android:name=".activitys.LoginActivity">
+        <activity
+            android:name=".activitys.LoginActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -61,9 +63,9 @@
                 android:value=".activitys.HomeActivity" />
         </activity>
 
-        <activity android:name=".activitys.ImageViewPagerActivity"
-            android:parentActivityName=".activitys.VVTalkDetailActivity"
-            >
+        <activity
+            android:name=".activitys.ImageViewPagerActivity"
+            android:parentActivityName=".activitys.VVTalkDetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activitys.VVTalkDetailActivity" />
@@ -71,8 +73,7 @@
 
         <activity
             android:name=".activitys.MakePostActivity"
-            android:parentActivityName=".activitys.HomeActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan">
+            android:parentActivityName=".activitys.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activitys.HomeActivity" />
@@ -86,6 +87,13 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+        <activity android:name=".activitys.MyPublishVVTalk"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:parentActivityName=".activitys.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activitys.HomeActivity" />
+        </activity>
 
     </application>
 

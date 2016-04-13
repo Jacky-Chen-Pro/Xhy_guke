@@ -1,5 +1,7 @@
 package cn.incongress.xhy_guke.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,13 +10,16 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.uis.ProgressWebView;
+import cn.incongress.xhy_guke.utils.ToastUtils;
 
 /**
  * Created by Jacky Chen on 2016/3/29 0029.
@@ -71,6 +76,7 @@ public class VVTalkDetailWebViewFragment extends BaseFragment {
     /**
      * 初始化Webview的配置
      */
+    @SuppressLint("JavascriptInterface")
     private void initialWebViewSetting() {
         //只有在系统版本号低于18的情况下才调用该方法
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -132,6 +138,16 @@ public class VVTalkDetailWebViewFragment extends BaseFragment {
                 return false;
             }
         });
+
+        mWebView.addJavascriptInterface(
+                new Object() {
+                    @JavascriptInterface
+                    @SuppressLint("JavascriptInterface")
+                    public void goAuthorCenter() {
+                        ToastUtils.showShorToast("goAuthorCenter", getActivity());
+                    }
+                }, "androidJS");
+
     }
 
     @Override
@@ -151,4 +167,5 @@ public class VVTalkDetailWebViewFragment extends BaseFragment {
             e.printStackTrace();
         }
     }
+
 }

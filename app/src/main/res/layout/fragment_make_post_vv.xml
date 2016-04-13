@@ -1,35 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:materialdesign="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    xmlns:flatui="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/white"
-    android:layout_height="match_parent">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    style="@style/fill_fill">
 
-    <TextView style="@style/fill_wrap"
-        android:padding="@dimen/layout_padding"
-        android:text="@string/post_post_vv_talk"
-        />
+    <RelativeLayout
+        style="@style/fill_fill"
+        android:background="@color/background">
 
-    <EditText style="@style/fill_wrap"
-        android:background="@color/edit_background"
-        android:layout_margin="@dimen/layout_margin"
-        android:textColorHint="@color/edit_hint_color"
-        android:hint="@string/post_edit_hint"
-        android:gravity="start"
-        android:padding="6dp"
-        android:textSize="@dimen/text_size_media"
-        android:minLines="5"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-    <LinearLayout style="@style/fill_wrap" android:orientation="horizontal" android:layout_margin="@dimen/layout_margin">
-        <android.support.v7.widget.AppCompatCheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/post_post_by_nickname"
-            />
-    </LinearLayout>
+            <TextView
+                style="@style/fill_wrap"
+                android:padding="@dimen/layout_padding"
+                android:text="@string/post_post_vv_talk" />
 
-</LinearLayout>
+            <EditText
+                style="@style/fill_wrap"
+                android:layout_margin="@dimen/layout_margin"
+                android:background="@color/edit_background"
+                android:gravity="start"
+                android:hint="@string/post_edit_hint"
+                android:minLines="5"
+                android:padding="6dp"
+                android:textColorHint="@color/edit_hint_color"
+                android:textSize="@dimen/text_size_media" />
+
+            <LinearLayout
+                style="@style/fill_wrap"
+                android:layout_margin="@dimen/layout_margin"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/post_post_by_nickname" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_operation_bar"
+            style="@style/fill_wrap"
+            android:layout_alignParentBottom="true"
+            android:background="@color/background"
+            android:padding="@dimen/layout_padding">
+
+            <ImageView
+                android:id="@+id/iv_take_photo"
+                style="@style/wrap_wrap"
+                android:src="@mipmap/publish_take_photo" />
+
+            <ImageView
+                android:id="@+id/iv_album"
+                style="@style/wrap_wrap"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/iv_take_photo"
+                android:src="@mipmap/publish_album" />
+
+            <ImageView
+                android:id="@+id/iv_close_keyboard"
+                style="@style/wrap_wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/publish_close_keyboard" />
+        </RelativeLayout>
+
+        <View
+            style="@style/h_line"
+            android:layout_above="@id/rl_operation_bar" />
+    </RelativeLayout>
+</ScrollView>

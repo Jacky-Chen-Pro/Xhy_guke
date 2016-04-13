@@ -225,7 +225,7 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
 
         if(mCurrentType == DETAIL_TYPE_NEWS || mCurrentType == DETAIL_TYPE_CASE) {
             getSupportFragmentManager().beginTransaction().
-                    add(R.id.fl_detail_area, VVTalkDetailWebViewFragment.getInstance(mDetailBean.getHtmlUrl()))
+                    add(R.id.fl_detail_area, VVTalkDetailWebViewFragment.getInstance("http://incongress.cn/XhyApiV2.do?getDataByIdH5&dataId=467"))
                     .add(R.id.fl_comment_area, mCommentFragment).commit();
         }else if(mCurrentType == DETAIL_TYPE_POST) {
             ToastUtils.showShorToast("Post", VVTalkDetailActivity.this);

@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -14,6 +15,7 @@ import org.jackyonline.refreshdemo.RefreshLayout;
 import org.w3c.dom.Text;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.activitys.MyPublishVVTalk;
 import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.base.XhyApplication;
@@ -26,11 +28,12 @@ import okhttp3.Call;
  * Created by Jacky on 2015/12/7.
  * 我
  */
-public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshListener {
+public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshListener,View.OnClickListener {
     CircleImageView mCivUserIcon;
     private TextView mTvFollowNums, mTvFanNums, mTvVisitCount, mTvPraiseCount, mTvCommentCount;
     private TextView mTvWeekVisitCount, mTvWeekPraiseCount, mTvWeekCommentCount;
     private TextView mTvPublishCount, mTvCollectionCount;
+    private LinearLayout mLlMyPublishVVTalk;
 
     private UserCountBean mUserCountBean;
 
@@ -74,6 +77,8 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
         mTvPublishCount = (TextView) view.findViewById(R.id.tv_publish_count);
         mTvCollectionCount = (TextView) view.findViewById(R.id.tv_collection_count);
 
+        mLlMyPublishVVTalk = (LinearLayout) view.findViewById(R.id.ll_my_publish_vvtalk);
+
         initData();
     }
 
@@ -83,6 +88,7 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
 
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setOnLoadMoreListener(null);
+        mLlMyPublishVVTalk.setOnClickListener(this);
 
         refreshData();
     }
@@ -128,5 +134,16 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
                 }
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        int target = v.getId();
+
+        switch (target) {
+            case R.id.ll_my_publish_vvtalk:
+                MyPublishVVTalk.startMyPublishVVtalkActivity(getActivity());
+                break;
+        }
     }
 }

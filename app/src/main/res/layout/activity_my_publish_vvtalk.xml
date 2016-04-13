@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <org.jackyonline.refreshdemo.RefreshLayout  android:layout_margin="6dp" android:id="@+id/refreshLayout" android:background="@color/background" style="@style/fill_fill" >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_vvtalk"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </org.jackyonline.refreshdemo.RefreshLayout>
+
+</LinearLayout>
