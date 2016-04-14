@@ -38,8 +38,6 @@ public class VVTalkDetailAttachFragment extends BaseFragment {
     //文件类型
     private int mDataType = Constants.DATA_TYPE_PDF;
 
-
-
     public static final String EXTRA_USER_ICON_URL = "userIconUrl";
     public static final String EXTRA_USER_NAME = "userName";
     public static final String EXTRA_USER_HOSPITAL = "userHospital";
@@ -143,6 +141,7 @@ public class VVTalkDetailAttachFragment extends BaseFragment {
             }
         });
 
+        dismissProgressDialog();
     }
 
     private String getPdfName(String pdfName, int type) {

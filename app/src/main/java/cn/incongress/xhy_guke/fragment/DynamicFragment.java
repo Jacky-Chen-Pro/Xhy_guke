@@ -1,5 +1,6 @@
 package cn.incongress.xhy_guke.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -34,6 +35,7 @@ import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.bean.DynamicListBean;
 import cn.incongress.xhy_guke.bean.VVTalkBean;
+import cn.incongress.xhy_guke.uis.FiveLine;
 import cn.incongress.xhy_guke.utils.LogUtils;
 import cn.incongress.xhy_guke.utils.ToastUtils;
 import okhttp3.Call;
@@ -143,8 +145,9 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
         mRefresh.setOnRefreshListener(this);
         mRefresh.setOnLoadMoreListener(this);
 
-        getData(mLasdDataID);
-
+        if(getData(mLasdDataID) == XhyGo.INTERNET_ERROR && mProgressDialog != null && mProgressDialog.isShowing()) {
+            dismissProgressDialog();
+        }
     }
 
     @Override
@@ -172,6 +175,7 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
             public void onAfter() {
                 super.onAfter();
                 mRefresh.finishCurrentLoad();
+                dismissProgressDialog();
             }
 
             @Override

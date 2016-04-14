@@ -48,6 +48,7 @@ public class MakePostVVFragment extends BaseFragment {
         });
 
         initData();
+        dismissProgressDialog();
     }
 
     @Override

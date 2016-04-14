@@ -31,8 +31,8 @@ public class MakePostAcademicFragment extends BaseFragment {
     @Override
     public void initView(View view) {
         super.initView(view);
-
         initData();
+        dismissProgressDialog();
     }
 
     @Override

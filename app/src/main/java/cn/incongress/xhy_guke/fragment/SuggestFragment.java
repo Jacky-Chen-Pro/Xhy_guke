@@ -67,7 +67,9 @@ public class SuggestFragment extends BaseFragment implements RefreshLayout.OnRef
         mVerticalManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false);
         mHorizontalManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
-        initData();
+        if(getData() == XhyGo.INTERNET_ERROR && mProgressDialog != null && mProgressDialog.isShowing()) {
+            dismissProgressDialog();
+        }
     }
 
     @Override
@@ -77,8 +79,8 @@ public class SuggestFragment extends BaseFragment implements RefreshLayout.OnRef
         getData();
     }
 
-    private void getData() {
-        XhyGo.goGetTuiJianList(getActivity(), XhyApplication.userId, new StringCallback() {
+    private int getData() {
+        return XhyGo.goGetTuiJianList(getActivity(), XhyApplication.userId, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
             }
@@ -87,6 +89,7 @@ public class SuggestFragment extends BaseFragment implements RefreshLayout.OnRef
             public void onAfter() {
                 super.onAfter();
                 mRefreshLayout.finishCurrentLoad();
+                dismissProgressDialog();
             }
 
             @Override

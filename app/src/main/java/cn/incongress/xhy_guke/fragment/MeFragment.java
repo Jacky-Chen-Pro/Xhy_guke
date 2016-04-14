@@ -89,16 +89,15 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
         mRefreshLayout.setOnLoadMoreListener(null);
         mLlMyPublishVVTalk.setOnClickListener(this);
 
-        refreshData();
+        if(getData() == XhyGo.INTERNET_ERROR && mProgressDialog != null && mProgressDialog.isShowing()) {
+            dismissProgressDialog();
+        }
     }
 
-    @Override
-    public void onRefresh() {
-        refreshData();
-    }
 
-    private void refreshData() {
-        int result = XhyGo.goGetUserNumbers(getActivity(), XhyApplication.userId, XhyApplication.userType + "", new StringCallback() {
+
+    private int getData() {
+        return XhyGo.goGetUserNumbers(getActivity(), XhyApplication.userId, XhyApplication.userType + "", new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
 
@@ -108,6 +107,7 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
             public void onAfter() {
                 super.onAfter();
                 mRefreshLayout.finishCurrentLoad();
+                dismissProgressDialog();
             }
 
             @Override
@@ -133,6 +133,11 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
                 }
             }
         });
+    }
+
+    @Override
+    public void onRefresh() {
+        getData();
     }
 
     @Override

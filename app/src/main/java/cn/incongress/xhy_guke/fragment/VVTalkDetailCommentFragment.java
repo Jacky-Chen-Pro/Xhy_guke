@@ -107,7 +107,9 @@ public class VVTalkDetailCommentFragment extends BaseFragment {
                                 getResources().getDimensionPixelSize(R.dimen.layout_margin))
                         .build());
 
-        getData(mLastCommentId+"");
+        if(getData(mLastCommentId+"") == XhyGo.INTERNET_ERROR && mProgressDialog!=null && mProgressDialog.isShowing()) {
+            dismissProgressDialog();
+        }
 
         return view;
     }
@@ -118,10 +120,16 @@ public class VVTalkDetailCommentFragment extends BaseFragment {
       ((VVTalkDetailActivity)getActivity()).completeRefresh();
     }
 
-    private void getData(String lastCommentId) {
-        XhyGo.getCommentList(getActivity(), mDataId, XhyApplication.userId, lastCommentId, Constants.PAGE_SIZE, new StringCallback() {
+    private int getData(String lastCommentId) {
+        return XhyGo.getCommentList(getActivity(), mDataId, XhyApplication.userId, lastCommentId, Constants.PAGE_SIZE, new StringCallback() {
             @Override
             public void onError(Call call, Exception e) {
+            }
+
+            @Override
+            public void onAfter() {
+                super.onAfter();
+                dismissProgressDialog();
             }
 
             @Override

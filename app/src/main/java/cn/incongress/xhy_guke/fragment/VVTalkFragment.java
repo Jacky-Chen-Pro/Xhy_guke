@@ -89,7 +89,11 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
     @Override
     public void initData() {
         super.initData();
-        getData(mLastDataId, mTopIds);
+
+        if( getData(mLastDataId, mTopIds) == XhyGo.INTERNET_ERROR && mProgressDialog != null && mProgressDialog.isShowing()) {
+            dismissProgressDialog();
+        }
+
         mMultiColumnListView.setOnItemClickListener(this);
 
         mMultiColumnListView.setOnScrollListener(new PLA_AbsListView.OnScrollListener() {
@@ -111,12 +115,13 @@ public class VVTalkFragment extends BaseFragment implements RefreshLayout.OnRefr
         });
     }
 
-    private void getData(final int lastDataId, String topIds) {
-        XhyGo.getMainDataListVyvy(getActivity(),refreshLayout, lastDataId, topIds, new StringCallBackWithProgress(getActivity()) {
+    private int getData(final int lastDataId, String topIds) {
+        return XhyGo.getMainDataListVyvy(getActivity(),refreshLayout, lastDataId, topIds, new StringCallBackWithProgress(getActivity()) {
             @Override
             public void onAfter() {
                 super.onAfter();
                 refreshLayout.finishCurrentLoad();
+                dismissProgressDialog();
             }
 
             @Override

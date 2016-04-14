@@ -114,6 +114,7 @@ public class VVTalkDetailWebViewFragment extends BaseFragment {
                 super.onPageFinished(view, url);
 //                animationDrawable.stop();
 //                mIvLoading.setVisibility(View.GONE);
+                dismissProgressDialog();
             }
 
             @Override

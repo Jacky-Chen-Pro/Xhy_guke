@@ -130,6 +130,8 @@ public class VVTalkDetailVideoFragment extends BaseFragment implements Universal
                 ToastUtils.showShorToast("video complete", getActivity());
             }
         });
+
+        dismissProgressDialog();
     }
 
 
