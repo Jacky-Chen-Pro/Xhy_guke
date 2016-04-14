@@ -13,9 +13,9 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/library_common" />
             <option value="$PROJECT_DIR$/library_multiListView" />
+            <option value="$PROJECT_DIR$/library_number_progress" />
             <option value="$PROJECT_DIR$/library_refreshlayout" />
             <option value="$PROJECT_DIR$/library_segment_group" />
-            <option value="$PROJECT_DIR$/library_umeng_share" />
           </set>
         </option>
       </GradleProjectSettings>

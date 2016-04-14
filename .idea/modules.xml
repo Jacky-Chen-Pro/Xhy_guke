@@ -6,10 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_common/library_common.iml" filepath="$PROJECT_DIR$/library_common/library_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_multiListView/library_multiListView.iml" filepath="$PROJECT_DIR$/library_multiListView/library_multiListView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library_number_progress/library_number_progress.iml" filepath="$PROJECT_DIR$/library_number_progress/library_number_progress.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_refreshlayout/library_refreshlayout.iml" filepath="$PROJECT_DIR$/library_refreshlayout/library_refreshlayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_segment_group/library_segment_group.iml" filepath="$PROJECT_DIR$/library_segment_group/library_segment_group.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_segment_group/library_segment_group.iml" filepath="$PROJECT_DIR$/library_segment_group/library_segment_group.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library_umeng_share/library_umeng_share.iml" filepath="$PROJECT_DIR$/library_umeng_share/library_umeng_share.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_umeng_share/library_umeng_share.iml" filepath="$PROJECT_DIR$/library_umeng_share/library_umeng_share.iml" />
     </modules>
   </component>

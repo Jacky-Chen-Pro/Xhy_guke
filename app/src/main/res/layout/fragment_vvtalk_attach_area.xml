@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@color/background"
-android:orientation="vertical"
-xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:background="@color/background"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 <RelativeLayout style="@style/fill_wrap">
 
@@ -89,7 +91,8 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 </RelativeLayout>
 
 <LinearLayout
-style="@style/fill_wrap"
+android:layout_width="match_parent"
+    android:layout_height="wrap_content"
 android:layout_marginTop="6dp"
 android:background="@color/white"
 android:orientation="vertical"
@@ -136,19 +139,36 @@ android:padding="@dimen/layout_padding">
 
     <View style="@style/v_line" />
 
-    <TextView
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:id="@+id/tv_click_download"
-        android:drawablePadding="3dp"
-        android:drawableTop="@mipmap/attach_download_icon"
-        android:gravity="center"
-        android:text="@string/attach_click_download"
-        android:textSize="@dimen/text_size_small" />
-</LinearLayout>
+        android:layout_weight="2">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_click_download"
+            android:drawablePadding="3dp"
+            android:drawableTop="@mipmap/attach_download_icon"
+            android:gravity="center"
+            android:text="@string/attach_click_download"
+            android:textSize="@dimen/text_size_small" />
+
+
+    </RelativeLayout>
+
 </LinearLayout>
 
+</LinearLayout>
+    <com.daimajia.numberprogressbar.NumberProgressBar
+        android:id="@+id/pb_download"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/layout_margin"
+        android:layout_marginRight="@dimen/layout_margin"
+        custom:progress_max="100"
+        android:layout_marginTop="6dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        />
 <LinearLayout
 style="@style/fill_wrap"
 android:layout_marginTop="6dp"

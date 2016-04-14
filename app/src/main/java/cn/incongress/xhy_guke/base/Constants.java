@@ -1,5 +1,7 @@
 package cn.incongress.xhy_guke.base;
 
+import android.os.Environment;
+
 /**
  * Created by Jacky on 2016/3/25.
  */
@@ -22,5 +24,8 @@ public class Constants {
     public static final int USER_TYPE_MEDIA_VIP = 2;//中V
     public static final int USER_TYPE_NORMAL_CERTIFY = 3; //已认证用户
     public static final int USER_TYPE_ORGANIZATION = 4; //组织
+
+    /** 最大下载数量 **/
+    public static final int MAX_TASK = 5;
 
 }

@@ -28,10 +28,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseTheme_Light">
 
-        <!-- 友盟 -->
+        <!-- 友盟 start -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="55d67ff067e58e06010053d2"></meta-data>
+            android:value="570f3587e0f55a4180000ced"></meta-data>
+
+        <!--<activity-->
+            <!--android:name="com.umeng.socialize.editorpage.ShareActivity"-->
+            <!--android:theme="@style/Theme.UMDefault"-->
+            <!--android:excludeFromRecents="true"/>-->
+
+        <!--&lt;!&ndash; 微信平台配置 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name=".wxapi.WXEntryActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:exported="true"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
+
+        <!-- 友盟 end-->
 
         <activity
             android:name=".activitys.LoginActivity"
@@ -80,12 +95,7 @@
         </activity>
 
 
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
 
         <activity android:name=".activitys.MyPublishPostActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -94,6 +104,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activitys.HomeActivity" />
         </activity>
+
 
     </application>
 

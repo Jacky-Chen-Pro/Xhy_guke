@@ -16,7 +16,9 @@
     <string name="decode_error">数据解析错误...</string>
     <string name="cancel">取消</string>
     <string name="send">发送</string>
-
+    <string name="share_success">分享成功</string>
+    <string name="share_fail">分享失败</string>
+    <string name="share_cancel">分享取消</string>
 
     <!-- V言V语 列表页 -->
     <string name="vvtalk_read_count">%1$s人查看</string>
@@ -102,4 +104,10 @@
     <string name="mypublish_no_data">您还未发布任何的V言V语哦</string>
     <string name="mypublish_time">%1$s发布</string>
     <string name="mypublish_no_more_data">没有更多的发布数据了</string>
+
+    <!-- 分享地址 -->
+    <string name="share_video_content">视频分享</string>
+    <string name="share_type_video_post"> http://incongress.cn/XhyApiV2.do?getDataByIdH5&#038;dataId=%1$s&#038;isShare=1</string>
+    <string name="share_type_attach"> http://incongress.cn/xhy/pdfHtml/pdfInHtml.html?pdfUrl=%1$s&#038;title=%2$s&#038;dataId=%3$s&#038;isShare=1</string>
+
 </resources>

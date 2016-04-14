@@ -11,15 +11,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.jackyonline.refreshdemo.RefreshLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseActivity;
+import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.base.XhyApplication;
 import cn.incongress.xhy_guke.bean.CommentListBean;
 import cn.incongress.xhy_guke.bean.VVTalkDetailBean;
@@ -57,8 +64,8 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
     public static final int WHERE_STATE_DYNAMIC = 2;
     public static final int WHERE_STATE_MY_PUBLISH = 3;
 
-    private int mCurrentType;//当前详情类型
-    private int mDataId;      //详情ID
+    private int mCurrentType = -1;//当前详情类型
+    private int mDataId = -1;      //详情ID
     private int mCurrentWhereState; //跳转来源
 
     private VVTalkDetailBean mDetailBean;
@@ -209,10 +216,31 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
             }
         });
 
+        /** 分享 **/
         mIvShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(mCurrentType != -1) {
+                    if(mCurrentType == DETAIL_TYPE_NEWS || mCurrentType == DETAIL_TYPE_CASE && mDetailBean!= null){
+                        sharePost(mDetailBean.getTitle(),mDetailBean.getContent(),mDetailBean.getHtmlUrl() +"?isShare=1");
 
+                    }else if(mCurrentType == DETAIL_TYPE_VIDEO ) {
+                        sharePost(mDetailBean.getTitle(), getString(R.string.share_video_content),getString(R.string.share_type_video_post,mDataId));
+
+                    }else if(mCurrentType == DETAIL_TYPE_POST){
+                        try {
+                            String content = URLDecoder.decode(mDetailBean.getContent(), Constants.ENCODDING_UTF8);
+                            sharePost(mDetailBean.getTitle(),content,getString(R.string.share_type_video_post,mDataId));
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                            ToastUtils.showShorToast(getString(R.string.decode_error), VVTalkDetailActivity.this);
+                        }
+
+                    }else if(mCurrentType == DETAIL_TYPE_ATTACH) {
+                        sharePost(mDetailBean.getTitle(),mDetailBean.getDataDescribe(),getString(R.string.share_type_attach, mDetailBean.getPdfDataUrl(), mDetailBean.getTitle(), mDataId));
+
+                    }
+                }
             }
         });
     }

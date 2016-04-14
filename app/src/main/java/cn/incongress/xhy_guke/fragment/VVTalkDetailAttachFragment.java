@@ -3,37 +3,36 @@ package cn.incongress.xhy_guke.fragment;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.DownloadListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.squareup.picasso.OkHttpDownloader;
+import com.daimajia.numberprogressbar.NumberProgressBar;
+import com.goyourfly.gdownloader.DownloadModule;
+import com.goyourfly.gdownloader.helper.DownloadHelper;
+import com.goyourfly.gdownloader.name_generator.HashCodeNameGenerator;
+import com.goyourfly.gdownloader.name_generator.NameGenerator;
 import com.squareup.picasso.Picasso;
-import com.zhy.http.okhttp.OkHttpUtils;
-
-import java.io.File;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.uis.CircleImageView;
 import cn.incongress.xhy_guke.utils.StringUtils;
-import cn.incongress.xhy_guke.utils.ToastUtils;
-import okhttp3.OkHttpClient;
 
 /**
  * Created by Jacky on 2016/4/6.
  */
-public class VVTalkDetailAttachFragment extends BaseFragment {
+public class VVTalkDetailAttachFragment extends BaseFragment implements DownloadHelper.DownloadListener, NameGenerator{
     private CircleImageView mCivUserIcon;
     private TextView mTvUserName,mTvUserHospital,mTvTitle,mTvShowTime,mTvReadCount,
             mTvPdfName,mTvPdfSize,mTvDownload,mTvAttachIntro;
+    private NumberProgressBar mPbDownload;
 
     private String mUserIconUrl, mUserName, mUserHospital, mTitle, mShowTime, mReadCount,mPdfName, mPdfSize, mDownloadUrl, mAttachIntro;
+
+    private String mDownloadPath = Environment.getExternalStorageDirectory().getPath() + "/DownloadTest/";
 
     //文件类型
     private int mDataType = Constants.DATA_TYPE_PDF;
@@ -113,12 +112,13 @@ public class VVTalkDetailAttachFragment extends BaseFragment {
         mTvPdfSize = (TextView) view.findViewById(R.id.tv_pdf_size);
         mTvAttachIntro = (TextView) view.findViewById(R.id.tv_attach_intro);
         mTvDownload = (TextView) view.findViewById(R.id.tv_click_download);
+        mPbDownload = (NumberProgressBar) view.findViewById(R.id.pb_download);
 
         initData();
     }
 
     @Override
-    public void initData() {
+        public void initData() {
         super.initData();
 
         if(StringUtils.isNotEmpty(mUserIconUrl)) {
@@ -130,16 +130,21 @@ public class VVTalkDetailAttachFragment extends BaseFragment {
         mTvTitle.setText(mTitle);
         mTvShowTime.setText(mShowTime);
         mTvReadCount.setText(getString(R.string.vvtalk_read_count, mReadCount));
-        mTvPdfName.setText(getPdfName(mPdfName,mDataType));
+        mTvPdfName.setText(getPdfName(mPdfName, mDataType));
         mTvPdfSize.setText(mPdfSize);
         mTvAttachIntro.setText(mAttachIntro);
 
         mTvDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showShorToast("click to download", getActivity());
+                DownloadModule.getInstance().download(mDownloadUrl);
             }
         });
+
+        //init download module
+        DownloadModule.init(getActivity(), mDownloadPath, Constants.MAX_TASK, VVTalkDetailAttachFragment.this);
+        //register the download listener
+        DownloadModule.getInstance().registerListener(this);
 
         dismissProgressDialog();
     }
@@ -152,5 +157,81 @@ public class VVTalkDetailAttachFragment extends BaseFragment {
         }else {
             return pdfName + ".ppt";
         }
+    }
+
+    @Override
+    public void onPreStart(String url) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mTvDownload.setVisibility(View.GONE);
+                mPbDownload.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    @Override
+    public void onStart(String url, long totalLength, long localLength) {
+
+    }
+
+    @Override
+    public void onProgress(String url, final long totalLength, final long downloadedBytes) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                int progress = (int) (((float) downloadedBytes / (float) totalLength) * 100);
+                mPbDownload.setProgress(progress);
+            }
+        });
+    }
+
+    @Override
+    public void onPause(String url) {
+
+    }
+
+    @Override
+    public void onWaiting(String url) {
+
+    }
+
+    @Override
+    public void onCancel(String url) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mPbDownload.setProgress(0);
+            }
+        });
+
+    }
+
+    @Override
+    public void onFinish(String url) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mPbDownload.setProgress(0);
+                mPbDownload.setVisibility(View.GONE);
+                mTvDownload.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    @Override
+    public void onError(String url, String err) {
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        DownloadModule.getInstance().unRegisterListener();
+    }
+
+    @Override
+    public String getName(String url) {
+        return mPdfName + ".pdf";
     }
 }

@@ -1,10 +1,19 @@
 package cn.incongress.xhy_guke.base;
 
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+
+import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.utils.ToastUtils;
 
 /**
  * Created by Jacky Chen on 2016/3/24 0024.
@@ -16,6 +25,31 @@ public class BaseActivity extends AppCompatActivity {
     protected ImageView mIvLeftIcon,mIvRightIcon;
 
     protected TextView mTvTitle;
+
+    /** 友盟分享监听 **/
+    protected UMShareListener mUmengShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA share_media) {
+            ToastUtils.showShorToast(getString(R.string.share_success), BaseActivity.this);
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+            ToastUtils.showShorToast(getString(R.string.share_fail), BaseActivity.this);
+
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media) {
+            ToastUtils.showShorToast(getString(R.string.share_cancel), BaseActivity.this);
+
+        }
+    };
+    /** 分享的渠道 **/
+    protected final SHARE_MEDIA[] mShareList = new SHARE_MEDIA[]
+    {
+            SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE
+    };
 
     /**
      *
@@ -65,4 +99,21 @@ public class BaseActivity extends AppCompatActivity {
         return (T) findViewById(id);
     }
 
+    /**
+     * 分享文章
+     * @param shareTitle 标题
+     * @param shareContent 内容
+     * @param shareUrl 跳转地址
+     */
+    protected void sharePost(String shareTitle, String shareContent, String shareUrl) {
+        UMImage image = new UMImage(BaseActivity.this, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+
+        new ShareAction(BaseActivity.this).setDisplayList(mShareList)
+                .withText(shareContent )
+                .withTitle(shareTitle)
+                .withTargetUrl(shareUrl)
+                .withMedia(image )
+                .setListenerList(mUmengShareListener)
+                .open();
+    }
 }
