@@ -19,6 +19,7 @@
     <string name="share_success">分享成功</string>
     <string name="share_fail">分享失败</string>
     <string name="share_cancel">分享取消</string>
+    <string name="fail_reason">失败原因:%1$s</string>
 
     <!-- V言V语 列表页 -->
     <string name="vvtalk_read_count">%1$s人查看</string>
@@ -94,8 +95,10 @@
     <string name="post_post_vv_talk">发布V言V语</string>
     <string name="post_post_by_nickname">昵称发布</string>
     <string name="post_academics_title">学术发布&#038;资源共享</string>
-    <string name="post_academics_content">如需发布学术资源请登录管理后台进行编辑发布哦，如忘记密码请登录注册号，点击忘记密码可邮箱获取密码，即可发布到您的最新学术资源</string>
+    <string name="post_academics_content">如需发布学术资源请登录管理后台进行编辑发布哦，\n如忘记密码请登录注册号，点击忘记密码可邮箱获取密码，即可发布到您的最新学术资源</string>
     <string name="post_edit_hint">输入内容</string>
+    <string name="post_photo_more_than_max">仅可以选择9张图片哦</string>
+    <string name="post_content_empty">内容为空哦</string>
 
     <!-- 我发布的V言V语 -->
     <string name="mypublish_read_count">阅读 %1$s</string>

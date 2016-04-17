@@ -51,4 +51,5 @@ dependencies {
     compile project(':library_common')
     compile project(':library_segment_group')
     compile project(':library_number_progress')
+    compile project(':library_galleryfinal')
 }

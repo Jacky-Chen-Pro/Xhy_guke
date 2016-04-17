@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center"
     android:layout_height="match_parent">
 
-    <TextView style="@style/fill_fill" android:gravity="center" android:text="学术"/>
+    <TextView style="@style/fill_wrap"
+        android:text="@string/post_academics_title"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large"
+        android:padding="@dimen/layout_padding"
+        />
+
+    <TextView style="@style/fill_wrap"
+        android:textSize="@dimen/text_size_small"
+        android:text="@string/post_academics_content"
+        android:padding="@dimen/layout_padding"
+        android:gravity="center"
+        />
+
+    <LinearLayout style="@style/fill_wrap" android:orientation="horizontal">
+
+    </LinearLayout>
 
 </LinearLayout>

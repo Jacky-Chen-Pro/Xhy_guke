@@ -27,5 +27,7 @@ public class Constants {
 
     /** 最大下载数量 **/
     public static final int MAX_TASK = 5;
+    /** 最多可以选择的图片数量 **/
+    public static final int MAX_CHOOSE_PHOTO = 9;
 
 }

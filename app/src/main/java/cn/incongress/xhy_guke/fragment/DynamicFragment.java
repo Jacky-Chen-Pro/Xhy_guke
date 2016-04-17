@@ -106,41 +106,12 @@ public class DynamicFragment extends BaseFragment implements RefreshLayout.OnRef
     public void initData() {
         super.initData();
 
-        mAdapter.setGoToBrowerModeListener(new DynamicsAdapter.GoToBrowserModeListener() {
-            @Override
-            public void doGoBrower(View view, String urlPath) {
-                PhotoView p = (PhotoView) view;
-                mInfo = p.getInfo();
-
-                Picasso.with(getActivity()).load(urlPath).into(mPhotoView);
-
-                mBg.startAnimation(in);
-                mParent.setVisibility(View.VISIBLE);
-                mPhotoView.animaFrom(mInfo);
-            }
-        });
-
-        mPhotoView.enable();
-        mPhotoView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBg.startAnimation(out);
-                mPhotoView.animaTo(mInfo, new Runnable() {
-                    @Override
-                    public void run() {
-                        mParent.setVisibility(View.GONE);
-                    }
-                });
-            }
-        });
-
         mAdapter.setOnItemClickListener(new DynamicsAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, DynamicListBean dynamicListBean) {
                 VVTalkDetailActivity.startVVTalkDetailActivity(getActivity(), dynamicListBean.getType(), dynamicListBean.getDataId(), VVTalkDetailActivity.WHERE_STATE_DYNAMIC);
             }
         });
-
 
         mRefresh.setOnRefreshListener(this);
         mRefresh.setOnLoadMoreListener(this);

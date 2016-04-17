@@ -58,6 +58,7 @@ public class MsgStationActivity extends BaseActivity {
 
         mPageAdapter = new MsgStationAdapter(getSupportFragmentManager(),mFragments,mTitleList);
         mViewpager.setAdapter(mPageAdapter);
+        mViewpager.setOffscreenPageLimit(3);
         mTabLayout.setupWithViewPager(mViewpager);
     }
 

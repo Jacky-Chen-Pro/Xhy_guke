@@ -4,6 +4,8 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -381,5 +383,41 @@ public class XhyApiClient {
         params.put("userId", userId);
 
         OkHttpUtils.post().url(HOST + "?getXhyShouCangs").params(params).build().execute(stringCallback);
+    }
+
+
+    /**
+     * 发帖 文字
+     *
+     * @param userId   用户Id
+     * @param content  文字内容
+     * @param isNicking 是否用昵称发布
+     */
+    public static void doCreatePost(String userId, String content,String  isNicking, StringCallback stringCallback) {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("userId", userId);
+        params.put("dataId", "-1");
+        params.put("content", content);
+        params.put("isNiming", isNicking);
+
+        OkHttpUtils.post().url(HOST + "?createPost").params(params).build().execute(stringCallback);
+    }
+
+    /**
+     * 发帖 图片
+     *
+     * @param userId   用户Id
+     * @param dataId  帖子Id
+     */
+    public static void doCreatePostImg(String userId, String dataId, File uploadImg,String fileName, StringCallback stringCallback) {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("userId", userId);
+        params.put("dataId", dataId);
+        params.put("project", PROJECT_NAME);
+        params.put("fileType", "jpg");
+
+        OkHttpUtils.post().url(HOST + "?createPostImg").
+                params(params).addFile("name",fileName, uploadImg).build().
+                execute(stringCallback);
     }
 }

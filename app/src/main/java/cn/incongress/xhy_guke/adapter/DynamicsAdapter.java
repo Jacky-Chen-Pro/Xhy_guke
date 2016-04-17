@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.activitys.ImageViewPagerActivity;
 import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.bean.DynamicListBean;
 import cn.incongress.xhy_guke.uis.CircleImageView;
@@ -33,7 +35,6 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private List<DynamicListBean> mDynamicListBeans;
     private LayoutInflater mLayoutInflater;
 
-    private GoToBrowserModeListener mBrowerModeListener;
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public DynamicsAdapter(Context context, List<DynamicListBean> beans) {
@@ -61,11 +62,11 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == VIEW_TYPE_NORMAL) {
-            //将数据保存在itemView的Tag中，以便点击时获取
-            holder.itemView.setTag(mDynamicListBeans.get(position));
-
             DynamicListBean data = mDynamicListBeans.get(position);
             int type = data.getType();
+
+            //将数据保存在itemView的Tag中，以便点击时获取
+            holder.itemView.setTag(data);
 
             //1新闻 2病例 3发帖 4课件 5视频
             //专家发帖
@@ -93,7 +94,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
 
                 if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getImgs())) {
-                    String[] imgs = data.getImgs().split(",");
+                    final String[] imgs = data.getImgs().split(",");
                     if (imgs.length == 1) {
                         Picasso.with(mContext).load(imgs[0]).into(((DynamicViewHolder) holder).ivOneImage);
                         ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.VISIBLE);
@@ -104,11 +105,23 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         ((DynamicViewHolder) holder).ngvTwoOrFour.setAdapter(new NoScrollGridViewAdapter(mContext, imgs));
                         ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.VISIBLE);
                         ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
+                        ((DynamicViewHolder) holder).ngvTwoOrFour.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                ImageViewPagerActivity.startImageViewPagerActivity(mContext, imgs, position);
+                            }
+                        });
                     } else {
                         ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.GONE);
                         ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
                         ((DynamicViewHolder) holder).ngvOther.setAdapter(new NoScrollGridViewAdapter(mContext, imgs));
                         ((DynamicViewHolder) holder).ngvOther.setVisibility(View.VISIBLE);
+                        ((DynamicViewHolder) holder).ngvOther.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                ImageViewPagerActivity.startImageViewPagerActivity(mContext, imgs, position);
+                            }
+                        });
                     }
                 } else {
                     ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.GONE);
@@ -200,26 +213,11 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    /**
-     * 进入大图游览模式
-     */
-    public interface GoToBrowserModeListener {
-        void doGoBrower(View view, String urlPath);
-    }
-
-    /**
-     * 设置进入放大模式的监听
-     *
-     * @param browerModeListener
-     */
-    public void setGoToBrowerModeListener(GoToBrowserModeListener browerModeListener) {
-        this.mBrowerModeListener = browerModeListener;
-    }
 
     /**
      * 监听接口
      */
-    public static interface OnRecyclerViewItemClickListener {
+    public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, DynamicListBean dynamicListBean);
     }
 

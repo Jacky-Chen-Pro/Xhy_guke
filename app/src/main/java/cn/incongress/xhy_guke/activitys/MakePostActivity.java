@@ -53,8 +53,10 @@ public class MakePostActivity extends BaseActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(checkedId == R.id.rb_vv) {
                     mViewpager.setCurrentItem(0);
+                    mTvPublish.setVisibility(View.VISIBLE);
                 }else {
                     mViewpager.setCurrentItem(1);
+                    mTvPublish.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -90,8 +92,7 @@ public class MakePostActivity extends BaseActivity {
         mTvPublish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //调用vvfragment中的发布方法
-                ToastUtils.showShorToast("发布", MakePostActivity.this);
+                ((MakePostVVFragment)mFragmetns.get(0)).createPost();
             }
         });
     }

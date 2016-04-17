@@ -1,1 +1,1 @@
-include ':library_segment_group', ':app', ':library_common', ':library_multiListView', ':library_refreshlayout', ':library_number_progress'
+include ':library_segment_group', ':app', ':library_common', ':library_multiListView', ':library_refreshlayout', ':library_number_progress', ':library_galleryfinal'

@@ -9,11 +9,13 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.ListBaseAdapter;
+import cn.incongress.xhy_guke.utils.StringUtils;
 
 /**
  * Created by Jacky on 2016/4/5.
