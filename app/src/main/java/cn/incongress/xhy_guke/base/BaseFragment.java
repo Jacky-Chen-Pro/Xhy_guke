@@ -17,6 +17,7 @@ public class BaseFragment extends Fragment implements BaseFragmentInterface{
     @Override
     public void initView(View view) {
         mProgressDialog = ProgressDialog.show(getActivity(),null, getString(R.string.loading));
+        mProgressDialog.setCanceledOnTouchOutside(true);
     }
     @Override
     public void initData() {

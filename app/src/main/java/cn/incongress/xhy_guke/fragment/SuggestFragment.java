@@ -70,13 +70,14 @@ public class SuggestFragment extends BaseFragment implements RefreshLayout.OnRef
         if(getData() == XhyGo.INTERNET_ERROR && mProgressDialog != null && mProgressDialog.isShowing()) {
             dismissProgressDialog();
         }
+
+        initData();
     }
 
     @Override
     public void initData() {
         super.initData();
         mRefreshLayout.setOnRefreshListener(this);
-        getData();
     }
 
     private int getData() {
