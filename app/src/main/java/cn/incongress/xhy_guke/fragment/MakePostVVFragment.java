@@ -1,6 +1,7 @@
 package cn.incongress.xhy_guke.fragment;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,7 +25,11 @@ import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -44,23 +49,26 @@ import cn.incongress.xhy_guke.uis.FullyGridLayoutManager;
 import cn.incongress.xhy_guke.uis.NoScrollGridView;
 import cn.incongress.xhy_guke.utils.KeyBoardUtils;
 import cn.incongress.xhy_guke.utils.LogUtils;
+import cn.incongress.xhy_guke.utils.PicUtils;
 import cn.incongress.xhy_guke.utils.PicassoImageLoader;
 import cn.incongress.xhy_guke.utils.StringUtils;
 import cn.incongress.xhy_guke.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * Created by Jacky on 2016/4/12.
  * 发布V说界面
  */
-public class MakePostVVFragment extends BaseFragment implements View.OnClickListener, GalleryFinal.OnHanlderResultCallback{
+public class MakePostVVFragment extends BaseFragment implements View.OnClickListener, GalleryFinal.OnHanlderResultCallback {
     private AppCompatCheckBox mCheckbox;
-    private ImageView mIvCloseKeyboard,mIvAlbum,mIvTakePhoto;
+    private ImageView mIvCloseKeyboard, mIvAlbum, mIvTakePhoto;
     private RecyclerView mRcvUploadPhotos;
     private NoScrollGridViewLocalPathAdapter mGridAdapter;
     private EditText mEtPost;
 
-    private boolean mIsNickName = false;//是否昵称发布
+    private String mIsNickName = "0";//是否昵称发布 0非昵称发布，1昵称发布
+    private String mDataId = "-1";//发帖一开始传-1,先发图片，后发文字
     private ArrayList<String> mPhotosPath = new ArrayList<>();
 
     private final int REQUEST_CODE_CAMERA = 1000;
@@ -90,21 +98,25 @@ public class MakePostVVFragment extends BaseFragment implements View.OnClickList
         mEtPost = (EditText) view.findViewById(R.id.et_post);
 
         mRcvUploadPhotos.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        mGridAdapter = new NoScrollGridViewLocalPathAdapter(getActivity(),mPhotosPath);
+        mGridAdapter = new NoScrollGridViewLocalPathAdapter(getActivity(), mPhotosPath);
         mRcvUploadPhotos.setAdapter(mGridAdapter);
         mRcvUploadPhotos.setItemAnimator(new DefaultItemAnimator());
 
         mCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mIsNickName = isChecked;
+                if(isChecked) {
+                    mIsNickName = "1";
+                }else {
+                    mIsNickName = "0";
+                }
             }
         });
 
         mGridAdapter.setDeleteClickListener(new NoScrollGridViewLocalPathAdapter.OnDeleteClickListener() {
             @Override
             public void onDeleteClick(View view, String path) {
-                mGridAdapter.removeData(Integer.parseInt((String)view.getTag()));
+                mGridAdapter.removeData(Integer.parseInt((String) view.getTag()));
             }
         });
 
@@ -127,34 +139,34 @@ public class MakePostVVFragment extends BaseFragment implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_album:
-                if(mPhotosPath.size() < 9) {
-                    FunctionConfig config = new FunctionConfig.Builder().setMutiSelectMaxSize(9-mPhotosPath.size()).setFilter(mPhotosPath).build();
+                if (mPhotosPath.size() < 9) {
+                    FunctionConfig config = new FunctionConfig.Builder().setMutiSelectMaxSize(9 - mPhotosPath.size()).setFilter(mPhotosPath).build();
                     GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY, config, MakePostVVFragment.this);
-                }else {
+                } else {
                     ToastUtils.showShorToast(getString(R.string.post_photo_more_than_max), getActivity());
                 }
                 break;
             case R.id.iv_take_photo:
-                if(mPhotosPath.size() < 9) {
+                if (mPhotosPath.size() < 9) {
                     GalleryFinal.openCamera(REQUEST_CODE_CAMERA, MakePostVVFragment.this);
-                }else {
+                } else {
                     ToastUtils.showShorToast(getString(R.string.post_photo_more_than_max), getActivity());
                 }
                 break;
             case R.id.iv_close_keyboard:
-                KeyBoardUtils.closeKeybord(mEtPost,getActivity());
+                KeyBoardUtils.closeKeybord(mEtPost, getActivity());
                 break;
         }
     }
 
     @Override
     public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-        if(reqeustCode == REQUEST_CODE_GALLERY) {
-            for(int i=0; i<resultList.size(); i++) {
+        if (reqeustCode == REQUEST_CODE_GALLERY) {
+            for (int i = 0; i < resultList.size(); i++) {
                 mPhotosPath.add(resultList.get(i).getPhotoPath());
             }
             mGridAdapter.notifyDataSetChanged();
-        }else if(reqeustCode == REQUEST_CODE_CAMERA) {
+        } else if (reqeustCode == REQUEST_CODE_CAMERA) {
             mPhotosPath.add(resultList.get(0).getPhotoPath());
             mGridAdapter.notifyDataSetChanged();
         }
@@ -166,37 +178,109 @@ public class MakePostVVFragment extends BaseFragment implements View.OnClickList
     }
 
     /**
-     * 发帖
+     * 发帖文字
      */
-    public void createPost() {
-        String content = mEtPost.getText().toString().trim();
-        if(StringUtils.isEmpty(content)){
-            ToastUtils.showShorToast(getString(R.string.post_content_empty), getActivity());
-        }else{
+    public void createPost(String content) {
+        try {
+            content = URLEncoder.encode(content, Constants.ENCODDING_UTF8);
+            XhyGo.goCreatePost(getActivity(), XhyApplication.userId, content, mDataId, mIsNickName, new StringCallback() {
+
+                @Override
+                public void onBefore(Request request) {
+                    super.onBefore(request);
+                }
+
+                @Override
+                public void onError(Call call, Exception e) {
+                }
+
+                @Override
+                public void onAfter() {
+                    super.onAfter();
+                    mDataId = "-1";
+                    dismissProgressDialog();
+                    ToastUtils.showShorToast(getString(R.string.post_success), getActivity());
+                    getActivity().finish();
+                }
+
+                @Override
+                public void onResponse(String response) {
+                    LogUtils.println("createPost:" + response);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtils.showShorToast(getString(R.string.decode_error), getActivity());
+        }
+    }
+
+    public int mUploadImgPosition = 0;
+
+    //发图片
+    public void createPostImag() {
+        if (mPhotosPath.size() > 0) {
+            //图片进行压缩
+            String filePhth = "";
             try {
-                content = URLEncoder.encode(content, Constants.ENCODDING_UTF8);
-
-                XhyGo.goCreatePost(getActivity(), XhyApplication.userId, content, "1", new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                    }
-
-                    @Override
-                    public void onAfter() {
-                        super.onAfter();
-                        getActivity().finish();
-                    }
-
-                    @Override
-                    public void onResponse(String response) {
-                        LogUtils.println("createPost:"+response);
-                    }
-                });
-            } catch (UnsupportedEncodingException e) {
+                filePhth = PicUtils.saveFile(PicUtils.getSmallBitmap(mPhotosPath.get(mUploadImgPosition)));
+            } catch (IOException e) {
                 e.printStackTrace();
-                ToastUtils.showShorToast(getString(R.string.decode_error), getActivity());
             }
+            XhyGo.goCreatePostImg(getActivity(), XhyApplication.userId, mDataId, new File(filePhth), mPhotosPath.get(mUploadImgPosition), mIsNickName, new StringCallback() {
+                @Override
+                public void onBefore(Request request) {
+                    super.onBefore(request);
+                    showProgressDialog();
+                }
 
+                @Override
+                public void onAfter() {
+                    super.onAfter();
+                    if (mPhotosPath.size() - 1 == mUploadImgPosition) {
+                        mUploadImgPosition = 0;
+                        //判断是否有问题，有文字则继续发送文字
+                        String content = mEtPost.getText().toString().trim();
+                        if (StringUtils.isEmpty(content)) {
+                            mDataId = "-1";
+                            dismissProgressDialog();
+                            ToastUtils.showShorToast(getString(R.string.post_success), getActivity());
+                            getActivity().finish();
+                        } else {
+                            //发送文字
+                            createPost(content);
+                        }
+                    } else {
+                        mUploadImgPosition++;
+                        createPostImag();
+                    }
+                }
+
+                @Override
+                public void onError(Call call, Exception e) {
+                }
+
+                @Override
+                public void onResponse(String response) {
+                    LogUtils.println("createPostImg:" + response);
+                    try {
+                        JSONObject obj = new JSONObject(response);
+                        int state = obj.getInt("state");
+                        if (state == 1) {
+                            mDataId = obj.getString("dataId");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }else {
+            //只发送文字
+            String content = mEtPost.getText().toString().trim();
+            if(StringUtils.isEmpty(content)) {
+                ToastUtils.showShorToast(getString(R.string.post_write_something), getActivity());
+            }else {
+                createPost(content);
+            }
         }
     }
 }

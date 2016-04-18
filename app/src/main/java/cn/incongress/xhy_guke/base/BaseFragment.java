@@ -28,4 +28,11 @@ public class BaseFragment extends Fragment implements BaseFragmentInterface{
             mProgressDialog.dismiss();
         }
     }
+
+    protected void showProgressDialog() {
+        if(mProgressDialog == null || !mProgressDialog.isShowing() ) {
+            mProgressDialog = ProgressDialog.show(getActivity(),null, getString(R.string.loading));
+            mProgressDialog.setCanceledOnTouchOutside(true);
+        }
+    }
 }

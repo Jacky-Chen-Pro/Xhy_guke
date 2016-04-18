@@ -96,7 +96,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getImgs())) {
                     final String[] imgs = data.getImgs().split(",");
                     if (imgs.length == 1) {
-                        Picasso.with(mContext).load(imgs[0]).into(((DynamicViewHolder) holder).ivOneImage);
+                        Picasso.with(mContext).load(imgs[0]).resize(400,400).into(((DynamicViewHolder) holder).ivOneImage);
                         ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.VISIBLE);
                         ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
                         ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);

@@ -19,6 +19,7 @@ import cn.incongress.xhy_guke.base.Constants;
 public class XhyApiClient {
     /** 测试服地址 **/
     private static final String HOST = "http://114.80.201.49/XhyApiV2.do";
+    private static final String HOST_OLD = "http://114.80.201.49/XhyApi.do";
     private static final String PROJECT_NAME = "lnyx";
 
     /**
@@ -393,14 +394,15 @@ public class XhyApiClient {
      * @param content  文字内容
      * @param isNicking 是否用昵称发布
      */
-    public static void doCreatePost(String userId, String content,String  isNicking, StringCallback stringCallback) {
+    public static void doCreatePost(String userId, String content,String dataId,String  isNicking, StringCallback stringCallback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("userId", userId);
-        params.put("dataId", "-1");
+        params.put("dataId", dataId);
         params.put("content", content);
+        params.put("project", PROJECT_NAME);
         params.put("isNiming", isNicking);
 
-        OkHttpUtils.post().url(HOST + "?createPost").params(params).build().execute(stringCallback);
+        OkHttpUtils.post().url(HOST_OLD + "?createPost").params(params).build().execute(stringCallback);
     }
 
     /**
@@ -408,16 +410,22 @@ public class XhyApiClient {
      *
      * @param userId   用户Id
      * @param dataId  帖子Id
+     *
+    *   params.addBodyParameter("img", new File(filePath.trim()));
+        params.addBodyParameter("userId", XhyApplication.getUserId() + "");
+        params.addBodyParameter("dataId", dataId + "");
+        params.addBodyParameter("project", Constant.PROJECT_NAME);
+        params.addBodyParameter("isNiming",mIsNicking + "");
      */
-    public static void doCreatePostImg(String userId, String dataId, File uploadImg,String fileName, StringCallback stringCallback) {
+    public static void doCreatePostImg(String userId, String dataId, File uploadImg,String fileName, String isNiming, StringCallback stringCallback) {
         Map<String, String> params = new HashMap<String, String>();
+
         params.put("userId", userId);
         params.put("dataId", dataId);
+        params.put("isNiming", isNiming);
         params.put("project", PROJECT_NAME);
-        params.put("fileType", "jpg");
 
-        OkHttpUtils.post().url(HOST + "?createPostImg").
-                params(params).addFile("name",fileName, uploadImg).build().
+        OkHttpUtils.post().url(HOST_OLD + "?createPostImg").params(params).addFile("img",fileName, uploadImg).build().
                 execute(stringCallback);
     }
 }

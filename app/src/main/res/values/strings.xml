@@ -99,6 +99,9 @@
     <string name="post_edit_hint">输入内容</string>
     <string name="post_photo_more_than_max">仅可以选择9张图片哦</string>
     <string name="post_content_empty">内容为空哦</string>
+    <string name="post_success">发布成功</string>
+    <string name="post_fail">发送失败</string>
+    <string name="post_write_something">文字和图片不能都不填写哦</string>
 
     <!-- 我发布的V言V语 -->
     <string name="mypublish_read_count">阅读 %1$s</string>

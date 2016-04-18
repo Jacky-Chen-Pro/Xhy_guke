@@ -114,7 +114,7 @@ public class VVTalkAdapter extends ListBaseAdapter<VVTalkBean> {
         if(StringUtils.isNotEmpty(data.getIsImg()) && StringUtils.isNotEmpty(data.getBgImg())) {
             holder.ivBg.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(mContext,200)));
             holder.rlContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,DensityUtil.dip2px(mContext,200)));
-            Picasso.with(mContext).load(data.getBgImg()).placeholder(R.mipmap.item_background_professor_default).error(R.mipmap.item_background_professor_default).into(holder.ivBg);
+            Picasso.with(mContext).load(data.getBgImg()).resize(400,400).placeholder(R.mipmap.item_background_professor_default).error(R.mipmap.item_background_professor_default).into(holder.ivBg);
         }else {
             holder.ivBg.setImageResource(R.mipmap.item_background_professor_default);
             if(getItemViewType(position) == VIEW_TYPE_NORMAL) {
@@ -149,7 +149,6 @@ public class VVTalkAdapter extends ListBaseAdapter<VVTalkBean> {
         }
 
         //主任或者专家的区分
-
 
         holder.tvLookNums.setText(mContext.getString(R.string.vvtalk_read_count, data.getReadCount()));
         holder.tvPublishTime.setText(data.getShowTime());

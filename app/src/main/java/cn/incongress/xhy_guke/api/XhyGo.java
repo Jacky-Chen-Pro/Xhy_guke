@@ -423,13 +423,13 @@ public class XhyGo {
     }
 
 
-    public static final int goCreatePost(Context context, String userId, String content,String  isNicking, StringCallback stringCallback) {
+    public static final int goCreatePost(Context context, String userId, String content, String dataId,String  isNicking, StringCallback stringCallback) {
         //先检查是否有网络
         if (NetWorkUtils.isNetworkConnected(context)) {
             //再检查字段是否格式正确
             if (StringUtils.isNotEmpty(userId)) {
                 //最后发送请求
-                XhyApiClient.doCreatePost(userId, content, isNicking, stringCallback);
+                XhyApiClient.doCreatePost(userId, content, dataId, isNicking, stringCallback);
                 return SUCCESS;
             } else {
                 ToastUtils.showShorToast(context.getString(R.string.comment_empty), context);
@@ -441,13 +441,13 @@ public class XhyGo {
         }
     }
 
-    public static final int goCreatePostImg(Context context, String userId, String dataId, File uploadImg,String fileName, StringCallback stringCallback) {
+    public static final int goCreatePostImg(Context context, String userId, String dataId, File uploadImg,String fileName,String isNiming, StringCallback stringCallback) {
         //先检查是否有网络
         if (NetWorkUtils.isNetworkConnected(context)) {
             //再检查字段是否格式正确
             if (StringUtils.isNotEmpty(userId)) {
                 //最后发送请求
-                XhyApiClient.doCreatePostImg(userId, dataId,uploadImg,fileName, stringCallback);
+                XhyApiClient.doCreatePostImg(userId, dataId,uploadImg,fileName, isNiming, stringCallback);
                 return SUCCESS;
             } else {
                 ToastUtils.showShorToast(context.getString(R.string.comment_empty), context);

@@ -92,7 +92,7 @@ public class MakePostActivity extends BaseActivity {
         mTvPublish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MakePostVVFragment)mFragmetns.get(0)).createPost();
+                ((MakePostVVFragment)mFragmetns.get(0)).createPostImag();
             }
         });
     }
