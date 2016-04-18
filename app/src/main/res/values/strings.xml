@@ -20,7 +20,7 @@
     <string name="share_fail">分享失败</string>
     <string name="share_cancel">分享取消</string>
     <string name="fail_reason">失败原因:%1$s</string>
-
+    <string name="text_long_for_test">个人简介：詹庆元。男。内科学博士。主任医师，教授，博士生导师,现任中日医院呼吸与危重症医学科副主任主持工作个人简介：詹庆元。男。内科学博士。主任医师，教授，博士生导师,现任中日医院呼吸与危重症医学科副主任主持工作个人简介：詹庆元。男。内科学博士。主任医师，教授，博士生导师,现任中日医院呼吸与危重症医学科副主任主持工作</string>
     <!-- V言V语 列表页 -->
     <string name="vvtalk_read_count">%1$s人查看</string>
 
@@ -110,6 +110,9 @@
     <string name="mypublish_no_data">您还未发布任何的V言V语哦</string>
     <string name="mypublish_time">%1$s发布</string>
     <string name="mypublish_no_more_data">没有更多的发布数据了</string>
+
+    <!-- TA的主页 -->
+    <string name="homepage_title">TA的主页</string>
 
     <!-- 分享地址 -->
     <string name="share_video_content">视频分享</string>

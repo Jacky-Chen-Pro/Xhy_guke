@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:background="@color/white"
+    android:padding="6dp">
 
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="80dp"
+        android:src="@mipmap/default_load_bg"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:layout_marginLeft="6dp"
+        android:layout_toRightOf="@id/iv_pic"
         android:orientation="horizontal">
 
 
@@ -17,8 +27,8 @@
             android:layout_height="match_parent"
             android:layout_weight="8"
             android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="6dp">
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
@@ -37,36 +47,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_margin"
+                android:gravity=""
                 android:orientation="horizontal">
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/tv_publish_time"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mypublish_time"/>
+                    android:text="1分钟前发布"
+                    android:textSize="@dimen/text_size_small"
+                    android:id="@+id/tv_show_time"
+                    style="@style/wrap_wrap" />
 
                 <TextView
                     android:id="@+id/tv_read_count"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
                     android:layout_height="wrap_content"
                     android:text="@string/mypublish_read_count"
                     android:textSize="@dimen/text_size_small" />
 
-                <TextView
-                    android:id="@+id/tv_comment_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_margin"
-                    android:text="@string/mypublish_comment_count"
-                    android:textSize="@dimen/text_size_small" />
-
-                <TextView
-                    android:id="@+id/tv_praise_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_margin"
-                    android:text="@string/mypublish_praise_count"
-                    android:textSize="@dimen/text_size_small" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -96,8 +96,7 @@
                 android:value=".activitys.HomeActivity" />
         </activity>
 
-
-
+        <activity android:name=".activitys.HisHomePageActivity" />
 
         <activity android:name=".activitys.MyPublishPostActivity"
             android:windowSoftInputMode="stateAlwaysHidden"

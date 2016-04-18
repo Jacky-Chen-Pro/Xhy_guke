@@ -46,6 +46,7 @@ dependencies {
     compile 'com.linsea:universalvideoview:1.1.0@aar'
     compile 'com.goyourfly:GDownloader:1.1.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.ms-square:expandableTextView:0.1.4'
     compile project(':library_refreshlayout')
     compile project(':library_multiListView')
     compile project(':library_common')

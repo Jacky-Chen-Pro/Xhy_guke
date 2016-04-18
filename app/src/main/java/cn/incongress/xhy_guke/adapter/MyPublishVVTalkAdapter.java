@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
-import cn.incongress.xhy_guke.bean.DynamicListBean;
+import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.bean.MyVVTalkBean;
 
 /**
@@ -51,8 +53,14 @@ public class MyPublishVVTalkAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (getItemViewType(position) == VIEW_TYPE_NORMAL) {
             MyVVTalkBean.DataListBean dataListBean = mMyTalkBeans.get(position);
             holder.itemView.setTag(dataListBean);
-
-            ((ViewHolder) holder).mTvTitleWithTime.setText(dataListBean.getTitle());
+            String title = "";
+            try {
+                title = URLDecoder.decode(dataListBean.getTitle(), Constants.ENCODDING_UTF8);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                title = "";
+            }
+            ((ViewHolder) holder).mTvTitleWithTime.setText(title);
             ((ViewHolder) holder).mTvReadCount.setText(mContext.getString(R.string.mypublish_read_count, dataListBean.getReadCount()));
             ((ViewHolder) holder).mTvCommentCount.setText(mContext.getString(R.string.mypublish_comment_count, dataListBean.getCommentCount()));
             ((ViewHolder) holder).mTvPraiseCount.setText(mContext.getString(R.string.mypublish_praise_count, dataListBean.getLaudCount()));
@@ -94,7 +102,7 @@ public class MyPublishVVTalkAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         public ViewHolder(View itemView) {
             super(itemView);
             this.ivBg = (ImageView) itemView.findViewById(R.id.iv_bg);
-            this.mTvTitleWithTime = (TextView) itemView.findViewById(R.id.tv_title_with_time);
+            this.mTvTitleWithTime = (TextView) itemView.findViewById(R.id.tv_title);
             this.mTvReadCount = (TextView) itemView.findViewById(R.id.tv_read_count);
             this.mTvCommentCount = (TextView) itemView.findViewById(R.id.tv_comment_count);
             this.mTvPraiseCount = (TextView) itemView.findViewById(R.id.tv_praise_count);

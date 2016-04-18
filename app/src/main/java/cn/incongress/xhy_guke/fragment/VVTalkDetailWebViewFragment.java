@@ -17,6 +17,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.activitys.HisHomePageActivity;
 import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.uis.ProgressWebView;
 import cn.incongress.xhy_guke.utils.ToastUtils;
@@ -145,7 +146,7 @@ public class VVTalkDetailWebViewFragment extends BaseFragment {
                     @JavascriptInterface
                     @SuppressLint("JavascriptInterface")
                     public void goAuthorCenter() {
-                        ToastUtils.showShorToast("goAuthorCenter", getActivity());
+                        HisHomePageActivity.startHisHomePageActivity(getActivity());
                     }
                 }, "androidJS");
 

@@ -36,5 +36,8 @@
 
     <!--发布-->
     <color name="edit_background">#E9E9EB</color>
-    <color name="edit_hint_color">#C6C6C6</color>
+    <color name="edit_hint_color">@color/gray</color>
+
+    <!--TA的主页-->
+    <color name="homepage_background">#85B5F7</color>
 </resources>

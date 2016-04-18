@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/homepage_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/fill_wrap"
+        android:orientation="horizontal"
+        android:padding="@dimen/layout_padding">
+
+        <cn.incongress.xhy_guke.uis.CircleImageView
+            android:layout_width="56dp"
+            android:id="@+id/civ_user_icon"
+            android:layout_height="56dp"
+            android:src="@mipmap/item_vvtalk_professor_head_default" />
+
+        <LinearLayout
+            style="@style/wrap_wrap"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/layout_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                style="@style/wrap_wrap"
+                android:text="詹庆元"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_media" />
+
+            <TextView
+                android:id="@+id/tv_user_hospital"
+                style="@style/wrap_wrap"
+                android:text="北京协和医院"
+                android:textColor="@color/theme_blue"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:id="@+id/tv_focus_count"
+                style="@style/wrap_wrap"
+                android:text="4626人关注"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_small" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_add_follow"
+                android:src="@mipmap/follow_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/h_line"/>
+
+    <LinearLayout style="@style/fill_wrap" android:orientation="horizontal" android:padding="@dimen/layout_padding">
+        <cn.incongress.xhy_guke.uis.ExpandableTextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/expand_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            expandableTextView:maxCollapsedLines="2"
+            expandableTextView:animDuration="500">
+            <TextView
+                android:id="@id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/theme_blue" />
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:background="@android:color/transparent"/>
+
+        </cn.incongress.xhy_guke.uis.ExpandableTextView>
+    </LinearLayout>
+</LinearLayout>
