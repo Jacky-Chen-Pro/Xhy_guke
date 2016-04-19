@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.yqritc.recyclerviewflexibledivider.FlexibleDividerDecoration;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -22,7 +22,6 @@ import cn.incongress.xhy_guke.bean.SuggestBean;
 import cn.incongress.xhy_guke.uis.CircleImageView;
 import cn.incongress.xhy_guke.utils.DensityUtil;
 import cn.incongress.xhy_guke.utils.StringUtils;
-import cn.incongress.xhy_guke.utils.ToastUtils;
 
 /**
  * Created by Jacky on 2016/4/11.
@@ -122,7 +121,7 @@ public class SuggestHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (viewType == TYPE_NORMAL) {
             SuggestBean.ZvListBean zvListBean = mInnerBean.get(position);
             if (StringUtils.isNotEmpty(zvListBean.getUserPic())) {
-                Picasso.with(mContext).load(zvListBean.getUserPic()).into(((HotViewHolder) holder).civUserIcon);
+                Glide.with(mContext).load(zvListBean.getUserPic()).into(((HotViewHolder) holder).civUserIcon);
             }
             ((HotViewHolder) holder).tvUserName.setText(zvListBean.getUserName());
             ((HotViewHolder) holder).tvUserHospital.setText((String) zvListBean.getHospital());

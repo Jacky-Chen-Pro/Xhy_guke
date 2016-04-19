@@ -8,12 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.goyourfly.gdownloader.DownloadModule;
 import com.goyourfly.gdownloader.helper.DownloadHelper;
-import com.goyourfly.gdownloader.name_generator.HashCodeNameGenerator;
 import com.goyourfly.gdownloader.name_generator.NameGenerator;
-import com.squareup.picasso.Picasso;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.BaseFragment;
@@ -122,7 +121,7 @@ public class VVTalkDetailAttachFragment extends BaseFragment implements Download
         super.initData();
 
         if(StringUtils.isNotEmpty(mUserIconUrl)) {
-            Picasso.with(getActivity()).load(mUserIconUrl).into(mCivUserIcon);
+            Glide.with(getActivity()).load(mUserIconUrl).into(mCivUserIcon);
         }
 
         mTvUserName.setText(mUserName);

@@ -4,18 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
+import com.bumptech.glide.Glide;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.List;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.Constants;
@@ -50,7 +46,7 @@ public class MyCollectionAdapter extends ListBaseAdapter<MyCollectionBean.DataLi
             holder.ivPic.setVisibility(View.GONE);
         }else {
             holder.ivPic.setVisibility(View.VISIBLE);
-            Picasso.with(mContext).load(bean.getBgImg()).resize(400,400).into(holder.ivPic);
+            Glide.with(mContext).load(bean.getBgImg()).into(holder.ivPic);
         }
         String title = "";
         if(bean.getType() == 3) {

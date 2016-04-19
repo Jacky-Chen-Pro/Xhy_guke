@@ -5,19 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
-import cn.incongress.xhy_guke.base.ListBaseAdapter;
-import cn.incongress.xhy_guke.bean.DynamicListBean;
-import cn.incongress.xhy_guke.utils.StringUtils;
 
 /**
  * Created by Jacky on 2016/4/5.
@@ -44,8 +40,8 @@ public class NoScrollGridViewLocalPathAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        holder.itemView.setTag(position+"");
-        Picasso.with(mContext).load(new File(mDatas.get(position))).resize(400, 400).into((((ViewHolder)holder).imageView));
+        holder.itemView.setTag(position + "");
+        Glide.with(mContext).load(new File(mDatas.get(position))).into((((ViewHolder) holder).imageView));
     }
 
     public void addData( String path) {

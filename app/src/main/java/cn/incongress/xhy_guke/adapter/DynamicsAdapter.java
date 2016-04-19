@@ -9,11 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.HashMap;
 import java.util.List;
 
 import cn.incongress.xhy_guke.R;
@@ -73,7 +72,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (type == 3) {
                 //头像
                 if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getUserPic())) {
-                    Picasso.with(mContext).load(data.getUserPic()).into(((DynamicViewHolder) holder).civUserIcon);
+                    Glide.with(mContext).load(data.getUserPic()).into(((DynamicViewHolder) holder).civUserIcon);
                 } else {
                     ((DynamicViewHolder) holder).civUserIcon.setImageResource(R.mipmap.item_vvtalk_professor_head_default);
                 }
@@ -96,7 +95,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getImgs())) {
                     final String[] imgs = data.getImgs().split(",");
                     if (imgs.length == 1) {
-                        Picasso.with(mContext).load(imgs[0]).resize(400,400).into(((DynamicViewHolder) holder).ivOneImage);
+                        Glide.with(mContext).load(imgs[0]).into(((DynamicViewHolder) holder).ivOneImage);
                         ((DynamicViewHolder) holder).ivOneImage.setVisibility(View.VISIBLE);
                         ((DynamicViewHolder) holder).ngvTwoOrFour.setVisibility(View.GONE);
                         ((DynamicViewHolder) holder).ngvOther.setVisibility(View.GONE);
@@ -131,7 +130,7 @@ public class DynamicsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             } else {
                 //头像
                 if (cn.incongress.xhy_guke.utils.StringUtils.isNotEmpty(data.getUserPic())) {
-                    Picasso.with(mContext).load(data.getUserPic()).into(((DynamicViewHolder) holder).civUserIcon);
+                    Glide.with(mContext).load(data.getUserPic()).into(((DynamicViewHolder) holder).civUserIcon);
                 } else {
                     ((DynamicViewHolder) holder).civUserIcon.setImageResource(R.mipmap.item_vvtalk_professor_head_default);
                 }

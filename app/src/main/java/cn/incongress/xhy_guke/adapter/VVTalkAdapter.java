@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -113,8 +113,8 @@ public class VVTalkAdapter extends ListBaseAdapter<VVTalkBean> {
     private void bindDataWithView(ViewHolder holder, VVTalkBean data, int position) {
         if(StringUtils.isNotEmpty(data.getIsImg()) && StringUtils.isNotEmpty(data.getBgImg())) {
             holder.ivBg.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(mContext,200)));
-            holder.rlContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,DensityUtil.dip2px(mContext,200)));
-            Picasso.with(mContext).load(data.getBgImg()).resize(400,400).placeholder(R.mipmap.item_background_professor_default).error(R.mipmap.item_background_professor_default).into(holder.ivBg);
+            holder.rlContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(mContext, 200)));
+            Glide.with(mContext).load(data.getBgImg()).centerCrop().placeholder(R.mipmap.item_background_professor_default).error(R.mipmap.item_background_professor_default).into(holder.ivBg);
         }else {
             holder.ivBg.setImageResource(R.mipmap.item_background_professor_default);
             if(getItemViewType(position) == VIEW_TYPE_NORMAL) {
@@ -128,7 +128,7 @@ public class VVTalkAdapter extends ListBaseAdapter<VVTalkBean> {
         }
 
         if(StringUtils.isNotEmpty(data.getUserPic())) {
-            Picasso.with(mContext).load(data.getUserPic()).placeholder(R.mipmap.item_vvtalk_professor_head_default).error(R.mipmap.item_vvtalk_professor_head_default).into(holder.civUserIcon);
+            Glide.with(mContext).load(data.getUserPic()).placeholder(R.mipmap.item_vvtalk_professor_head_default).error(R.mipmap.item_vvtalk_professor_head_default).into(holder.civUserIcon);
         }else {
             holder.civUserIcon.setImageResource(R.mipmap.item_vvtalk_professor_head_default);
         }

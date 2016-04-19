@@ -3,16 +3,14 @@ package cn.incongress.xhy_guke.base;
 import android.app.Application;
 import android.content.Context;
 
-import com.squareup.picasso.Picasso;
 import com.umeng.socialize.PlatformConfig;
 
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ThemeConfig;
-import cn.incongress.xhy_guke.BuildConfig;
 import cn.incongress.xhy_guke.R;
-import cn.incongress.xhy_guke.utils.PicassoImageLoader;
+import cn.incongress.xhy_guke.utils.GlideImageLoader;
 
 /**
  * Created by Jacky Chen on 2016/3/29 0029.
@@ -51,7 +49,7 @@ public class XhyApplication extends Application {
             .build();
 
         //配置imageloader
-        PicassoImageLoader imageloader = new PicassoImageLoader();
+        GlideImageLoader imageloader = new GlideImageLoader();
         CoreConfig coreConfig = new CoreConfig.Builder(mContext, imageloader, theme)
                 .setFunctionConfig(functionConfig)
         .build();

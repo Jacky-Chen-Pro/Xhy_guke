@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -56,7 +56,7 @@ public class VVTalkCommentAdapter extends RecyclerView.Adapter<RecyclerView.View
             CommentListBean data = mCommentListBean.get(position);
 
             if(StringUtils.isNotEmpty(data.getUserPic())) {
-                Picasso.with(mContext).load(data.getUserPic()).into(((CommentViewHolder)holder).civCommentIcon);
+                Glide.with(mContext).load(data.getUserPic()).into(((CommentViewHolder)holder).civCommentIcon);
             }
             ((CommentViewHolder) holder).tvCommentName.setText(data.getUserName()+":");
 

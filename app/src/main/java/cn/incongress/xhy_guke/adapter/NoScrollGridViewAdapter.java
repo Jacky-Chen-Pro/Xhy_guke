@@ -1,21 +1,15 @@
 package cn.incongress.xhy_guke.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import com.bm.library.PhotoView;
+import com.bumptech.glide.Glide;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.ListBaseAdapter;
-import cn.incongress.xhy_guke.utils.StringUtils;
 
 /**
  * Created by Jacky on 2016/4/5.
@@ -33,6 +27,7 @@ public class NoScrollGridViewAdapter extends ListBaseAdapter<String> {
     @Override
     protected View getTrueView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
+
         if(convertView == null || convertView.getTag() == null) {
             convertView =  getLayoutInflater(parent.getContext()).inflate(R.layout.item_dynamic_img,null);
             holder = new ViewHolder(convertView);
@@ -41,7 +36,11 @@ public class NoScrollGridViewAdapter extends ListBaseAdapter<String> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Picasso.with(mContext).load(mDatas.get(position)).resize(400,400).into(( holder.imageView));
+        Glide.with(mContext)
+                .load(mDatas.get(position))
+                .centerCrop()
+                .placeholder(R.mipmap.default_load_bg)
+                .into(holder.imageView);
         return convertView;
     }
 

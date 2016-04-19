@@ -1,13 +1,13 @@
 package cn.incongress.xhy_guke.adapter;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+
+import com.bumptech.glide.Glide;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -17,7 +17,6 @@ import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.base.ListBaseAdapter;
 import cn.incongress.xhy_guke.bean.HomePageBean;
-import cn.incongress.xhy_guke.bean.VVTalkBean;
 import cn.incongress.xhy_guke.utils.StringUtils;
 
 /**
@@ -46,7 +45,7 @@ public class HisHomePageAdapter extends ListBaseAdapter<HomePageBean.DataListBea
 
         if(StringUtils.isNotEmpty(bean.getBgImg())) {
             holder.ivPic.setVisibility(View.VISIBLE);
-            Picasso.with(mContext).load(bean.getBgImg()).resize(400,400).into(holder.ivPic);
+            Glide.with(mContext).load(bean.getBgImg()).placeholder(R.mipmap.default_load_bg).into(holder.ivPic);
         }else {
             holder.ivPic.setVisibility(View.GONE);
         }

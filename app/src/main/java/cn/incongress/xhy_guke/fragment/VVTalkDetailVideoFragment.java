@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.universalvideoview.UniversalMediaController;
 import com.universalvideoview.UniversalVideoView;
 
@@ -116,7 +116,7 @@ public class VVTalkDetailVideoFragment extends BaseFragment implements Universal
         mMediaController.setTitle(mVideoTitle);
 
         if(StringUtils.isNotEmpty(mUserIconUrl)) {
-            Picasso.with(getActivity()).load(mUserIconUrl).into(mCivUserIcon);
+            Glide.with(getActivity()).load(mUserIconUrl).into(mCivUserIcon);
         }
 
         mTvUserName.setText(mUserName);

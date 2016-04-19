@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
-import java.lang.reflect.AccessibleObject;
+import com.bumptech.glide.Glide;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.bean.SuggestBean;
@@ -65,7 +63,7 @@ public class SuggestSpecailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             holder.itemView.setLayoutParams(new ViewGroup.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             if(StringUtils.isNotEmpty(bean.getUserPic())) {
-                Picasso.with(mContext).load(bean.getUserPic()).into(((ViewHolder) holder).civUserIcon);
+                Glide.with(mContext).load(bean.getUserPic()).into(((ViewHolder) holder).civUserIcon);
             }
 
             ((ViewHolder) holder).tvUserName.setText(bean.getUserName());

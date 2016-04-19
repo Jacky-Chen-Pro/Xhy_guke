@@ -3,17 +3,15 @@ package cn.incongress.xhy_guke.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.jackyonline.refreshdemo.RefreshLayout;
@@ -21,7 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.adapter.HisHomePageAdapter;
@@ -216,7 +213,7 @@ public class HisHomePageActivity extends BaseActivity implements RefreshLayout.O
 
                 if (mUserBean.getState() == 1) {
                     if (StringUtils.isNotEmpty(mUserBean.getUserPic())) {
-                        Picasso.with(HisHomePageActivity.this).load(mUserBean.getUserPic()).into(mCivUser);
+                        Glide.with(HisHomePageActivity.this).load(mUserBean.getUserPic()).into(mCivUser);
                     }
 
                     mTvUserName.setText(mUserBean.getTrueName());

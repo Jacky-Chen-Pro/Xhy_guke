@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class VVTalkLaudAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         LaudListBean bean = mBeans.get(position);
         if(StringUtils.isNotEmpty(bean.getUserPic()))
-            Picasso.with(mContext).load(bean.getUserPic()).placeholder(R.mipmap.item_vvtalk_professor_head_default).error(R.mipmap.item_vvtalk_professor_head_default).into(((LaudViewHolder) holder).civUserIcon);
+            Glide.with(mContext).load(bean.getUserPic()).placeholder(R.mipmap.item_vvtalk_professor_head_default).error(R.mipmap.item_vvtalk_professor_head_default).into(((LaudViewHolder) holder).civUserIcon);
     }
 
     @Override

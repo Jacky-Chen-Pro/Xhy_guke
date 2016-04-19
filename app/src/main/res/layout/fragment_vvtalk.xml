@@ -13,8 +13,9 @@
         <com.huewu.pla.lib.MultiColumnListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:background="@color/background"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
             android:fastScrollEnabled="true"
             android:scrollbars="vertical"
             pla:plaColumnNumber="2" />

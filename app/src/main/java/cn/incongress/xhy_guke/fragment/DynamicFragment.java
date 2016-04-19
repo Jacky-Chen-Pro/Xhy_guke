@@ -1,27 +1,22 @@
 package cn.incongress.xhy_guke.fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.widget.FrameLayout;
 
 import com.bm.library.Info;
 import com.bm.library.PhotoView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.jackyonline.refreshdemo.RefreshLayout;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -34,8 +29,6 @@ import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseFragment;
 import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.bean.DynamicListBean;
-import cn.incongress.xhy_guke.bean.VVTalkBean;
-import cn.incongress.xhy_guke.uis.FiveLine;
 import cn.incongress.xhy_guke.utils.LogUtils;
 import cn.incongress.xhy_guke.utils.ToastUtils;
 import okhttp3.Call;

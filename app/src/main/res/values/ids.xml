@@ -3,4 +3,5 @@
 
     <item type="id" name="expandable_text"/>
     <item type="id" name="expand_collapse"/>
+    <item name="adapter_item_tag_key" type="id"/>
 </resources>

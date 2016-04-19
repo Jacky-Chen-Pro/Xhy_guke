@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -95,7 +95,7 @@ public class VVTalkDetailMakePostFragment extends BaseFragment {
     public void initData() {
         super.initData();
         if (StringUtils.isNotEmpty(mUserIconUrl)) {
-            Picasso.with(getActivity()).load(mUserIconUrl).into(mCivCircleIcon);
+            Glide.with(getActivity()).load(mUserIconUrl).into(mCivCircleIcon);
         }
         mTvName.setText(mUserName);
         mTvHospital.setText(mUserHospital);
@@ -112,7 +112,7 @@ public class VVTalkDetailMakePostFragment extends BaseFragment {
         if (StringUtils.isNotEmpty(mImgs)) {
             final String[] imgs = mImgs.split(",");
             if (imgs.length == 1) {
-                Picasso.with(getActivity()).load(imgs[0]).into(mIvOne);
+                Glide.with(getActivity()).load(imgs[0]).into(mIvOne);
                 mIvOne.setVisibility(View.VISIBLE);
                 mTwoOrFourGridView.setVisibility(View.GONE);
                 mOtherGridView.setVisibility(View.GONE);
