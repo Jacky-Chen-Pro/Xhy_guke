@@ -13,16 +13,21 @@ import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.jackyonline.refreshdemo.RefreshLayout;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.activitys.HisHomePageActivity;
 import cn.incongress.xhy_guke.adapter.SuggestHotAdapter;
 import cn.incongress.xhy_guke.adapter.SuggestSpecailAdapter;
 import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseFragment;
+import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.base.XhyApplication;
 import cn.incongress.xhy_guke.bean.SuggestBean;
 import cn.incongress.xhy_guke.uis.CircleImageView;
 import cn.incongress.xhy_guke.utils.LogUtils;
+import cn.incongress.xhy_guke.utils.ToastUtils;
 import cn.trinea.android.common.util.AppUtils;
 import okhttp3.Call;
 
@@ -37,8 +42,8 @@ public class SuggestFragment extends BaseFragment implements RefreshLayout.OnRef
 
     private RecyclerView mRcvSpecail,mRcvHot;
     private LinearLayoutManager mHorizontalManager, mVerticalManager;
-    private SuggestSpecailAdapter mSpecialAdapter;
-    private SuggestHotAdapter mHotAdapter;
+    private SuggestSpecailAdapter mSpecialAdapter;//特别推荐
+    private SuggestHotAdapter mHotAdapter;//热门推荐 包括热门主任和热门同仁
 
     @Nullable
     @Override
@@ -113,6 +118,31 @@ public class SuggestFragment extends BaseFragment implements RefreshLayout.OnRef
                             .visibilityProvider(mHotAdapter)
                             .marginProvider(mHotAdapter)
                             .build());
+
+                    mSpecialAdapter.setOnItemClickListener(new SuggestSpecailAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View v, SuggestBean.TbtjListBean bean) {
+                            HisHomePageActivity.startHisHomePageActivity(getActivity(), bean.getUserId() + "");
+                        }
+                    });
+                    mHotAdapter.setFollowListener(new SuggestHotAdapter.OnFollowClickListener() {
+                        @Override
+                        public void followClickListener(View view, SuggestBean.ZvListBean bean) {
+                            if(bean.getIsFocus() == 1) {
+                                addFocus(bean.getUserId()+"", Constants.FOCUS_CANCEL);
+                            }else{
+                                addFocus(bean.getUserId()+"", Constants.FOCUS_ADD);
+                            }
+
+                        }
+                    });
+
+                    mHotAdapter.setHomePageListener(new SuggestHotAdapter.OnHomePageClickListener() {
+                        @Override
+                        public void homePageClickListener(View view, SuggestBean.ZvListBean bean) {
+                            HisHomePageActivity.startHisHomePageActivity(getActivity(), bean.getUserId()+"");
+                        }
+                    });
                 }
             }
         });
@@ -121,5 +151,34 @@ public class SuggestFragment extends BaseFragment implements RefreshLayout.OnRef
     @Override
     public void onRefresh() {
         getData();
+    }
+
+
+    /**
+     * 添加关注 1关注0取消关注
+     */
+    private void addFocus(final String focusUserId, final String focusState) {
+        XhyGo.goDoUserFocus(getActivity(), XhyApplication.userId, focusUserId, focusState, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+
+            }
+
+            @Override
+            public void onResponse(String response) {
+                LogUtils.println("focus:"+response);
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    if(obj.getInt("state")==1) {
+                        mHotAdapter.setFocusState(Integer.parseInt(focusUserId), Integer.parseInt(focusState));
+                    }else {
+                        ToastUtils.showShorToast(getString(R.string.suggest_focus_fail, obj.getString("msg")), getActivity());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 }

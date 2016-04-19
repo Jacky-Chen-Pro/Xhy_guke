@@ -14,6 +14,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.jackyonline.refreshdemo.RefreshLayout;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.activitys.MyCollectionActivity;
 import cn.incongress.xhy_guke.activitys.MyPublishPostActivity;
 import cn.incongress.xhy_guke.api.XhyGo;
 import cn.incongress.xhy_guke.base.BaseFragment;
@@ -32,7 +33,7 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
     private TextView mTvFollowNums, mTvFanNums, mTvVisitCount, mTvPraiseCount, mTvCommentCount;
     private TextView mTvWeekVisitCount, mTvWeekPraiseCount, mTvWeekCommentCount;
     private TextView mTvPublishCount, mTvCollectionCount;
-    private LinearLayout mLlMyPublishVVTalk;
+    private LinearLayout mLlMyPublishVVTalk,mLlCollection;
 
     private UserCountBean mUserCountBean;
 
@@ -77,6 +78,7 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
         mTvCollectionCount = (TextView) view.findViewById(R.id.tv_collection_count);
 
         mLlMyPublishVVTalk = (LinearLayout) view.findViewById(R.id.ll_my_publish_vvtalk);
+        mLlCollection = (LinearLayout) view.findViewById(R.id.ll_collection);
 
         initData();
     }
@@ -88,6 +90,7 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setOnLoadMoreListener(null);
         mLlMyPublishVVTalk.setOnClickListener(this);
+        mLlCollection.setOnClickListener(this);
 
         if(getData() == XhyGo.INTERNET_ERROR && mProgressDialog != null && mProgressDialog.isShowing()) {
             dismissProgressDialog();
@@ -147,6 +150,9 @@ public class MeFragment extends BaseFragment implements RefreshLayout.OnRefreshL
         switch (target) {
             case R.id.ll_my_publish_vvtalk:
                 MyPublishPostActivity.startMyPublishVVtalkActivity(getActivity());
+                break;
+            case R.id.ll_collection:
+                MyCollectionActivity.startMyCollectionActivity(getActivity());
                 break;
         }
     }

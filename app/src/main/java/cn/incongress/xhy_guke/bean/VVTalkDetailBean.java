@@ -32,8 +32,17 @@ public class VVTalkDetailBean {
     private List<LaudListBean> laudList; //点赞榜集合
     private int isVote; //是否含有投票
     private int commentCount; //评论数
+    private int isShouCang; //是否收藏
     private String authorPic;//作者头像
     private List<MoreXhyDataListBean> moreXhyDataList;// 新增的五条推荐文章集合
+
+    public int getIsShouCang() {
+        return isShouCang;
+    }
+
+    public void setIsShouCang(int isShouCang) {
+        this.isShouCang = isShouCang;
+    }
 
     public int getUserType() {
         return userType;

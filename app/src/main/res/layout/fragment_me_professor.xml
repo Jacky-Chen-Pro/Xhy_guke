@@ -310,6 +310,7 @@
         <View style="@style/h_line" />
 
         <LinearLayout
+            android:id="@+id/ll_collection"
             style="@style/fill_wrap"
             android:background="@color/white"
             android:gravity="center_vertical"

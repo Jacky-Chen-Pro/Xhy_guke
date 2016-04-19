@@ -11,8 +11,8 @@
        style="@style/fill_fill"
         android:id="@+id/refreshLayout"
         app:can_refresh="true"
-        app:can_load="true">
-        <cn.incongress.xhy_guke.uis.MyFixedListView style="@style/fill_fill" android:id="@+id/lv_home_page" android:background="@color/background"/>
+        app:can_load="false">
+        <cn.incongress.xhy_guke.uis.MyFixedListView style="@style/fill_fill" android:id="@+id/lv_collections" android:background="@color/background"/>
     </org.jackyonline.refreshdemo.RefreshLayout>
 
 </LinearLayout>

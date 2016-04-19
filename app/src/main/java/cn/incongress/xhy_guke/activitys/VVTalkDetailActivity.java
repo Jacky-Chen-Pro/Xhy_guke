@@ -140,14 +140,13 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
                             JSONObject obj = new JSONObject(response);
                             int state = obj.getInt("state");
 
-                            //state msg commentId content  userId userName userPic timeShow
-                            if(state == 1) {
-                                ToastUtils.showShorToast(getString(R.string.comment_success),VVTalkDetailActivity.this);
+                            if (state == 1) {
+                                ToastUtils.showShorToast(getString(R.string.comment_success), VVTalkDetailActivity.this);
                                 CommentListBean tempComment = new Gson().fromJson(response, CommentListBean.class);
-                                if(tempComment != null && mCommentFragment != null) {
+                                if (tempComment != null && mCommentFragment != null) {
                                     mCommentFragment.addCommentToList(tempComment);
                                 }
-                            }else {
+                            } else {
                                 ToastUtils.showShorToast(obj.getString("msg"), VVTalkDetailActivity.this);
                             }
                         } catch (JSONException e) {
@@ -170,8 +169,8 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
         mIvPraise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mDetailBean.getIsLaud() == 0) {
-                    XhyGo.goDataLaud(VVTalkDetailActivity.this, mDataId+"", XhyApplication.userId, new StringCallback() {
+                if (mDetailBean.getIsLaud() == 0) {
+                    XhyGo.goDataLaud(VVTalkDetailActivity.this, mDataId + "", XhyApplication.userId, new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e) {
 
@@ -182,7 +181,7 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
                             super.onBefore(request);
 
                             //放大动画
-                            final ScaleAnimation animation =new ScaleAnimation(1.0f, 1.3f, 1.0f, 1.3f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                            final ScaleAnimation animation = new ScaleAnimation(1.0f, 1.3f, 1.0f, 1.3f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                             animation.setDuration(500);//设置动画持续时间
                             mIvPraise.startAnimation(animation);
                         }
@@ -194,9 +193,9 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
                                 int state = json.getInt("state");
                                 String msg = json.getString("msg");
                                 int laudCount = json.getInt("laudCount");
-                                if(state == 0) {
+                                if (state == 0) {
                                     ToastUtils.showShorToast(msg, VVTalkDetailActivity.this);
-                                }else {
+                                } else {
                                     mIvPraise.setImageResource(R.mipmap.vvtalk_detail_praise_done);
                                     mDetailBean.setIsLaud(1);
                                 }
@@ -212,7 +211,14 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
         mIvCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showShorToast("collect is collected", VVTalkDetailActivity.this);
+                //收藏
+                if(mDetailBean.getIsShouCang() == 1) {
+                    //取消收藏
+                    collectData(Constants.COLLECT_CANCEL);
+                }else {
+                    //添加收藏
+                    collectData(Constants.COLLECT_ADD);
+                }
             }
         });
 
@@ -253,22 +259,19 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
 
         if(mCurrentType == DETAIL_TYPE_NEWS || mCurrentType == DETAIL_TYPE_CASE) {
             getSupportFragmentManager().beginTransaction().
-                    add(R.id.fl_detail_area, VVTalkDetailWebViewFragment.getInstance("http://incongress.cn/XhyApiV2.do?getDataByIdH5&dataId=467"))
+                    add(R.id.fl_detail_area, VVTalkDetailWebViewFragment.getInstance("http://incongress.cn/XhyApiV2.do?getDataByIdH5&dataId=467",mDetailBean.getCreateUserId()+""))
                     .add(R.id.fl_comment_area, mCommentFragment).commit();
         }else if(mCurrentType == DETAIL_TYPE_POST) {
-            ToastUtils.showShorToast("Post", VVTalkDetailActivity.this);
             getSupportFragmentManager().beginTransaction().
                     add(R.id.fl_detail_area, VVTalkDetailMakePostFragment.getInstance(mDetailBean.getAuthorPic(), mDetailBean.getCreateUser(), mDetailBean.getHospital(), mDetailBean.getContent(), mDetailBean.getImgs()))
                     .add(R.id.fl_comment_area, mCommentFragment).commit();
         }else if(mCurrentType == DETAIL_TYPE_ATTACH) {
-            ToastUtils.showShorToast("Attach", VVTalkDetailActivity.this);
             getSupportFragmentManager().beginTransaction().
                     add(R.id.fl_detail_area, VVTalkDetailAttachFragment.getInstance(mDetailBean.getAuthorPic(), mDetailBean.getCreateUser(),
                             mDetailBean.getHospital(), mDetailBean.getTitle(), mDetailBean.getTime(), mDetailBean.getReadCount() + "", mDetailBean.getTitle(),
                             mDetailBean.getPdfDataSize(), mDetailBean.getPdfDataUrl(), mDetailBean.getDataDescribe(), Integer.valueOf(mDetailBean.getDataType())))
                     .add(R.id.fl_comment_area, mCommentFragment).commit();
         }else if(mCurrentType == DETAIL_TYPE_VIDEO) {
-            ToastUtils.showShorToast("Video", VVTalkDetailActivity.this);
             getSupportFragmentManager().beginTransaction().
                     add(R.id.fl_detail_area, VVTalkDetailVideoFragment.getInstance(mDetailBean.getHtmlUrl(),mDetailBean.getTitle(),mDetailBean.getAuthorPic(), mDetailBean.getAuthor(), mDetailBean.getTitle(),mDetailBean.getTime(), mDetailBean.getReadCount()+""))
                     .add(R.id.fl_comment_area, mCommentFragment).commit();
@@ -280,12 +283,15 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
             if(mDetailBean.getIsLaud() == 1) {
                 mIvPraise.setImageResource(R.mipmap.vvtalk_detail_praise_done);
             }
+
+            if(mDetailBean.getIsShouCang() == 1) {
+                mIvCollect.setImageResource(R.mipmap.vvtalk_detail_collection_done);
+            }
         }
     }
 
     @Override
     public void onLoadMore() {
-        //加载更多评论
         mCommentFragment.loadMoreComment();
     }
 
@@ -296,14 +302,55 @@ public class VVTalkDetailActivity extends BaseActivity implements RefreshLayout.
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO Auto-generated method stub
-        if(mCurrentWhereState == VVTalkDetailActivity.WHERE_STATE_MY_PUBLISH) {
-            if(item.getItemId() == android.R.id.home)
-            {
-                this.finish();
-                return true;
-            }
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //收藏
+    private void collectData(final String shoucang) {
+        XhyGo.goShouCang(VVTalkDetailActivity.this, XhyApplication.userId, mDataId+"", shoucang, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+
+            }
+
+            @Override
+            public void onBefore(Request request) {
+                super.onBefore(request);
+
+                //放大动画
+                final ScaleAnimation animation = new ScaleAnimation(1.0f, 1.3f, 1.0f, 1.3f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                animation.setDuration(500);//设置动画持续时间
+                mIvCollect.startAnimation(animation);
+            }
+
+            @Override
+            public void onResponse(String response) {
+                LogUtils.println("收藏结果：" + response);
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    if(obj.getInt("state") == 1) {
+                        if(shoucang.equals("1")) {
+                            mDetailBean.setIsShouCang(Integer.parseInt(Constants.COLLECT_ADD));
+                            mIvCollect.setImageResource(R.mipmap.vvtalk_detail_collection_done);
+                            ToastUtils.showShorToast(getString(R.string.vvtalk_collect_add), VVTalkDetailActivity.this);
+                        }else {
+                            mDetailBean.setIsShouCang(Integer.parseInt(Constants.COLLECT_CANCEL));
+                            mIvCollect.setImageResource(R.mipmap.vvtalk_detail_collection);
+                            ToastUtils.showShorToast(getString(R.string.vvtalk_collect_cancel), VVTalkDetailActivity.this);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onAfter() {
+                super.onAfter();
+            }
+        });
     }
 }

@@ -28,13 +28,17 @@ import cn.incongress.xhy_guke.utils.ToastUtils;
  */
 public class VVTalkDetailWebViewFragment extends BaseFragment {
     private static final String BUNDLE_URL = "url";
+    private static final String BUNDLE_USER_ID = "authorUserId";
+
     private ProgressWebView mWebView;
+    private String mAuthorUserId;
     private String mUrl;
 
-    public static final VVTalkDetailWebViewFragment getInstance(String url) {
+    public static final VVTalkDetailWebViewFragment getInstance(String url, String authorUserId) {
         VVTalkDetailWebViewFragment fragment = new VVTalkDetailWebViewFragment();
         Bundle bundle = new Bundle();
         bundle.putString(BUNDLE_URL, url);
+        bundle.putString(BUNDLE_USER_ID, authorUserId);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -42,6 +46,7 @@ public class VVTalkDetailWebViewFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuthorUserId = getArguments().getString(BUNDLE_USER_ID);
         mUrl = getArguments().getString(BUNDLE_URL);
     }
 
@@ -146,7 +151,7 @@ public class VVTalkDetailWebViewFragment extends BaseFragment {
                     @JavascriptInterface
                     @SuppressLint("JavascriptInterface")
                     public void goAuthorCenter() {
-                        HisHomePageActivity.startHisHomePageActivity(getActivity());
+                        HisHomePageActivity.startHisHomePageActivity(getActivity(), mAuthorUserId);
                     }
                 }, "androidJS");
 

@@ -25,21 +25,18 @@
             <TextView
                 android:id="@+id/tv_user_name"
                 style="@style/wrap_wrap"
-                android:text="詹庆元"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_media" />
 
             <TextView
                 android:id="@+id/tv_user_hospital"
                 style="@style/wrap_wrap"
-                android:text="北京协和医院"
                 android:textColor="@color/theme_blue"
                 android:textSize="@dimen/text_size_small" />
 
             <TextView
                 android:id="@+id/tv_focus_count"
                 style="@style/wrap_wrap"
-                android:text="4626人关注"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_small" />
         </LinearLayout>

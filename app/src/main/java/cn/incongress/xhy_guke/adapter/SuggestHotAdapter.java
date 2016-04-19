@@ -22,6 +22,7 @@ import cn.incongress.xhy_guke.bean.SuggestBean;
 import cn.incongress.xhy_guke.uis.CircleImageView;
 import cn.incongress.xhy_guke.utils.DensityUtil;
 import cn.incongress.xhy_guke.utils.StringUtils;
+import cn.incongress.xhy_guke.utils.ToastUtils;
 
 /**
  * Created by Jacky on 2016/4/11.
@@ -31,7 +32,7 @@ public class SuggestHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //        FlexibleDividerDecoration.SizeProvider,
 //        FlexibleDividerDecoration.ColorProvider,
         FlexibleDividerDecoration.VisibilityProvider,
-        HorizontalDividerItemDecoration.MarginProvider {
+        HorizontalDividerItemDecoration.MarginProvider, View.OnClickListener {
 
     @Override
     public int dividerLeftMargin(int position, RecyclerView parent) {
@@ -133,6 +134,19 @@ public class SuggestHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }else {
                 setHotZrImageRange(((HotViewHolder) holder).ivHotLable, zvListBean.getRang());
             }
+
+            if(zvListBean.getIsFocus() == 1) {
+                ((HotViewHolder) holder).ivAddFollow.setImageResource(R.mipmap.follow_done);
+            }else {
+                ((HotViewHolder) holder).ivAddFollow.setImageResource(R.mipmap.follow_add);
+            }
+
+            ((HotViewHolder) holder).ivAddFollow.setTag(zvListBean);
+            ((HotViewHolder) holder).ivAddFollow.setOnClickListener(this);
+
+            holder.itemView.setTag(zvListBean);
+            holder.itemView.setOnClickListener(this);
+
         } else {
             if (position == 0) {
                 ((TitleViewHolder) holder).tvTitle.setText(R.string.suggest_hot_head);
@@ -156,13 +170,26 @@ public class SuggestHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v instanceof ImageView) {
+            if(mFollowListener!= null) {
+                mFollowListener.followClickListener(v, (SuggestBean.ZvListBean) v.getTag());
+            }
+        }else {
+            if(mHomePageListener != null) {
+                mHomePageListener.homePageClickListener(v, (SuggestBean.ZvListBean) v.getTag());
+            }
+        }
+    }
+
     /**
      * 热门推荐布局
      */
     class HotViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivHotLable;
+        ImageView ivHotLable,ivAddFollow;
         CircleImageView civUserIcon;
-        TextView tvUserName, tvUserHospital, tvAttentionProgress, tvReadCount, tvPraiseCount, tvAddAttention;
+        TextView tvUserName, tvUserHospital, tvAttentionProgress, tvReadCount, tvPraiseCount;
 
         public HotViewHolder(View itemView) {
             super(itemView);
@@ -174,7 +201,7 @@ public class SuggestHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvAttentionProgress = (TextView) itemView.findViewById(R.id.tv_attention_progress);
             tvReadCount = (TextView) itemView.findViewById(R.id.tv_read_count);
             tvPraiseCount = (TextView) itemView.findViewById(R.id.tv_praise_count);
-            tvAddAttention = (TextView) itemView.findViewById(R.id.tv_add_attention);
+            ivAddFollow = (ImageView) itemView.findViewById(R.id.iv_add_follow);
         }
     }
 
@@ -208,5 +235,38 @@ public class SuggestHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }else {
             view.setImageResource(R.mipmap.hot_tr_third);
         }
+    }
+
+    private OnFollowClickListener mFollowListener;
+    private OnHomePageClickListener mHomePageListener;
+
+    public interface OnFollowClickListener{
+        public void followClickListener(View view, SuggestBean.ZvListBean bean);
+    }
+
+    public interface OnHomePageClickListener{
+        public void homePageClickListener(View view, SuggestBean.ZvListBean bean);
+    }
+
+    public void setFollowListener(OnFollowClickListener listener) {
+        this.mFollowListener = listener;
+    }
+
+    public void setHomePageListener(OnHomePageClickListener listener) {
+        this.mHomePageListener = listener;
+    }
+
+    /**
+     * 修改关注状态
+     * @param userId
+     * @param focusState
+     */
+    public void setFocusState(int userId, int focusState) {
+        for(int i=0; i<mInnerBean.size(); i++) {
+            if(mInnerBean.get(i).getUserId() == userId) {
+                mInnerBean.get(i).setIsFocus(focusState);
+            }
+        }
+        notifyDataSetChanged();
     }
 }

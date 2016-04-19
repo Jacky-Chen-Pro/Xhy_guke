@@ -35,21 +35,6 @@
             android:name="UMENG_APPKEY"
             android:value="570f3587e0f55a4180000ced"></meta-data>
 
-        <!--<activity-->
-            <!--android:name="com.umeng.socialize.editorpage.ShareActivity"-->
-            <!--android:theme="@style/Theme.UMDefault"-->
-            <!--android:excludeFromRecents="true"/>-->
-
-        <!--&lt;!&ndash; 微信平台配置 &ndash;&gt;-->
-        <!--<activity-->
-            <!--android:name=".wxapi.WXEntryActivity"-->
-            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
-            <!--android:exported="true"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-
-        <!-- 友盟 end-->
-
         <activity
             android:name=".activitys.LoginActivity"
             >
@@ -64,11 +49,7 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".activitys.VVTalkDetailActivity"
-            android:parentActivityName=".activitys.HomeActivity"
             android:windowSoftInputMode="stateHidden|adjustPan">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activitys.HomeActivity" />
         </activity>
 
         <activity
@@ -105,7 +86,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activitys.HomeActivity" />
         </activity>
-
+        <activity android:name=".activitys.MyCollectionActivity"/>
 
     </application>
 

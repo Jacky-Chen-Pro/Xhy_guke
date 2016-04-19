@@ -16,7 +16,7 @@ android {
         XHY_Key {
             keyAlias 'incongress'
             keyPassword 'incongress'
-            storeFile file('E:/A-Company_Project_Keys/xhy/incongress_xhy.jks')
+            storeFile file('F:/C-Keys/xhy/incongress_xhy.jks')
             storePassword 'incongress'
         }
     }

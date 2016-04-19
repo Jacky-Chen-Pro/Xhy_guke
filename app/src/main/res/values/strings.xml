@@ -20,7 +20,8 @@
     <string name="share_fail">分享失败</string>
     <string name="share_cancel">分享取消</string>
     <string name="fail_reason">失败原因:%1$s</string>
-    <string name="text_long_for_test">个人简介：詹庆元。男。内科学博士。主任医师，教授，博士生导师,现任中日医院呼吸与危重症医学科副主任主持工作个人简介：詹庆元。男。内科学博士。主任医师，教授，博士生导师,现任中日医院呼吸与危重症医学科副主任主持工作个人简介：詹庆元。男。内科学博士。主任医师，教授，博士生导师,现任中日医院呼吸与危重症医学科副主任主持工作</string>
+    <string name="get_data_fail">获取数据失败</string>
+
     <!-- V言V语 列表页 -->
     <string name="vvtalk_read_count">%1$s人查看</string>
 
@@ -29,6 +30,8 @@
     <string name="vvtalk_detail_title">详情</string>
     <string name="vvtalk_detail_laud_count">共%1$s个赞</string>
     <string name="vvtalk_empty_tips">快来发表评论，抢占沙发！</string>
+    <string name="vvtalk_collect_add">收藏成功</string>
+    <string name="vvtalk_collect_cancel">取消收藏</string>
 
     <!-- 动态 -->
     <string name="dynamic_empty_tips">暂无动态，快发发一波！</string>
@@ -87,6 +90,7 @@
     <string name="suggest_attention_progress">关注度 %1$s</string>
     <string name="suggest_read_progress">阅读数 %1$s</string>
     <string name="suggest_praise_progress">点赞数 %1$s</string>
+    <string name="suggest_focus_fail">关注失败：%1$s</string>
 
     <!-- 发布 -->
     <string name="post_publish">发布</string>
@@ -119,4 +123,6 @@
     <string name="share_type_video_post"> http://incongress.cn/XhyApiV2.do?getDataByIdH5&#038;dataId=%1$s&#038;isShare=1</string>
     <string name="share_type_attach"> http://incongress.cn/xhy/pdfHtml/pdfInHtml.html?pdfUrl=%1$s&#038;title=%2$s&#038;dataId=%3$s&#038;isShare=1</string>
 
+    <!-- 我的收藏 -->
+    <string name="collection_title">我的收藏</string>
 </resources>

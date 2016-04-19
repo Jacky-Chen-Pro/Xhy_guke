@@ -1,5 +1,6 @@
 package cn.incongress.xhy_guke.base;
 
+import android.app.ProgressDialog;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +26,21 @@ public class BaseActivity extends AppCompatActivity {
     protected ImageView mIvLeftIcon,mIvRightIcon;
 
     protected TextView mTvTitle;
+
+    protected ProgressDialog mProgressDialog;
+
+    protected void dismissProgressDialog() {
+        if(mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    protected void showProgressDialog() {
+        if(mProgressDialog == null || !mProgressDialog.isShowing() ) {
+            mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading));
+            mProgressDialog.setCanceledOnTouchOutside(true);
+        }
+    }
 
     /** 友盟分享监听 **/
     protected UMShareListener mUmengShareListener = new UMShareListener() {

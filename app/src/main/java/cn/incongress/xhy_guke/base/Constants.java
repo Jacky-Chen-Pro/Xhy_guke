@@ -30,4 +30,13 @@ public class Constants {
     /** 最多可以选择的图片数量 **/
     public static final int MAX_CHOOSE_PHOTO = 9;
 
+    /** 添加关注 **/
+    public static final String FOCUS_ADD = "1";
+    /** 取消关注 **/
+    public static final String FOCUS_CANCEL = "0";
+
+    /** 添加收藏 **/
+    public static final String COLLECT_ADD = "1";
+    /** 取消收藏 **/
+    public static final String COLLECT_CANCEL = "0";
 }

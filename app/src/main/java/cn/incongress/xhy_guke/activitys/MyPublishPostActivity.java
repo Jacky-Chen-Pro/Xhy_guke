@@ -73,7 +73,6 @@ public class MyPublishPostActivity extends BaseActivity implements RefreshLayout
         mAdapter.setOnItemClickListener(new MyPublishVVTalkAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, MyVVTalkBean.DataListBean dataBean) {
-                ToastUtils.showShorToast(dataBean.getTitle(), MyPublishPostActivity.this);
                 VVTalkDetailActivity.startVVTalkDetailActivity(MyPublishPostActivity.this,dataBean.getType(),dataBean.getDataId(), VVTalkDetailActivity.WHERE_STATE_MY_PUBLISH);
             }
         });

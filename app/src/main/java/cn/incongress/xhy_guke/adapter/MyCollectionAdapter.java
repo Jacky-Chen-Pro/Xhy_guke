@@ -1,54 +1,56 @@
 package cn.incongress.xhy_guke.adapter;
 
 import android.content.Context;
-import android.graphics.Canvas;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.base.ListBaseAdapter;
-import cn.incongress.xhy_guke.bean.HomePageBean;
-import cn.incongress.xhy_guke.bean.VVTalkBean;
+import cn.incongress.xhy_guke.bean.MyCollectionBean;
 import cn.incongress.xhy_guke.utils.StringUtils;
 
 /**
- * Created by Jacky on 2016/4/18.
+ * Created by Jacky on 2016/4/19 0019.
  */
-public class HisHomePageAdapter extends ListBaseAdapter<HomePageBean.DataListBean> {
+public class MyCollectionAdapter extends ListBaseAdapter<MyCollectionBean.DataListBean> {
     private Context mContext;
 
-    public HisHomePageAdapter(Context context, ArrayList<HomePageBean.DataListBean> beans) {
+    public MyCollectionAdapter(Context context, ArrayList<MyCollectionBean.DataListBean> data) {
         this.mContext = context;
-        this.mDatas = beans;
+        this.mDatas = data;
     }
 
     @Override
     protected View getTrueView(int position, View convertView, ViewGroup parent) {
-        ListViewHolder holder;
+        ViewHolder holder;
         if(convertView == null || convertView.getTag() == null) {
-            convertView = getLayoutInflater(parent.getContext()).inflate(R.layout.item_home_page,null);
-            holder = new ListViewHolder(convertView);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_my_collection,null);
+            holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }else {
-            holder = (ListViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        HomePageBean.DataListBean bean = mDatas.get(position);
-
-        if(StringUtils.isNotEmpty(bean.getBgImg())) {
+        MyCollectionBean.DataListBean bean = mDatas.get(position);
+        if(StringUtils.isEmpty(bean.getBgImg())) {
+            holder.ivPic.setVisibility(View.GONE);
+        }else {
             holder.ivPic.setVisibility(View.VISIBLE);
             Picasso.with(mContext).load(bean.getBgImg()).resize(400,400).into(holder.ivPic);
-        }else {
-            holder.ivPic.setVisibility(View.GONE);
         }
         String title = "";
         if(bean.getType() == 3) {
@@ -56,31 +58,27 @@ public class HisHomePageAdapter extends ListBaseAdapter<HomePageBean.DataListBea
                 title = URLDecoder.decode(bean.getTitle(), Constants.ENCODDING_UTF8);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
-                title = "";
             }
         }else {
             title = bean.getTitle();
         }
-
         holder.tvTitle.setText(title);
-        holder.tvShowTime.setText(bean.getTimeShow());
-        holder.tvLookNum.setText(bean.getReadCount()+"");
+        holder.tvAuthorName.setText(bean.getShowName());
 
         return convertView;
     }
 
-    class ListViewHolder {
+    class ViewHolder {
         ImageView ivPic;
-        TextView tvTitle;
-        TextView tvShowTime;
-        TextView tvLookNum;
+        TextView tvTitle,tvAuthorName;
 
-        public ListViewHolder(View view) {
+        public ViewHolder(View view) {
             ivPic = (ImageView) view.findViewById(R.id.iv_pic);
             tvTitle = (TextView) view.findViewById(R.id.tv_title);
-            tvShowTime = (TextView) view.findViewById(R.id.tv_show_time);
-            tvLookNum = (TextView) view.findViewById(R.id.tv_read_count);
+            tvAuthorName = (TextView) view.findViewById(R.id.tv_user_name);
         }
-    }
 
+
+
+    }
 }
