@@ -28,10 +28,10 @@ public class SuggestFriendActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_suggest_to_friend:
-                ToastUtils.showShorToast("推荐给朋友", SuggestFriendActivity.this);
+                sharePost(getString(R.string.setting_share_app_title), getString(R.string.setting_share_app_content), getString(R.string.setting_share_app_download_url));
                 break;
             case R.id.rl_suggest_to_friend_circle:
-                ToastUtils.showShorToast("推荐给朋友圈", SuggestFriendActivity.this);
+                sharePost(getString(R.string.setting_share_app_title), getString(R.string.setting_share_app_content), getString(R.string.setting_share_app_download_url));
                 break;
         }
     }

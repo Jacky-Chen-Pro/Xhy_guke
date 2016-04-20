@@ -144,5 +144,46 @@
     <string name="setting_suggestion_app_to_friend_title">推荐此应用给好友</string>
     <string name="setting_wechat_friend">微信好友</string>
     <string name="setting_wechat_moment">微信朋友圈</string>
+    <string name="setting_share_app_title">老年医学APP</string>
+    <string name="setting_share_app_content">专为N多老年同道精心打造。</string>
+    <string name="setting_share_app_download_url">http://app.incongress.cn/lnyx/</string>
+
+    <!-- 提示框 -->
+    <string name="dialog_title">温馨提示</string>
+    <string name="dialog_ok">确定</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_exist">确定要退出软件吗？</string>
+
+    <!-- 个人信息页面· -->
+    <string name="personal_center">个人信息</string>
+    <string name="info_user_icon">头像</string>
+    <string name="info_name">姓名</string>
+    <string name="info_nick_name">昵称</string>
+    <string name="info_sexual">性别</string>
+    <string name="info_email">邮箱</string>
+    <string name="info_resource">我的资源</string>
+    <string name="info_location">地区</string>
+    <string name="info_keshi">科室</string>
+    <string name="info_zhicheng">职称</string>
+    <string name="info_education_school">毕业院校</string>
+    <string name="info_in_school_time">入学年份</string>
+    <string name="info_compete_to_comment">资料完善即可参与评论互动</string>
+    <string name="get_photo_fail">获取照片失败</string>
+    <string name="choose_area_first">请先选择您所处的区域哦</string>
+    <string name="info_hospital">医院</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="info_mobilephone">手机</string>
+    <string name="uploading_head_icon">正在上传头像</string>
+    <string name="personal_info_cancel">取消</string>
+    <string name="personal_info_save">保存</string>
+    <string name="email_wrong_format">您填写的邮箱格式有问题，请填写正确的邮箱</string>
+    <string name="name_can_not_empty">姓名不能为空</string>
+    <string name="email_can_not_empty">邮箱不能为空</string>
+    <string name="keshi_can_not_empty">科室不能为空</string>
+    <string name="zhcheng_can_not_empty">职称不能为空</string>
+    <string name="nickname_cann_not_empty">昵称不能为空</string>
+    <string name="info_no_setting">未设置</string>
+    <string name="info_blank"> </string>
 
 </resources>

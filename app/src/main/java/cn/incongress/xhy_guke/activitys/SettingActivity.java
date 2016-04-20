@@ -1,16 +1,21 @@
 package cn.incongress.xhy_guke.activitys;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.api.XhyApiClient;
 import cn.incongress.xhy_guke.base.BaseActivity;
 import cn.incongress.xhy_guke.base.Constants;
 import cn.incongress.xhy_guke.base.XhyApplication;
+import cn.incongress.xhy_guke.utils.ActivityUtils;
 import cn.incongress.xhy_guke.utils.ToastUtils;
 
 /**
@@ -42,7 +47,24 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 WebViewActivity.startWebViewActivity(SettingActivity.this, getString(R.string.setting_about_us_url, XhyApplication.userId, Constants.PROJECT_NAME), getString(R.string.setting_about_us));
                 break;
             case R.id.bt_logout:
-                ToastUtils.showShorToast(getString(R.string.setting_exit), SettingActivity.this);
+                new MaterialDialog.Builder(this)
+                        .title(R.string.dialog_title)
+                        .content(R.string.dialog_exist)
+                        .positiveText(R.string.dialog_ok)
+                        .negativeText(R.string.dialog_cancel)
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(MaterialDialog dialog, DialogAction which) {
+
+                            }
+                        }).onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(MaterialDialog dialog, DialogAction which) {
+                                    clearSPValue();
+                                    ActivityUtils.finishAll();
+                                    startActivity(new Intent(SettingActivity.this,LoginActivity.class));
+                                }
+                }).show();
                 break;
         }
     }

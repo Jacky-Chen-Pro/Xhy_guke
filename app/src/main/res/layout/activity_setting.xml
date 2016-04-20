@@ -81,8 +81,8 @@
             android:background="@color/white"
             android:text="@string/setting_exit"
             android:textColor="@color/theme_blue" />
-
     </LinearLayout>
 
-
+    <ImageView style="@style/wrap_wrap" android:src="@mipmap/setting_company_logo" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/layout_margin"/>
 </RelativeLayout>

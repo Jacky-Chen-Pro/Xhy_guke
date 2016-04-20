@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -36,7 +37,7 @@ public class CommentPopupWindow extends BasePopupWindow implements View.OnClickL
 
     private StringCallback mStringCallback;
 
-    public CommentPopupWindow(Activity context,String sendUserId, String receiveUserId, String receiveName, String dataId, StringCallback stringCallback) {
+    public CommentPopupWindow(Activity context, String sendUserId, String receiveUserId, String receiveName, String dataId, StringCallback stringCallback) {
         super(context);
 
         mTvCancel = (TextView) mPopupView.findViewById(R.id.tv_cancle);

@@ -3,6 +3,7 @@ package cn.incongress.xhy_guke.base;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
 import cn.incongress.xhy_guke.R;
+import cn.incongress.xhy_guke.utils.ActivityUtils;
 import cn.incongress.xhy_guke.utils.ToastUtils;
 
 /**
@@ -33,6 +35,19 @@ public class BaseActivity extends AppCompatActivity {
 
     /** 个人信息sp文件名 **/
     private static final String SP_PERSON_INFO = "personInfo";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ActivityUtils.addActivity(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityUtils.removeActivity(this);
+    }
+
 
     protected void dismissProgressDialog() {
         if(mProgressDialog != null && mProgressDialog.isShowing()) {
