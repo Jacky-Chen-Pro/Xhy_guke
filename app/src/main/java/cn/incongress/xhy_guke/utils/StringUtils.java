@@ -65,4 +65,5 @@ public final class StringUtils {
         Matcher m = p.matcher(password);
         return m.matches();
     }
+
 }

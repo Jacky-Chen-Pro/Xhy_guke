@@ -1,9 +1,11 @@
 package cn.incongress.xhy_guke.base;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +30,9 @@ public class BaseActivity extends AppCompatActivity {
     protected TextView mTvTitle;
 
     protected ProgressDialog mProgressDialog;
+
+    /** 个人信息sp文件名 **/
+    private static final String SP_PERSON_INFO = "personInfo";
 
     protected void dismissProgressDialog() {
         if(mProgressDialog != null && mProgressDialog.isShowing()) {
@@ -131,5 +136,43 @@ public class BaseActivity extends AppCompatActivity {
                 .withMedia(image )
                 .setListenerList(mUmengShareListener)
                 .open();
+    }
+
+
+    protected void setSPStringValue(String key, String value) {
+        SharedPreferences sp = getSharedPreferences(SP_PERSON_INFO,MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString(key,value);
+        edit.commit();
+    }
+
+    protected void setSPIntValue(String key, int value) {
+        SharedPreferences sp = getSharedPreferences(SP_PERSON_INFO,MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putInt(key, value);
+        edit.commit();
+    }
+
+    protected String getSPStringValue(String key) {
+        SharedPreferences sp = getSharedPreferences(SP_PERSON_INFO,MODE_PRIVATE);
+        return sp.getString(key,"");
+    }
+
+    protected int getSPIntValue(String key) {
+        SharedPreferences sp = getSharedPreferences(SP_PERSON_INFO,MODE_PRIVATE);
+        return sp.getInt(key, -1);
+    }
+
+    protected void clearSPValue() {
+        SharedPreferences sp = getSharedPreferences(SP_PERSON_INFO,MODE_PRIVATE);
+        sp.edit().clear().commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -6,6 +6,8 @@ import android.os.Environment;
  * Created by Jacky on 2016/3/25.
  */
 public class Constants {
+    /** 项目名称 **/
+    public static final String PROJECT_NAME = "lnyx";
     /** 页码长度 **/
     public static final String PAGE_SIZE = "12";
     /** 默认编码方式 **/
@@ -39,4 +41,26 @@ public class Constants {
     public static final String COLLECT_ADD = "1";
     /** 取消收藏 **/
     public static final String COLLECT_CANCEL = "0";
+
+    /** 个人信息相关的字段 **/
+    public static String USER_USER_ID = "userId";
+    public static String USER_TRUE_NAME = "trueName";
+    public static String USER_PIC = "userPic";
+    public static String USER_NICKNAME = "nickname";
+    public static String USER_SEX = "sex";
+    public static String USER_MOBILE = "mobilePhone";
+    public static String USER_EMAIL = "email";
+    public static String USER_KESHI = "keshi";
+    public static String USER_ZHICHENG = "zhicheng";
+    public static String USER_PROVINCE_ID = "province";
+    public static String USER_PROVINCE_NAME = "provinceName";
+    public static String USER_CITY_NAME = "cityName";
+    public static String USER_CITY_ID = "city";
+    public static String USER_HOSPITAL_ID = "hospital";
+    public static String USER_HOSPITAL_NAME = "hospitalName";
+    public static String USER_UNIV = "univ";
+    public static String USER_UNIV_ID = "univsId";
+    public static String USER_UNIV_YEAR = "univYear";
+    public static String USER_REMARK = "remark";
+    public static String USER_TYPE = "type";//1专家 2普通用户
 }

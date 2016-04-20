@@ -87,7 +87,9 @@
                 android:value=".activitys.HomeActivity" />
         </activity>
         <activity android:name=".activitys.MyCollectionActivity"/>
-
+        <activity android:name=".activitys.SettingActivity"/>
+        <activity android:name=".activitys.WebViewActivity"/>
+        <activity android:name=".activitys.SuggestFriendActivity"/>
     </application>
 
 </manifest>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/fill_fill">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <include layout="@layout/include_toolbar" />
+
+        <RelativeLayout
+            android:id="@+id/rl_feed_back"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="@dimen/layout_margin"
+            android:background="@color/white"
+            android:padding="@dimen/layout_padding">
+
+            <TextView
+                style="@style/wrap_wrap"
+                android:layout_centerVertical="true"
+                android:text="@string/setting_feed_back"
+                android:textSize="@dimen/text_size_media" />
+
+            <ImageView
+                style="@style/wrap_wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/me_next" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_suggest_friend"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/white"
+            android:padding="@dimen/layout_padding">
+
+            <TextView
+                style="@style/wrap_wrap"
+                android:layout_centerVertical="true"
+                android:text="@string/setting_suggest_friend"
+                android:textSize="@dimen/text_size_media" />
+
+            <ImageView
+                style="@style/wrap_wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/me_next" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_about_us"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/white"
+            android:padding="@dimen/layout_padding">
+
+            <TextView
+                style="@style/wrap_wrap"
+                android:layout_centerVertical="true"
+                android:text="@string/setting_about_us"
+                android:textSize="@dimen/text_size_media" />
+
+            <ImageView
+                style="@style/wrap_wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/me_next" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/bt_logout"
+            style="@style/fill_wrap"
+            android:layout_margin="@dimen/layout_margin"
+            android:background="@color/white"
+            android:text="@string/setting_exit"
+            android:textColor="@color/theme_blue" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

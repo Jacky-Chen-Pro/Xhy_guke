@@ -21,6 +21,7 @@
     <string name="share_cancel">分享取消</string>
     <string name="fail_reason">失败原因:%1$s</string>
     <string name="get_data_fail">获取数据失败</string>
+    <string name="double_click_to_exit">再按一次退出程序</string>
 
     <!-- V言V语 列表页 -->
     <string name="vvtalk_read_count">%1$s人查看</string>
@@ -125,4 +126,23 @@
 
     <!-- 我的收藏 -->
     <string name="collection_title">我的收藏</string>
+
+    <!-- 登录 -->
+    <string name="login_success">登录成功</string>
+    <string name="login_fail">登录失败[%1$s]</string>
+    <string name="login_name_pwd_empty">手机号和密码不能为空哦</string>
+    <string name="login_mobile_format_error">手机号格式不对哦</string>
+
+    <!-- 设置 -->
+    <string name="setting_title">设置</string>
+    <string name="setting_feed_back">意见反馈</string>
+    <string name="setting_suggest_friend">推荐给好友</string>
+    <string name="setting_about_us">关于我们</string>
+    <string name="setting_exit">注销</string>
+    <string name="setting_feed_back_url">http://weixin.incongress.cn/xhy/xhyHtml5/html/feedback.html?userId=%1$s&#038;project=%2$s</string>
+    <string name="setting_about_us_url">http://www.incongress.cn</string>
+    <string name="setting_suggestion_app_to_friend_title">推荐此应用给好友</string>
+    <string name="setting_wechat_friend">微信好友</string>
+    <string name="setting_wechat_moment">微信朋友圈</string>
+
 </resources>

@@ -3,6 +3,7 @@ package cn.incongress.xhy_guke.activitys;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
@@ -12,12 +13,17 @@ import cn.incongress.xhy_guke.R;
 import cn.incongress.xhy_guke.base.BaseActivity;
 import cn.incongress.xhy_guke.uis.MainTab;
 import cn.incongress.xhy_guke.uis.MyFragmentTabHost;
+import cn.incongress.xhy_guke.utils.ToastUtils;
 
 /**
  * Created by Jacky Chen on 2016/3/24 0024.
  */
 public class HomeActivity  extends BaseActivity  implements TabHost.OnTabChangeListener{
     public MyFragmentTabHost mTabHost;
+
+    private static final int RIGHT_POST = 1;
+    private static final int RIGHT_SETTING = 2;
+    private int mRightIconListener = RIGHT_POST;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +47,11 @@ public class HomeActivity  extends BaseActivity  implements TabHost.OnTabChangeL
         }, true, R.mipmap.home_make_post, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, MakePostActivity.class));
+                if(mRightIconListener == RIGHT_POST) {
+                    startActivity(new Intent(HomeActivity.this, MakePostActivity.class));
+                }else if(mRightIconListener == RIGHT_SETTING) {
+                    startActivity(new Intent(HomeActivity.this, SettingActivity.class));
+                }
             }
         });
 
@@ -118,14 +128,34 @@ public class HomeActivity  extends BaseActivity  implements TabHost.OnTabChangeL
         if(tagId == 0 || tagId == 1) {
             mIvLeftIcon.setVisibility(View.VISIBLE);
             mIvRightIcon.setVisibility(View.VISIBLE);
-            mIvLeftIcon.setImageResource(cn.incongress.xhy_guke.R.mipmap.home_message);
-            mIvRightIcon.setImageResource(cn.incongress.xhy_guke.R.mipmap.home_make_post);
+            mIvLeftIcon.setImageResource(R.mipmap.home_message);
+            mIvRightIcon.setImageResource(R.mipmap.home_make_post);
+
+            mRightIconListener = RIGHT_POST;
         }else if(tagId == 2) {
             mIvLeftIcon.setVisibility(View.GONE);
             mIvRightIcon.setVisibility(View.GONE);
         }else if(tagId == 3) {
             mIvLeftIcon.setVisibility(View.GONE);
-            mIvRightIcon.setVisibility(View.GONE);
+            mIvRightIcon.setVisibility(View.VISIBLE);
+            mIvRightIcon.setImageResource(R.mipmap.me_setting);
+            mRightIconListener = RIGHT_SETTING;
         }
+    }
+
+    private long exitTime = 0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+            if((System.currentTimeMillis()-exitTime) > 2000){
+                ToastUtils.showShorToast(getString(R.string.double_click_to_exit), HomeActivity.this);
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
